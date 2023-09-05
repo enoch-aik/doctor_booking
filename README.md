@@ -17,12 +17,12 @@ We are a team of six students
 
 [![Najem](https://img.shields.io/badge/Github-NajemHamo-blue.svg)](https://github.com/najemhamo)
 
-[![YOURNAME](https://img.shields.io/badge/Github-YOURNAME-blue.svg)](LINK)
+[![YOURNAME](https://img.shields.io/badge/Github-Benjamin-Dinkelmann-blue.svg)](LINK)
 
-[![YOURNAME](https://img.shields.io/badge/Github-YOURNAME-blue.svg)](LINK)
+[![YOURNAME](https://img.shields.io/badge/Github-GauriSingh-blue.svg)](LINK)
 
-[![YOURNAME](https://img.shields.io/badge/Github-YOURNAME-blue.svg)](LINK)
+[![YOURNAME](https://img.shields.io/badge/Github-KishFalk-blue.svg)](LINK)
 
-[![YOURNAME](https://img.shields.io/badge/Github-YOURNAME-blue.svg)](LINK)
+[![YOURNAME](https://img.shields.io/badge/Github-Tim-blue.svg)](LINK)
 
-[![YOURNAME](https://img.shields.io/badge/Github-YOURNAME-blue.svg)](LINK)
+[![YOURNAME](https://img.shields.io/badge/Github-Enoch-blue.svg)](LINK)
