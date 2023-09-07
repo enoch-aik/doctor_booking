@@ -29,6 +29,10 @@ dependencies:
   hooks_riverpod: ^2.3.10
   flutter_svg: ^2.0.7
   flutter_screenutil: ^5.9.0
+  freezed_annotation: ^2.2.0
+  json_annotation: ^4.8.1
+  freezed: ^2.3.5
+  dio: ^5.2.1+1
   serverpod_flutter: ^1.1.1
   doctor_booking_client:
     path: ../doctor_booking_client
@@ -37,6 +41,12 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.5
+  firebase_core: ^2.15.1
+  firebase_auth: ^4.9.0
+  cloud_firestore: ^4.9.1
+  firebase_messaging: ^14.6.7
+  flutter_local_notifications: ^15.1.1
+  google_sign_in: ^6.1.5
 
 dev_dependencies:
   flutter_lints: ^2.0.1

@@ -32,7 +32,7 @@ class KText extends StatelessWidget {
       overflow: overflow,
       style: AppStyle.textStyle.copyWith(
         decoration: decoration,
-        fontSize: fontSize ?? 18.sp,
+        fontSize: fontSize ?? 15.sp,
         fontWeight: fontWeight /*?? FontWeight.w300*/,
         color: color,
         height: lineHeight,

@@ -2,11 +2,7 @@ import 'package:auto_route/annotations.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/constants.dart';
-import 'package:doctor_booking_flutter/src/res/styles.dart';
-import 'package:doctor_booking_flutter/src/widgets/textfield/default_textfield.dart';
-import 'package:doctor_booking_flutter/src/widgets/textfield/password_textfield.dart';
 import 'package:flutter/gestures.dart';
-
 
 @RoutePage(name: 'login')
 class LoginScreen extends HookConsumerWidget {
@@ -44,6 +40,7 @@ class LoginScreen extends HookConsumerWidget {
             SizedBox(
               height: 56.h,
             ),
+
             ///Textfield for email address
             DefaultTextFormField(
                 label: 'Email address',
@@ -58,11 +55,11 @@ class LoginScreen extends HookConsumerWidget {
                     return 'Email address not valid';
                   }
                   return null;
-                }
-            ),
+                }),
+
             ///Textfield for password
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 32.h),
+              padding: EdgeInsets.only(top: 16.h),
               child: PasswordTextField(
                 label: 'Password',
                 controller: passwordController,
@@ -138,9 +135,9 @@ class LoginScreen extends HookConsumerWidget {
                                         label: 'Email address',
                                         hint: 'user@example.com',
                                         controller:
-                                        forgotPasswordEmailController,
+                                            forgotPasswordEmailController,
                                         keyboardType:
-                                        TextInputType.emailAddress,
+                                            TextInputType.emailAddress,
                                       ),
                                     ),
                                     SizedBox(
@@ -149,8 +146,8 @@ class LoginScreen extends HookConsumerWidget {
                                         onPressed: () async {
                                           //get email in plain text
                                           String email =
-                                          forgotPasswordEmailController.text
-                                              .trim();
+                                              forgotPasswordEmailController.text
+                                                  .trim();
                                           /*//check if email is valid, then send 'forget password' request to server
                                           if (TextFieldValidator.emailExp
                                               .hasMatch(email)) {
@@ -196,11 +193,11 @@ class LoginScreen extends HookConsumerWidget {
 
             ///LOGIN BUTTON
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 40.h),
+              padding: EdgeInsets.symmetric(vertical: 32.h),
               child: FilledButton(
                   onPressed: () async {
                     //if form is valid, try to login
-                   /* if (formKey.currentState!.validate()) {
+                    /* if (formKey.currentState!.validate()) {
                       showLoadingDialog(context);
                       await auth
                           .signInWithEmailAndPassword(
@@ -265,7 +262,8 @@ class LoginScreen extends HookConsumerWidget {
                   )),
             ),
             GestureDetector(
-              onTap: (){},/* => Navigator.push(
+              onTap: () {},
+              /* => Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => const SignUpScreen())),*/
@@ -276,17 +274,18 @@ class LoginScreen extends HookConsumerWidget {
                       text: 'Signup',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                         /* //no longer necessary
+                          /* //no longer necessary
                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const SignUpScreen()));
-                       */ },
+                       */
+                        },
                       style: AppStyle.textStyle
                           .copyWith(fontWeight: FontWeight.w500))
                 ]),
                 textAlign: TextAlign.center,
-                style: AppStyle.textStyle.copyWith(fontSize: 18.sp),
+                style: AppStyle.textStyle.copyWith(fontSize: 16.sp),
               ),
             )
           ],
