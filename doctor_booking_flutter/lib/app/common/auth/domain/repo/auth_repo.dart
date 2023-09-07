@@ -8,4 +8,5 @@ abstract class AuthRepo {
   Future<ApiResult<UserCredential>> loginWithEmailAndPassword(UserCred user);
 
   Future<ApiResult<UserCredential>> signUpWithEmailAndPassword(UserCred user);
+  Future<ApiResult<void>> forgotPassword(String email);
 }

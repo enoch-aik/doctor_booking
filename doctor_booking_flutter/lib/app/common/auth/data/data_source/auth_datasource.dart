@@ -5,6 +5,7 @@ abstract class AuthDataSource {
 
   Future<UserCredential> loginWithEmailAndPassword(UserCred user);
   Future<UserCredential> googleSignIn();
+  Future<void> forgotPassword(String email);
   Future<UserCredential> signUpWithEmailAndPassword(UserCred user);
 
 }

@@ -47,9 +47,11 @@ dependencies:
   firebase_messaging: ^14.6.7
   flutter_local_notifications: ^15.1.1
   google_sign_in: ^6.1.5
+  flutter_animate: ^4.2.0
+  lottie: ^2.4.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.1
+  flutter_lints: ^2.0.3
   auto_route_generator:
   build_runner:
   flutter_test:

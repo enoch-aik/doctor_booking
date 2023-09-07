@@ -22,4 +22,8 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<ApiResult<UserCredential>> signUpWithEmailAndPassword(UserCred user) =>
       apiInterceptor(() => _dataSource.signUpWithEmailAndPassword(user));
+
+  @override
+  Future<ApiResult<void>> forgotPassword(String email) =>
+      apiInterceptor(() => _dataSource.forgotPassword(email));
 }

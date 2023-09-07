@@ -1,8 +1,16 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
+import 'package:doctor_booking_flutter/core/service_exceptions/service_exception.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/constants.dart';
+import 'package:doctor_booking_flutter/src/router/navigator.dart';
+import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
+import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 @RoutePage(name: 'login')
 class LoginScreen extends HookConsumerWidget {
@@ -18,7 +26,7 @@ class LoginScreen extends HookConsumerWidget {
     final rememberMe = useState(false);
 
     // auth provider
-    //final auth = ref.read(authServiceProvider);
+    final auth = ref.read(authRepoProvider);
     //formKey
     final GlobalKey<FormState> formKey = GlobalKey();
     return Scaffold(
@@ -30,12 +38,12 @@ class LoginScreen extends HookConsumerWidget {
           children: [
             KText(
               'Welcome!',
-              fontSize: 28.sp,
+              fontSize: 24.sp,
               fontWeight: FontWeight.w500,
             ),
             KText(
               'Glad to see you again! 👋',
-              fontSize: 20.sp,
+              fontSize: 18.sp,
             ),
             SizedBox(
               height: 56.h,
@@ -148,26 +156,43 @@ class LoginScreen extends HookConsumerWidget {
                                           String email =
                                               forgotPasswordEmailController.text
                                                   .trim();
-                                          /*//check if email is valid, then send 'forget password' request to server
+                                          //check if email is valid, then send 'forget password' request to server
                                           if (TextFieldValidator.emailExp
                                               .hasMatch(email)) {
-                                            showLoadingDialog(context);
-                                            await auth
-                                                .forgotPassword(email)
-                                                .then((value) {
-                                              Navigator.pop(context);
-                                              Navigator.pop(context);
+                                            Loader.show(context);
+
+                                            final result = await auth
+                                                .forgotPassword(email);
+                                            result.when(success: (_) {
+                                              Loader.hide(context);
+                                              AutoRouter.of(context)
+                                                  .popUntilRoot();
+                                            }, apiFailure: (e, _) {
+                                              Loader.hide(context);
+                                              AppNavigator.of(context).pop();
                                               showMessageAlertDialog(context,
-                                                  text: value == true
-                                                      ? 'Password reset link has been successfully 1sent to your email address'
-                                                      : value);
+                                                  text:
+                                                  e.message);
                                             });
+
+                                            /*await auth
+                                                .forgotPassword(email)
+                                                .then(
+                                              (value) {
+                                                  AutoRouter.of(context).popUntilRoot();
+                                                */ /*Navigator.pop(context);
+                                                Navigator.pop(context);*/ /*
+                                                showMessageAlertDialog(context,
+                                                    text:
+                                                        'Password reset link has been successfully 1sent to your email address');
+                                              },
+                                            );*/
                                           } else {
                                             //if email is no valid, prompt user to input valid mail
                                             showMessageAlertDialog(context,
                                                 text:
-                                                'Provide a valid email address to continue to password reset');
-                                          }*/
+                                                    'Provide a valid email address to continue to password reset');
+                                          }
                                         },
                                         child: const Text(
                                           'Reset password',
@@ -232,11 +257,19 @@ class LoginScreen extends HookConsumerWidget {
               padding: EdgeInsets.symmetric(vertical: 24.h),
               child: OutlinedButton(
                   onPressed: () async {
-                    /*showLoadingDialog(context);
-                    await auth.googleSignIn().then((value) {
+                    Loader.show(context);
+                    final result = await auth.googleSignIn();
+                    Loader.hide(context);
+                    result.when(
+                        success: (data) {},
+                        apiFailure: (e, _) {
+                          showMessageAlertDialog(context, text: e.message);
+                        });
+
+                    /*   await auth.googleSignIn().then((value) {
                       Navigator.pop(context);
                       //if User is the result, then the login was successful
-                      if (value is User) {
+                      if (value is UserCredential) {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(

@@ -40,4 +40,9 @@ class AuthDataSourceImpl extends AuthDataSource {
     return await auth.createUserWithEmailAndPassword(
         email: user.email, password: user.password);
   }
+
+  @override
+  Future<void> forgotPassword( String email) async {
+    await auth.sendPasswordResetEmail(email: email);
+  }
 }

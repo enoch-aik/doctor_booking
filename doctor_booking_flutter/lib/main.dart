@@ -17,15 +17,16 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   //Initialize FirebaseApp and FirebaseAuth into app
   app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   auth = FirebaseAuth.instanceFor(app: app);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
   runApp(ProviderScope(
     overrides: [
       firebaseAppProvider.overrideWith((ref) => app),

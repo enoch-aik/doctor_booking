@@ -18,7 +18,9 @@ Future<ApiResult<T>> apiInterceptor<T>(TypeDef func) async {
     return ApiResult.apiFailure(
         error: ApiExceptions.defaultError(exception.message),
         statusCode: exception.statusCode);
-  } on FirebaseAuthException catch (exception) {
+  }
+
+  on FirebaseAuthException catch (exception) {
     return ApiResult.apiFailure(
         error: ApiExceptions.defaultError(
             exception.message ?? 'Unexpected error occurred'),

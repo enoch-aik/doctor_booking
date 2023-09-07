@@ -8,7 +8,7 @@ Future showMessageAlertDialog(context,
   return showDialog(
     barrierDismissible: isDismissible ?? true,
     context: context,
-    builder: (context) => AlertDialog(
+    builder: (context) => AlertDialog.adaptive(
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.r),
       ),
