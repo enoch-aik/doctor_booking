@@ -4,18 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="39e48bbe-d1c3-485d-be93-3bf363f50caf" name="Changes" comment="first commit">
-      <change afterPath="$PROJECT_DIR$/lib/src/app_constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/res/assets/images.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/res/assets/svg.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/res/styles.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/res/theme/color_scheme.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/src/res/theme/theme.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/doctor_booking.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/doctor_booking.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/doctor_booking_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/doctor_booking_android.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+    <list default="true" id="39e48bbe-d1c3-485d-be93-3bf363f50caf" name="Changes" comment="added project with serverpod">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,10 +22,17 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="dev" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GithubProjectSettings">
+    <option name="branchProtectionPatterns">
+      <list>
+        <option value="main" />
+      </list>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -44,7 +41,7 @@
   &quot;associatedIndex&quot;: 2
 }</component>
   <component name="ProjectId" id="2UkjUYcBkTB9DmiWgpGDcuuN6oQ" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
@@ -75,19 +72,6 @@
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="doctor_booking" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="doctor_booking" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -106,12 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1693490553220</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="added project with serverpod">
+      <option name="closed" value="true" />
+      <created>1693567805773</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1693567805773</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="first commit" />
+    <MESSAGE value="added project with serverpod" />
+    <option name="LAST_COMMIT_MESSAGE" value="added project with serverpod" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

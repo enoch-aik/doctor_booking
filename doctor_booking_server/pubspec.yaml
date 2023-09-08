@@ -1,0 +1,13 @@
+name: doctor_booking_server
+description: Starting point for a Serverpod server.
+# version: 1.0.0
+# homepage: https://www.example.com
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+dependencies:
+  serverpod: ^1.1.1
+
+dev_dependencies:
+  lints: ^2.0.1
