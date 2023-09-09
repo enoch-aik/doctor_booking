@@ -1,5 +1,5 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/core/service_exceptions/service_exception.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';
@@ -8,9 +8,9 @@ import 'package:doctor_booking_flutter/src/constants/constants.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+
+
 
 @RoutePage(name: 'login')
 class LoginScreen extends HookConsumerWidget {
@@ -29,6 +29,8 @@ class LoginScreen extends HookConsumerWidget {
     final auth = ref.read(authRepoProvider);
     //formKey
     final GlobalKey<FormState> formKey = GlobalKey();
+
+
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -36,6 +38,7 @@ class LoginScreen extends HookConsumerWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           children: [
+
             KText(
               'Welcome!',
               fontSize: 24.sp,
@@ -171,8 +174,7 @@ class LoginScreen extends HookConsumerWidget {
                                               Loader.hide(context);
                                               AppNavigator.of(context).pop();
                                               showMessageAlertDialog(context,
-                                                  text:
-                                                  e.message);
+                                                  text: e.message);
                                             });
 
                                             /*await auth
@@ -222,26 +224,21 @@ class LoginScreen extends HookConsumerWidget {
               child: FilledButton(
                   onPressed: () async {
                     //if form is valid, try to login
-                    /* if (formKey.currentState!.validate()) {
-                      showLoadingDialog(context);
-                      await auth
-                          .signInWithEmailAndPassword(
+                    if (formKey.currentState!.validate()) {
+                      Loader.show(context);
+                      UserCred user = UserCred(
                           email: emailController.text.trim(),
-                          password: passwordController.text)
-                          .then((value) {
-                        Navigator.pop(context);
-                        //if UserCredential is the result, then the login was successful
-                        if (value is UserCredential) {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const HomeScreen()));
-                        } else {
-                          //else show the error message
-                          showMessageAlertDialog(context, text: value);
-                        }
+                          password: passwordController.text);
+                      final result = await auth.loginWithEmailAndPassword(user);
+                      Loader.hide(context);
+                      result.when(success: (data) {
+                        //if the login was successful, navigate to home screen
+
+                      }, apiFailure: (e, _) {
+                        showMessageAlertDialog(context, text: e.message);
                       });
-                    }*/
+
+                    }
                   },
                   child: const KText('Login')),
             ),
