@@ -1,0 +1,10 @@
+const String kUserKey = 'patient';
+const String kDoctorKey = 'doctor';
+const String kUserTypeKey = 'userType';
+const String kWalletBalanceKey = 'walletBalance';
+const String kSelectedTokenKey = 'selectedToken';
+const String kUserDefaultCurrencyKey = 'userDefaultCurrency';
+const String kThemeModeKey = 'themeMode';
+const String kHideBalanceKey = 'hideBalance';
+const String kSelectedAvatarKey = 'selectedAvatar';
+const String kOnBoardingKey = 'onBoarding';

@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/data/models/onboarding_model.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/presentation/ui/widgets/onboarding_item.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/presentation/ui/widgets/page_indicator.dart';
@@ -46,8 +47,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           currentPage = index;
                         });
                       },
-                      itemBuilder: (context, index) => OnboardingItem(
-                          model: OnboardingModel.appOnboarding[index]),
+                      itemBuilder: (context, index) => AnimatedScale(
+                        scale: currentPage == index ? 1.0 : 0.2,
+                        duration: const Duration(milliseconds: 400),
+                        child: OnboardingItem(
+                            model: OnboardingModel.appOnboarding[index]),
+                      ),
                     ),
                   ),
                   OnBoardingPageIndicator(
@@ -74,10 +79,10 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               padding: EdgeInsets.symmetric(horizontal: 16.w),
               decoration: BoxDecoration(
                 color: context.primary,
-                borderRadius: BorderRadius.only(
+                /*borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40.r),
                     topRight: Radius.circular(40.r),
-                  )
+                  )*/
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -86,19 +91,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        context.pushRoute(const DoctorLogin());
+
+                      },
                       style: OutlinedButton.styleFrom(
                           side: BorderSide(width: 1, color: context.onPrimary),
                           foregroundColor: context.onPrimary),
-                      child: Text('Continue as Doctor'),
+                      child: const Text('Continue as Doctor'),
                     ),
                   ),
                   ColSpacing(10.h),
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Continue as Patient'),
+                      onPressed: () {
+                        context.pushRoute(const PatientLogin());
+                      },
+                      child: const Text('Continue as Patient'),
                     ),
                   ),
                 ],

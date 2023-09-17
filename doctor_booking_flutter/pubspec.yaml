@@ -47,13 +47,16 @@ dependencies:
   firebase_messaging: ^14.6.7
   flutter_local_notifications: ^15.1.1
   google_sign_in: ^6.1.5
-  flutter_animate: ^4.2.0
+  flutter_animate: ^4.2.0+1
   lottie: ^2.4.0
+  #local persistence
+  shared_preferences: ^2.1.1
 
 dev_dependencies:
   flutter_lints: ^2.0.3
   auto_route_generator:
   build_runner:
+  json_serializable: ^6.6.2
   flutter_test:
     sdk: flutter
 

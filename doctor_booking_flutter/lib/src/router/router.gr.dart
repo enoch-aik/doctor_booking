@@ -15,6 +15,18 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    DoctorLogin.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorLoginScreen(),
+      );
+    },
+    DoctorSignup.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorSignupScreen(),
+      );
+    },
     Login.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -27,6 +39,24 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const OnboardingScreen(),
       );
     },
+    PatientHome.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PatientHomeScreen(),
+      );
+    },
+    PatientLogin.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PatientLoginScreen(),
+      );
+    },
+    PatientSignUp.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const PatientSignUpScreen(),
+      );
+    },
     Splash.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
@@ -34,6 +64,34 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [DoctorLoginScreen]
+class DoctorLogin extends PageRouteInfo<void> {
+  const DoctorLogin({List<PageRouteInfo>? children})
+      : super(
+          DoctorLogin.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorLogin';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DoctorSignupScreen]
+class DoctorSignup extends PageRouteInfo<void> {
+  const DoctorSignup({List<PageRouteInfo>? children})
+      : super(
+          DoctorSignup.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorSignup';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
 }
 
 /// generated route for
@@ -60,6 +118,48 @@ class Onboarding extends PageRouteInfo<void> {
         );
 
   static const String name = 'Onboarding';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PatientHomeScreen]
+class PatientHome extends PageRouteInfo<void> {
+  const PatientHome({List<PageRouteInfo>? children})
+      : super(
+          PatientHome.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PatientHome';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PatientLoginScreen]
+class PatientLogin extends PageRouteInfo<void> {
+  const PatientLogin({List<PageRouteInfo>? children})
+      : super(
+          PatientLogin.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PatientLogin';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [PatientSignUpScreen]
+class PatientSignUp extends PageRouteInfo<void> {
+  const PatientSignUp({List<PageRouteInfo>? children})
+      : super(
+          PatientSignUp.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'PatientSignUp';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }
