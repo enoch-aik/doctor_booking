@@ -232,7 +232,7 @@ class PatientLoginScreen extends HookConsumerWidget {
                       UserCred user = UserCred(
                           email: emailController.text.trim(),
                           password: passwordController.text);
-                      final result = await auth.loginWithEmailAndPassword(user);
+                      final result = await auth.patientLogin(user);
                       Loader.hide(context);
                       result.when(success: (data) {
                         ref.read(storeProvider).savePatientInfo(Patient(

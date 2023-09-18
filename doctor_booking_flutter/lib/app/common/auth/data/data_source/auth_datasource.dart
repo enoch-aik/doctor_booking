@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthDataSource {
   ///auth for patient
-  Future<UserCredential> loginWithEmailAndPassword(UserCred user);
+  Future<UserCredential> patientLogin(UserCred user);
 
   Future<UserCredential> googleSignIn();
 
@@ -15,4 +15,6 @@ abstract class AuthDataSource {
 
   ///auth for doctor
   Future<UserCredential> doctorSignUp(NewDoctor doctor);
+
+  Future<UserCredential> doctorLogin(UserCred user);
 }

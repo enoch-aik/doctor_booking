@@ -1,6 +1,9 @@
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
+import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/core/service_exceptions/src/api_exceptions.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';
 import 'package:doctor_booking_flutter/lib.dart';
@@ -76,7 +79,8 @@ class DoctorLoginScreen extends HookConsumerWidget {
             ),
 
             ///FORGOT PASSWORD
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +101,6 @@ class DoctorLoginScreen extends HookConsumerWidget {
                     )
                   ],
                 ),
-
                 Align(
                   alignment: Alignment.centerRight,
                   child: InkWell(
@@ -108,7 +111,8 @@ class DoctorLoginScreen extends HookConsumerWidget {
                         builder: (context) {
                           return Padding(
                             padding: EdgeInsets.only(
-                                bottom: MediaQuery.of(context).viewInsets.bottom),
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom),
                             child: SingleChildScrollView(
                               child: SizedBox(
                                 height: 450.h,
@@ -120,7 +124,8 @@ class DoctorLoginScreen extends HookConsumerWidget {
                                       Align(
                                         alignment: Alignment.centerRight,
                                         child: IconButton(
-                                          onPressed: () => Navigator.pop(context),
+                                          onPressed: () =>
+                                              Navigator.pop(context),
                                           icon: const Icon(
                                             Icons.cancel,
                                           ),
@@ -144,8 +149,10 @@ class DoctorLoginScreen extends HookConsumerWidget {
                                         child: DefaultTextFormField(
                                           label: 'Email address',
                                           hint: 'user@example.com',
-                                          controller: forgotPasswordEmailController,
-                                          keyboardType: TextInputType.emailAddress,
+                                          controller:
+                                              forgotPasswordEmailController,
+                                          keyboardType:
+                                              TextInputType.emailAddress,
                                         ),
                                       ),
                                       SizedBox(
@@ -154,15 +161,16 @@ class DoctorLoginScreen extends HookConsumerWidget {
                                           onPressed: () async {
                                             //get email in plain text
                                             String email =
-                                                forgotPasswordEmailController.text
+                                                forgotPasswordEmailController
+                                                    .text
                                                     .trim();
                                             //check if email is valid, then send 'forget password' request to server
                                             if (TextFieldValidator.emailExp
                                                 .hasMatch(email)) {
                                               Loader.show(context);
 
-                                              final result =
-                                                  await auth.forgotPassword(email);
+                                              final result = await auth
+                                                  .forgotPassword(email);
                                               result.when(success: (_) {
                                                 Loader.hide(context);
                                                 AutoRouter.of(context)
@@ -217,11 +225,30 @@ class DoctorLoginScreen extends HookConsumerWidget {
             ),
             ColSpacing(24.h),
             FilledButton(
-              onPressed: () {
+              onPressed: () async {
                 //login here
-
+//if form is valid, try to login
+                if (formKey.currentState!.validate()) {
+                  Loader.show(context);
+                  UserCred user = UserCred(
+                      email: emailController.text.trim(),
+                      password: passwordController.text);
+                  final result = await auth.doctorLogin(user);
+                  Loader.hide(context);
+                  result.when(success: (data) {
+                    ref.read(storeProvider).saveDoctorInfo(Doctor(
+                        fullName: data.user?.displayName ?? '',
+                        emailAddress: emailController.text,
+                        userId: data.user!.uid,
+                        speciality: ''));
+                    AppNavigator.of(context).replaceAll([const DoctorHome()]);
+                    //if the login was successful, navigate to home screen
+                  }, apiFailure: (e, _) {
+                    showMessageAlertDialog(context, text: e.message);
+                  });
+                }
               },
-              child: Text('Login'),
+              child: const Text('Login'),
             ),
             ColSpacing(16.h),
             GestureDetector(

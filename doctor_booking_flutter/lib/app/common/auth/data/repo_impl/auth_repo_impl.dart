@@ -18,8 +18,8 @@ class AuthRepoImpl extends AuthRepo {
       apiInterceptor(() => _dataSource.googleSignIn());
 
   @override
-  Future<ApiResult<UserCredential>> loginWithEmailAndPassword(UserCred user) =>
-      apiInterceptor(() => _dataSource.loginWithEmailAndPassword(user));
+  Future<ApiResult<UserCredential>> patientLogin(UserCred user) =>
+      apiInterceptor(() => _dataSource.patientLogin(user));
 
   @override
   Future<ApiResult<UserCredential>> signUpWithEmailAndPassword(NewUser user) =>
@@ -32,4 +32,8 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<ApiResult<UserCredential>> doctorSignUp(NewDoctor doctor) =>
       apiInterceptor(() => _dataSource.doctorSignUp(doctor));
+
+  @override
+  Future<ApiResult<UserCredential>> doctorLogin(UserCred user) =>
+      apiInterceptor(() => _dataSource.doctorLogin(user));
 }
