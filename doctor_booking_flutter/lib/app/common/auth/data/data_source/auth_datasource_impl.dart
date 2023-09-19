@@ -1,5 +1,8 @@
 import 'package:doctor_booking_flutter/app/common/auth/data/data_source/auth_datasource.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
@@ -15,7 +18,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
     // get auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-        await googleUser?.authentication;
+    await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -36,13 +39,19 @@ class AuthDataSourceImpl extends AuthDataSource {
 
   /// signup with email and password
   @override
-  Future<UserCredential> signUpWithEmailAndPassword(UserCred user) async {
+  Future<UserCredential> signUpWithEmailAndPassword(NewUser user) async {
     return await auth.createUserWithEmailAndPassword(
-        email: user.email, password: user.password);
+        email: user.emailAddress, password: user.password);
   }
 
   @override
-  Future<void> forgotPassword( String email) async {
+  Future<void> forgotPassword(String email) async {
     await auth.sendPasswordResetEmail(email: email);
+  }
+
+  @override
+  Future<UserCredential> doctorSignUp(NewDoctor doctor) async {
+    return await auth.createUserWithEmailAndPassword(
+        email: doctor.emailAddress, password: doctor.password);
   }
 }

@@ -26,7 +26,6 @@ Future<ApiResult<T>> apiInterceptor<T>(TypeDef func) async {
             exception.message ?? 'Unexpected error occurred'),
         statusCode: -1);
   }
-
   on FirebaseException catch (exception){
     return ApiResult.apiFailure(error: ApiExceptions.defaultError(exception.message??'Unexpected error occurred'));
   }

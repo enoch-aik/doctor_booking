@@ -54,33 +54,35 @@ class PasswordTextField extends HookWidget {
                       : Icons.visibility_off_rounded),
                 ))),
         SizedBox(
-          height: 24.h,
+          height: 16.h,
         ),
         if (isSignUp)
           TextFormField(
-              maxLines: 1,
-              validator: (value) {
-                value?.trim();
-                if (value!.isEmpty || value != controller!.text) {
-                  return 'Password does not match';
-                }
-                return null;
-              },
-              obscureText: obscureText.value,
-              keyboardType: TextInputType.visiblePassword,
-              decoration: InputDecoration(
-                  contentPadding: const EdgeInsets.only(left: 10, top: 1),
-                  hintText: hint,
-                  labelText: 'Confirm password',
-                  helperText: helperText,
-                  suffixIcon: InkWell(
-                    onTap: () {
-                      obscureText.value = !obscureText.value;
-                    },
-                    child: Icon(obscureText.value
-                        ? Icons.visibility
-                        : Icons.visibility_off_rounded),
-                  )))
+            maxLines: 1,
+            validator: (value) {
+              value?.trim();
+              if (value!.isEmpty || value != controller!.text) {
+                return 'Password does not match';
+              }
+              return null;
+            },
+            obscureText: obscureText.value,
+            keyboardType: TextInputType.visiblePassword,
+            decoration: InputDecoration(
+              contentPadding: const EdgeInsets.only(left: 10, top: 1),
+              hintText: hint,
+              labelText: 'Confirm password',
+              helperText: helperText,
+              suffixIcon: InkWell(
+                onTap: () {
+                  obscureText.value = !obscureText.value;
+                },
+                child: Icon(obscureText.value
+                    ? Icons.visibility
+                    : Icons.visibility_off_rounded),
+              ),
+            ),
+          ),
       ],
     );
   }

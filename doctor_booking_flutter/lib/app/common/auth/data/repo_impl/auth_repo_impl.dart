@@ -1,8 +1,10 @@
 import 'package:doctor_booking_flutter/app/common/auth/data/data_source/auth_datasource.dart';
 import 'package:doctor_booking_flutter/app/common/auth/data/data_source/auth_datasource_impl.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/repo/auth_repo.dart';
-import 'package:doctor_booking_flutter/core/helpers/dio_interceptor.dart';
+import 'package:doctor_booking_flutter/core/helpers/api_interceptor.dart';
 import 'package:doctor_booking_flutter/core/service_result/src/api_result.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,10 +22,14 @@ class AuthRepoImpl extends AuthRepo {
       apiInterceptor(() => _dataSource.loginWithEmailAndPassword(user));
 
   @override
-  Future<ApiResult<UserCredential>> signUpWithEmailAndPassword(UserCred user) =>
+  Future<ApiResult<UserCredential>> signUpWithEmailAndPassword(NewUser user) =>
       apiInterceptor(() => _dataSource.signUpWithEmailAndPassword(user));
 
   @override
   Future<ApiResult<void>> forgotPassword(String email) =>
       apiInterceptor(() => _dataSource.forgotPassword(email));
+
+  @override
+  Future<ApiResult<UserCredential>> doctorSignUp(NewDoctor doctor) =>
+      apiInterceptor(() => _dataSource.doctorSignUp(doctor));
 }

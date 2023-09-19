@@ -1,20 +1,23 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
+import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
+import 'package:doctor_booking_flutter/app/patient/home/presentation/ui/screens/home.dart';
+import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/core/service_exceptions/service_exception.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/constants.dart';
+import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
-
-
-@RoutePage(name: 'login')
-class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+@RoutePage(name: 'patientLogin')
+class PatientLoginScreen extends HookConsumerWidget {
+  const PatientLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -30,7 +33,6 @@ class LoginScreen extends HookConsumerWidget {
     //formKey
     final GlobalKey<FormState> formKey = GlobalKey();
 
-
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -38,15 +40,16 @@ class LoginScreen extends HookConsumerWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           children: [
-
             KText(
               'Welcome!',
-              fontSize: 24.sp,
+              fontSize: 20.sp,
               fontWeight: FontWeight.w500,
-            ),
+              color: context.primary,
+            ).animate(onPlay: (controller) => controller.repeat()).shimmer(
+                duration: const Duration(seconds: 2), color: context.onPrimary),
             KText(
               'Glad to see you again! 👋',
-              fontSize: 18.sp,
+              fontSize: 16.sp,
             ),
             SizedBox(
               height: 56.h,
@@ -232,12 +235,16 @@ class LoginScreen extends HookConsumerWidget {
                       final result = await auth.loginWithEmailAndPassword(user);
                       Loader.hide(context);
                       result.when(success: (data) {
+                        ref.read(storeProvider).savePatientInfo(Patient(
+                            fullName: data.user?.displayName ?? '',
+                            emailAddress: emailController.text,
+                            userId: data.user!.uid));
+                        AppNavigator.of(context)
+                            .replaceAll([const PatientHome()]);
                         //if the login was successful, navigate to home screen
-
                       }, apiFailure: (e, _) {
                         showMessageAlertDialog(context, text: e.message);
                       });
-
                     }
                   },
                   child: const KText('Login')),
@@ -257,11 +264,18 @@ class LoginScreen extends HookConsumerWidget {
                     Loader.show(context);
                     final result = await auth.googleSignIn();
                     Loader.hide(context);
-                    result.when(
-                        success: (data) {},
-                        apiFailure: (e, _) {
-                          showMessageAlertDialog(context, text: e.message);
-                        });
+                    result.when(success: (data) {
+                      //save user details here and
+
+                      ref.read(storeProvider).savePatientInfo(Patient(
+                          fullName: data.user?.displayName ?? '',
+                          emailAddress: emailController.text,
+                          userId: data.user!.uid));
+                      AppNavigator.of(context)
+                          .replaceAll([const PatientHome()]);
+                    }, apiFailure: (e, _) {
+                      showMessageAlertDialog(context, text: e.message);
+                    });
 
                     /*   await auth.googleSignIn().then((value) {
                       Navigator.pop(context);
@@ -304,12 +318,7 @@ class LoginScreen extends HookConsumerWidget {
                       text: 'Signup',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          /* //no longer necessary
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen()));
-                       */
+                          context.pushRoute(const PatientSignUp());
                         },
                       style: AppStyle.textStyle
                           .copyWith(fontWeight: FontWeight.w500))
