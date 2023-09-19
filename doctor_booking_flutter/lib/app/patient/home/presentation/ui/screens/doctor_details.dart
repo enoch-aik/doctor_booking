@@ -1,94 +1,109 @@
 import 'package:auto_route/annotations.dart';
 import 'package:booking_calendar/booking_calendar.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
+import 'package:doctor_booking_flutter/src/extensions/string.dart';
+import 'package:doctor_booking_flutter/src/router/navigator.dart';
+import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 
 @RoutePage(name: 'doctorDetails')
 class DoctorDetailsScreen extends ConsumerWidget {
-  const DoctorDetailsScreen({super.key});
+  const DoctorDetailsScreen({super.key, required this.doctor});
+
+  final Doctor doctor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    DateTime now = DateTime.now();
-    Stream<dynamic>? getBookingStream(
-        {required DateTime end, required DateTime start}) {
-      return Stream.value([]);
-    }
-
-    List<DateTimeRange> converted = [];
-
-    Future<dynamic> uploadBooking({required BookingService newBooking}) async {
-      await Future.delayed(const Duration(seconds: 1));
-      converted.add(DateTimeRange(
-          start: newBooking.bookingStart, end: newBooking.bookingEnd));
-      print('${newBooking.toJson()} has been uploaded');
-    }
-
-    List<DateTimeRange> convertStreamResult({required dynamic streamResult}) {
-      DateTime first = now;
-      DateTime tomorrow = now.add(const Duration(days: 1));
-      DateTime second = now.add(const Duration(minutes: 55));
-      DateTime third = now.subtract(const Duration(minutes: 240));
-      DateTime fourth = now.subtract(const Duration(minutes: 500));
-      converted.add(DateTimeRange(
-          start: first, end: now.add(const Duration(minutes: 30))));
-      converted.add(DateTimeRange(
-          start: second, end: second.add(const Duration(minutes: 23))));
-      converted.add(DateTimeRange(
-          start: third, end: third.add(const Duration(minutes: 15))));
-      converted.add(DateTimeRange(
-          start: fourth, end: fourth.add(const Duration(minutes: 50))));
-
-      //book whole day example
-      converted.add(DateTimeRange(
-          start: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 5, 0),
-          end: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 23, 0)));
-      return converted;
-    }
-
     return Scaffold(
-      appBar: AppBar(),
-      body: BookingCalendar(
-        key: key,
-        bookingGridCrossAxisCount: 4,
-
-        getBookingStream: getBookingStream,
-        uploadBooking: uploadBooking,
-        convertStreamResultToDateTimeRanges: convertStreamResult,
-
-        //bookingButtonColor: bookingButtonColor,
-        //  bookingButtonText: bookingButtonText,
-        //  bookingExplanation: bookingExplanation,
-        // bookingGridChildAspectRatio: bookingGridChildAspectRatio,
-        //  bookingGridCrossAxisCount: bookingGridCrossAxisCount,
-        // formatDateTime: formatDateTime,
-        // availableSlotColor: availableSlotColor,
-        // availableSlotText: availableSlotText,
-        // bookedSlotColor: bookedSlotColor,
-        // bookedSlotText: bookedSlotText,
-        // selectedSlotColor: selectedSlotColor,
-        // selectedSlotText: selectedSlotText,
-        // gridScrollPhysics: gridScrollPhysics,
-        //loadingWidget: loadingWidget,
-        //errorWidget: errorWidget,
-        // uploadingWidget: uploadingWidget,
-        pauseSlotColor: context.outlineVariant,
-        //pauseSlotText: pauseSlotText,
-        pauseSlots: [
-          DateTimeRange(
-            start: DateTime(now.year, now.month, now.day, 11, 30),
-            end: DateTime(now.year, now.month, now.day, 13, 0),
+      appBar: AppBar(
+        title: KText(
+          'Doctor details',
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w500,
+        ),
+      ),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 16.w),
+        children: [
+          ColSpacing(24.h),
+          Row(
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 120.w,
+                    height: 120.w,
+                    decoration: BoxDecoration(
+                      color: context.tertiaryContainer,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                  ),
+                  RowSpacing(16.w),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      KText(
+                        doctor.fullName.capitalizeFirstLetter(),
+                        // color: context.onPrimary,
+                        fontWeight: FontWeight.w500, fontSize: 18.sp,
+                      ),
+                      ColSpacing(2.h),
+                      KText(
+                        doctor.speciality,
+                        color: context.outline,
+                        fontSize: 14.sp,
+                      )
+                    ],
+                  ),
+                ],
+              )
+            ],
           ),
+          ColSpacing(40.h),
+          Container(
+            padding: EdgeInsets.all(16.w),
+            //height: 400.h,
+            decoration: BoxDecoration(
+              color: context.background,
+              borderRadius: BorderRadius.circular(24.r),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.shade300,
+                    spreadRadius: 1,
+                    blurRadius: 16)
+              ],
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                KText(
+                  'Biography',
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.w500,
+                  color: context.primary,
+                ),
+                ColSpacing(8.h),
+                KText(
+                    '${doctor.fullName.capitalizeFirstLetter()} is a professional '
+                    '${doctor.speciality} specialist in Sweden. He practices'
+                    ' general at Elisabeth Hospital in Semarang ...')
+              ],
+            ),
+          )
         ],
-        hideBreakTime: false,
-        //locale: locale,
-        disabledDays: const [6, 7],
-        // startingDayOfWeek: startingDayOfWeek,
-        bookingService: BookingService(
-            serviceName: 'Appointments',
-            serviceDuration: 30,
-            bookingEnd: DateTime(now.year, now.month, now.day, 18, 0),
-            bookingStart: DateTime(now.year, now.month, now.day, 8, 0)),
+      ),
+      bottomSheet: SizedBox(
+        width: double.maxFinite,
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 16.h, right: 16.w, left: 16.w),
+          child: FilledButton(
+              onPressed: () {
+                 AppNavigator.of(context).push(BookAppointment(doctor:doctor));
+              },
+              child: Text('Book Appointment')),
+        ),
       ),
     );
   }

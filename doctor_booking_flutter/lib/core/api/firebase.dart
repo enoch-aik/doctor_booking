@@ -55,13 +55,13 @@ class FirebaseApi {
       FirebaseFirestore.instance.collection('bookings');
 
   ///This is how can you get the reference to your data from the collection, and serialize the data with the help of the Firestore [withConverter]. This function would be in your repository.
-  CollectionReference<BookingService> getBookingStream({required String docId}) {
+  CollectionReference<Appointment> getBookingStream({required String docId}) {
     return bookings
         .doc(docId)
         .collection('appointments')
-        .withConverter<BookingService>(
+        .withConverter<Appointment>(
           fromFirestore: (snapshots, _) =>
-              BookingService.fromJson(snapshots.data()!),
+              Appointment.fromJson(snapshots.data()!),
           toFirestore: (snapshots, _) => snapshots.toJson(),
         );
   }
@@ -92,7 +92,7 @@ class FirebaseApi {
 
   ///This is how you upload data to Firestore
   Future<dynamic> uploadBookingFirebase(
-      {required BookingService newAppointment}) async {
+      {required Appointment newAppointment}) async {
     await bookings
         .doc('your id, or autogenerate')
         .collection('bookings')

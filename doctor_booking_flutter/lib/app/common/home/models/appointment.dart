@@ -4,7 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'appointment.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class BookingService {
+class Appointment {
   /// The generated code assumes these values exist in JSON.
   final String? patientId;
   final String? doctorId;
@@ -26,9 +26,8 @@ class BookingService {
   @JsonKey(fromJson: timeStampToDateTime, toJson: dateTimeToTimeStamp)
   final DateTime? bookingEnd;
 
-  BookingService(
-      {
-      this.bookingStart,
+  Appointment(
+      {this.bookingStart,
       this.bookingEnd,
       this.patientId,
       this.doctorId,
@@ -38,9 +37,9 @@ class BookingService {
 
   /// Connect the generated [_$SportBookingFromJson] function to the `fromJson`
   /// factory.
-  factory BookingService.fromJson(Map<String, dynamic> json) =>
-      _$BookingServiceFromJson(json);
+  factory Appointment.fromJson(Map<String, dynamic> json) =>
+      _$AppointmentFromJson(json);
 
   /// Connect the generated [_$SportBookingToJson] function to the `toJson` method.
-  Map<String, dynamic> toJson() => _$BookingServiceToJson(this);
+  Map<String, dynamic> toJson() => _$AppointmentToJson(this);
 }

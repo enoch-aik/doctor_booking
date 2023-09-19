@@ -21,6 +21,16 @@ final isLoggedIn = StateProvider<bool>((ref) {
   return ref.watch(firebaseAuthProvider).currentUser != null;
 });
 
+final collectionStreamProvider =
+    StreamProvider.family<List<DocumentSnapshot>, String>((ref, collection) {
+  return FirebaseFirestore.instance
+      .collection(collection)
+      .snapshots()
+      .map((querySnapshot) {
+    return querySnapshot.docs;
+  });
+});
+
 //storage provider
 //storage providers
 final storeProvider = Provider(

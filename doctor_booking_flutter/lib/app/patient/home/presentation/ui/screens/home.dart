@@ -1,5 +1,6 @@
 import 'package:auto_route/annotations.dart';
 import 'package:booking_calendar/booking_calendar.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor_speciality.dart';
 import 'package:doctor_booking_flutter/app/patient/calendar/presentation/ui/screens/calendar.dart';
 import 'package:doctor_booking_flutter/app/patient/home/presentation/ui/widgets/doctor_card.dart';
@@ -8,6 +9,7 @@ import 'package:doctor_booking_flutter/app/patient/home/presentation/ui/widgets/
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/app/patient/profile/presentation/ui/screens/profile.dart';
 import 'package:doctor_booking_flutter/app/patient/search/presentation/ui/screens/search.dart';
+import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/app_constants.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
@@ -59,7 +61,9 @@ class _PatientHomeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
+    final doctor = ref.watch(doctorStreamProvider);
+    List<Doctor> initialList = [];
+    List<Doctor> filteredList = [];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -81,7 +85,6 @@ class _PatientHomeView extends ConsumerWidget {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
         children: [
-
           ColSpacing(16.h),
           CategoryHeader(title: 'Upcoming Schedule', onPressed: () {}),
           const UpcomingScheduleCard(),
@@ -114,7 +117,53 @@ class _PatientHomeView extends ConsumerWidget {
             ),
           ),
           ColSpacing(16.h),
-       ...List.generate(4, (index) => DoctorCard())
+          doctor.when(
+            data: (data) {
+              initialList = data;
+              filteredList = initialList
+                  .where((element) => element.speciality.contains(
+                      ref.watch(selectedDoctorSpeciality)?.title ?? ''))
+                  .toList();
+              List<Doctor> currentList =
+                  ref.watch(selectedDoctorSpeciality) == null
+                      ? initialList
+                      : filteredList;
+              if (currentList.isEmpty) {
+                return SizedBox(
+                  height: 300.h,
+                  child: const Center(
+                    child: KText(
+                      'No doctor found, please check in later',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                );
+              }
+
+              return ListView.builder(
+                shrinkWrap: true,
+                itemCount: ref.watch(selectedDoctorSpeciality) == null
+                    ? data.length
+                    : filteredList.length,
+                itemBuilder: (context, index) {
+                  return DoctorCard(
+                    doctor: ref.watch(selectedDoctorSpeciality) == null
+                        ? data[index]
+                        : filteredList[index],
+                  );
+                },
+              );
+            },
+            error: (e, _) {
+              return const SizedBox();
+            },
+            loading: () => SizedBox(
+              height: 300.h,
+              child: const Center(
+                child: CircularProgressIndicator(),
+              ),
+            ),
+          ),
         ],
       ),
     );

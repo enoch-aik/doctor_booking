@@ -1,10 +1,14 @@
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
+import 'package:doctor_booking_flutter/src/extensions/string.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({super.key});
+  final Doctor doctor;
+
+  const DoctorCard({super.key, required this.doctor});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +16,7 @@ class DoctorCard extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 16.h),
       child: GestureDetector(
         onTap: () {
-          AppNavigator.of(context).push(DoctorDetails());
+          AppNavigator.of(context).push(DoctorDetails(doctor: doctor));
         },
         child: Container(
           padding: EdgeInsets.all(16.w),
@@ -41,12 +45,12 @@ class DoctorCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   KText(
-                    'Doctor\'s name',
+                    doctor.fullName.capitalizeFirstLetter(),
                     color: context.onTertiaryContainer,
                     fontWeight: FontWeight.w500,
                   ),
                   KText(
-                    'Speciality',
+                    doctor.speciality,
                     color: context.onTertiaryContainer,
                   ),
                 ],
