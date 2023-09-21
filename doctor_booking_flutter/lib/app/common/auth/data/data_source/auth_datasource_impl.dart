@@ -18,7 +18,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
     // get auth details from the request
     final GoogleSignInAuthentication? googleAuth =
-    await googleUser?.authentication;
+        await googleUser?.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -32,7 +32,7 @@ class AuthDataSourceImpl extends AuthDataSource {
 
   ///login with email and password
   @override
-  Future<UserCredential> loginWithEmailAndPassword(UserCred user) async {
+  Future<UserCredential> patientLogin(UserCred user) async {
     return await auth.signInWithEmailAndPassword(
         email: user.email, password: user.password);
   }
@@ -53,5 +53,11 @@ class AuthDataSourceImpl extends AuthDataSource {
   Future<UserCredential> doctorSignUp(NewDoctor doctor) async {
     return await auth.createUserWithEmailAndPassword(
         email: doctor.emailAddress, password: doctor.password);
+  }
+
+  @override
+  Future<UserCredential> doctorLogin(UserCred user) async {
+    return await auth.signInWithEmailAndPassword(
+        email: user.email, password: user.password);
   }
 }

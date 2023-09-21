@@ -5,15 +5,15 @@ class DoctorSpeciality {
   DoctorSpeciality({required this.title, required this.icon});
 
   static List<DoctorSpeciality> specialities = [
-    DoctorSpeciality(title: 'Chiropractor', icon: ''),
-    DoctorSpeciality(title: 'Dentist', icon: ''),
-    DoctorSpeciality(title: 'Gerontologist', icon: ''),
-    DoctorSpeciality(title: 'Nutritionist ', icon: ''),
-    DoctorSpeciality(title: 'Optometrist', icon: ''),
-    DoctorSpeciality(title: 'Pathologist', icon: ''),
-    DoctorSpeciality(title: 'Pharmacist', icon: ''),
-    DoctorSpeciality(title: 'Psychiatrist', icon: ''),
-    DoctorSpeciality(title: 'Psychologist', icon: ''),
-    DoctorSpeciality(title: 'Therapist', icon: ''),
+    DoctorSpeciality(title: 'Chiropractor', icon: '🩻'),
+    DoctorSpeciality(title: 'Dentist', icon: '🦷'),
+    DoctorSpeciality(title: 'Gerontologist', icon: '👴'),
+    DoctorSpeciality(title: 'Nutritionist', icon: '🍇'),
+    DoctorSpeciality(title: 'Optometrist', icon: '👁️'),
+    DoctorSpeciality(title: 'Pathologist', icon: '🦠'),
+    DoctorSpeciality(title: 'Pharmacist', icon: '💊'),
+    // DoctorSpeciality(title: 'Psychiatrist', icon: ''),
+    // DoctorSpeciality(title: 'Psychologist', icon: ''),
+    DoctorSpeciality(title: 'Therapist', icon: '🧘‍♂️'),
   ];
 }

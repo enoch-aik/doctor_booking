@@ -16,10 +16,15 @@ final Provider<FirebaseFirestore> firestoreProvider =
 final Provider<FirebaseApi> firebaseApiProvider =
     Provider((ref) => FirebaseApi(ref.watch(firestoreProvider)));
 
+//This boolean is used to get there is a current user, this is true if there is a current user and false if there is no current user
+final isLoggedIn = StateProvider<bool>((ref) {
+  return ref.watch(firebaseAuthProvider).currentUser != null;
+});
+
 //storage provider
 //storage providers
 final storeProvider = Provider(
-        (ref) {
-        return Storage();
-    },
+  (ref) {
+    return Storage();
+  },
 );
