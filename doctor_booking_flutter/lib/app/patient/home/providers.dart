@@ -10,7 +10,8 @@ import 'package:doctor_booking_flutter/app/patient/home/domain/repo/appointment_
 import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 
-final selectedHomeIndex = StateProvider<int>((ref) => 0);
+final patientSelectedHomeIndex = StateProvider<int>((ref) => 0);
+final doctorSelectedHomeIndex = StateProvider<int>((ref) => 0);
 
 final appointmentDataSourceProvider = Provider<AppointmentDataSource>((ref) {
   return AppointmentDataSourceImpl(

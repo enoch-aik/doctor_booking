@@ -31,7 +31,7 @@ class PatientHomeScreen extends ConsumerWidget {
     ];
 
     return Scaffold(
-      body: body[ref.watch(selectedHomeIndex)],
+      body: body[ref.watch(patientSelectedHomeIndex)],
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
             splashFactory: NoSplash.splashFactory,
@@ -39,10 +39,10 @@ class PatientHomeScreen extends ConsumerWidget {
             highlightColor: Colors.transparent),
         child: BottomNavigationBar(
           onTap: (index) {
-            ref.read(selectedHomeIndex.notifier).state = index;
+            ref.read(patientSelectedHomeIndex.notifier).state = index;
           },
-          currentIndex: ref.watch(selectedHomeIndex),
-          items: appNavItems,
+          currentIndex: ref.watch(patientSelectedHomeIndex),
+          items: patientAppNavItems,
           type: BottomNavigationBarType.fixed,
           showSelectedLabels: false,
           showUnselectedLabels: false,

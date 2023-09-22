@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>36939145380-b6s70k2ptv3dvdkb2c5r69f54iffm17k.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.36939145380-b6s70k2ptv3dvdkb2c5r69f54iffm17k</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>36939145380-1d7r76qc3pgbstkirm2tn6rkoc4if1sg.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCGR2LVqmvDGzBxquq91gAWUKg-QhuqpXE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>36939145380</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.doctorBookingFlutter</string>
+	<key>PROJECT_ID</key>
+	<string>doctorbooking2023</string>
+	<key>STORAGE_BUCKET</key>
+	<string>doctorbooking2023.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:36939145380:ios:b75eb209fb8b256cf94631</string>
+</dict>
+</plist>

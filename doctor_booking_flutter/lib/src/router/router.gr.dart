@@ -25,6 +25,12 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    DoctorCalendar.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorCalendarScreen(),
+      );
+    },
     DoctorDetails.name: (routeData) {
       final args = routeData.argsAs<DoctorDetailsArgs>();
       return AutoRoutePage<dynamic>(
@@ -45,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const DoctorLoginScreen(),
+      );
+    },
+    DoctorProfile.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorProfileScreen(),
       );
     },
     DoctorSignup.name: (routeData) {
@@ -149,6 +161,20 @@ class BookAppointmentArgs {
 }
 
 /// generated route for
+/// [DoctorCalendarScreen]
+class DoctorCalendar extends PageRouteInfo<void> {
+  const DoctorCalendar({List<PageRouteInfo>? children})
+      : super(
+          DoctorCalendar.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorCalendar';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [DoctorDetailsScreen]
 class DoctorDetails extends PageRouteInfo<DoctorDetailsArgs> {
   DoctorDetails({
@@ -210,6 +236,20 @@ class DoctorLogin extends PageRouteInfo<void> {
         );
 
   static const String name = 'DoctorLogin';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DoctorProfileScreen]
+class DoctorProfile extends PageRouteInfo<void> {
+  const DoctorProfile({List<PageRouteInfo>? children})
+      : super(
+          DoctorProfile.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorProfile';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

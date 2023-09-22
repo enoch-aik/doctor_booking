@@ -1,10 +1,10 @@
-
+import 'dart:io';
 
 import 'package:doctor_booking_flutter/lib.dart';
-import 'package:doctor_booking_flutter/src/widgets/text.dart';
 
 Future showMessageAlertDialog(context,
     {required text, onTap, isDismissible, String? actionText}) {
+  final bool isAndroid = Platform.isAndroid;
   return showDialog(
     barrierDismissible: isDismissible ?? true,
     context: context,
@@ -21,13 +21,21 @@ Future showMessageAlertDialog(context,
           child: SizedBox(
             height: 50.h,
             width: double.maxFinite,
-            child: FilledButton(
-              onPressed: onTap ??
-                  () {
-                    Navigator.of(context).pop();
-                  },
-              child: KText(actionText ?? 'Got it'),
-            ),
+            child: isAndroid
+                ? FilledButton(
+                    onPressed: onTap ??
+                        () {
+                          Navigator.of(context).pop();
+                        },
+                    child: KText(actionText ?? 'Got it'),
+                  )
+                : TextButton(
+                    onPressed: onTap ??
+                        () {
+                          Navigator.of(context).pop();
+                        },
+                    child: KText(actionText ?? 'Got it'),
+                  ),
           ),
         )
       ],
