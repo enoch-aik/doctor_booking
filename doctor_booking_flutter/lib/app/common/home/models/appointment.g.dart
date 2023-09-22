@@ -14,8 +14,8 @@ Appointment _$AppointmentFromJson(Map<String, dynamic> json) => Appointment(
       patientId: json['patientId'] as String?,
       doctorId: json['doctorId'] as String?,
       userEmail: json['userEmail'] as String?,
-      serviceDuration: json['serviceDuration'] as int?,
-      servicePrice: json['servicePrice'] as int?,
+      patientNote: json['patientNote'] as String?,
+      valid: json['valid'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$AppointmentToJson(Appointment instance) =>
@@ -23,8 +23,8 @@ Map<String, dynamic> _$AppointmentToJson(Appointment instance) =>
       'patientId': instance.patientId,
       'doctorId': instance.doctorId,
       'userEmail': instance.userEmail,
-      'serviceDuration': instance.serviceDuration,
-      'servicePrice': instance.servicePrice,
+      'patientNote': instance.patientNote,
+      'valid': instance.valid,
       'bookingStart': Appointment.dateTimeToTimeStamp(instance.bookingStart),
       'bookingEnd': Appointment.dateTimeToTimeStamp(instance.bookingEnd),
     };

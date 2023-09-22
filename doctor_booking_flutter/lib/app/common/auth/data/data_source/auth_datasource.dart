@@ -4,6 +4,7 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_creden
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthDataSource {
+  
   ///auth for patient
   Future<UserCredential> patientLogin(UserCred user);
 

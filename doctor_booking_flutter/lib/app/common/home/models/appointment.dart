@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'appointment.g.dart';
@@ -9,8 +10,10 @@ class Appointment {
   final String? patientId;
   final String? doctorId;
   final String? userEmail;
-  final int? serviceDuration;
-  final int? servicePrice;
+  final String? patientNote;
+  final bool? valid;
+
+  bool get isActive => bookingEnd?.isBefore(DateTime.now()) ?? false;
 
   //Because we are storing timestamp in Firestore, we need a converter for DateTime
   static DateTime timeStampToDateTime(Timestamp timestamp) {
@@ -32,8 +35,8 @@ class Appointment {
       this.patientId,
       this.doctorId,
       this.userEmail,
-      this.serviceDuration,
-      this.servicePrice});
+      this.patientNote,
+      this.valid = true});
 
   /// Connect the generated [_$SportBookingFromJson] function to the `fromJson`
   /// factory.
@@ -42,4 +45,11 @@ class Appointment {
 
   /// Connect the generated [_$SportBookingToJson] function to the `toJson` method.
   Map<String, dynamic> toJson() => _$AppointmentToJson(this);
+
+  //convert appointment to DateTimerRange
+  DateTimeRange get toDateTimeRange =>
+      DateTimeRange(start: bookingStart!, end: bookingEnd!);
+
 }
+
+

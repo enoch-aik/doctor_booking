@@ -61,7 +61,7 @@ class _PatientHomeView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final doctor = ref.watch(doctorStreamProvider);
+    final doctor = ref.watch(doctorListStreamProvider);
     List<Doctor> initialList = [];
     List<Doctor> filteredList = [];
     return Scaffold(

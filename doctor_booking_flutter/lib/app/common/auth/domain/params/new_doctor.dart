@@ -1,3 +1,4 @@
+import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -11,13 +12,13 @@ class NewDoctor {
   String? userId;
   final String speciality;
   final bool isApproved;
-  final List<DateTime> schedules;
+  final List<Appointment> appointments;
 
   NewDoctor(
       {required this.fullName,
         required this.emailAddress,
         required this.password,
-        this.schedules = const [],this.isApproved = false,required this.speciality,
+        this.appointments = const [],this.isApproved = false,required this.speciality,
         this.userId});
 
   factory NewDoctor.fromJson(Map<String, dynamic> json) =>
@@ -29,5 +30,5 @@ class NewDoctor {
       fullName: fullName,
       emailAddress: emailAddress,
       userId: userId,
-      schedules: schedules, speciality: speciality);
+      appointments: [], speciality: speciality);
 }

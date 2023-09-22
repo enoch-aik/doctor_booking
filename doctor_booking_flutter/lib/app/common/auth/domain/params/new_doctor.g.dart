@@ -10,8 +10,8 @@ NewDoctor _$NewDoctorFromJson(Map<String, dynamic> json) => NewDoctor(
       fullName: json['fullName'] as String,
       emailAddress: json['emailAddress'] as String,
       password: json['password'] as String,
-      schedules: (json['schedules'] as List<dynamic>?)
-              ?.map((e) => DateTime.parse(e as String))
+      appointments: (json['appointments'] as List<dynamic>?)
+              ?.map((e) => Appointment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       isApproved: json['isApproved'] as bool? ?? false,
@@ -26,5 +26,5 @@ Map<String, dynamic> _$NewDoctorToJson(NewDoctor instance) => <String, dynamic>{
       'userId': instance.userId,
       'speciality': instance.speciality,
       'isApproved': instance.isApproved,
-      'schedules': instance.schedules.map((e) => e.toIso8601String()).toList(),
+      'appointments': instance.appointments,
     };

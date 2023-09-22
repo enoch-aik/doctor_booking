@@ -52,7 +52,7 @@ dependencies:
   #local persistence
   shared_preferences: ^2.1.1
   booking_calendar:
-    path: /Users/enochaikpokpodion/IdeaProjects/booking_calendar
+    path: booking_calendar
   equatable: ^2.0.5
   syncfusion_flutter_calendar: ^21.2.3
 
