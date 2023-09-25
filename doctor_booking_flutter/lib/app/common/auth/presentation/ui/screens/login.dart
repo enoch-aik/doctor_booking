@@ -258,7 +258,9 @@ class LoginScreen extends HookConsumerWidget {
                     final result = await auth.googleSignIn();
                     Loader.hide(context);
                     result.when(
-                        success: (data) {},
+                        success: (data) {
+
+                        },
                         apiFailure: (e, _) {
                           showMessageAlertDialog(context, text: e.message);
                         });

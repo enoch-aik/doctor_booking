@@ -9,8 +9,8 @@ part of 'doctor.dart';
 Doctor _$DoctorFromJson(Map<String, dynamic> json) => Doctor(
       fullName: json['fullName'] as String,
       emailAddress: json['emailAddress'] as String,
-      schedules: (json['schedules'] as List<dynamic>?)
-              ?.map((e) => DateTime.parse(e as String))
+      appointments: (json['appointments'] as List<dynamic>?)
+              ?.map((e) => Appointment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
       speciality: json['speciality'] as String,
@@ -23,6 +23,6 @@ Map<String, dynamic> _$DoctorToJson(Doctor instance) => <String, dynamic>{
       'emailAddress': instance.emailAddress,
       'userId': instance.userId,
       'speciality': instance.speciality,
-      'schedules': instance.schedules.map((e) => e.toIso8601String()).toList(),
+      'appointments': instance.appointments.map((e) => e.toJson()).toList(),
       'isApproved': instance.isApproved,
     };

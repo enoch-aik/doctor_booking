@@ -15,10 +15,30 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
-    DoctorDetails.name: (routeData) {
+    BookAppointment.name: (routeData) {
+      final args = routeData.argsAs<BookAppointmentArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const DoctorDetailsScreen(),
+        child: BookAppointmentScreen(
+          key: args.key,
+          doctor: args.doctor,
+        ),
+      );
+    },
+    DoctorCalendar.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorCalendarScreen(),
+      );
+    },
+    DoctorDetails.name: (routeData) {
+      final args = routeData.argsAs<DoctorDetailsArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: DoctorDetailsScreen(
+          key: args.key,
+          doctor: args.doctor,
+        ),
       );
     },
     DoctorHome.name: (routeData) {
@@ -31,6 +51,12 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const DoctorLoginScreen(),
+      );
+    },
+    DoctorProfile.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const DoctorProfileScreen(),
       );
     },
     DoctorSignup.name: (routeData) {
@@ -97,17 +123,93 @@ abstract class _$AppRouter extends RootStackRouter {
 }
 
 /// generated route for
-/// [DoctorDetailsScreen]
-class DoctorDetails extends PageRouteInfo<void> {
-  const DoctorDetails({List<PageRouteInfo>? children})
+/// [BookAppointmentScreen]
+class BookAppointment extends PageRouteInfo<BookAppointmentArgs> {
+  BookAppointment({
+    Key? key,
+    required Doctor doctor,
+    List<PageRouteInfo>? children,
+  }) : super(
+          BookAppointment.name,
+          args: BookAppointmentArgs(
+            key: key,
+            doctor: doctor,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'BookAppointment';
+
+  static const PageInfo<BookAppointmentArgs> page =
+      PageInfo<BookAppointmentArgs>(name);
+}
+
+class BookAppointmentArgs {
+  const BookAppointmentArgs({
+    this.key,
+    required this.doctor,
+  });
+
+  final Key? key;
+
+  final Doctor doctor;
+
+  @override
+  String toString() {
+    return 'BookAppointmentArgs{key: $key, doctor: $doctor}';
+  }
+}
+
+/// generated route for
+/// [DoctorCalendarScreen]
+class DoctorCalendar extends PageRouteInfo<void> {
+  const DoctorCalendar({List<PageRouteInfo>? children})
       : super(
+          DoctorCalendar.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorCalendar';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DoctorDetailsScreen]
+class DoctorDetails extends PageRouteInfo<DoctorDetailsArgs> {
+  DoctorDetails({
+    Key? key,
+    required Doctor doctor,
+    List<PageRouteInfo>? children,
+  }) : super(
           DoctorDetails.name,
+          args: DoctorDetailsArgs(
+            key: key,
+            doctor: doctor,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'DoctorDetails';
 
-  static const PageInfo<void> page = PageInfo<void>(name);
+  static const PageInfo<DoctorDetailsArgs> page =
+      PageInfo<DoctorDetailsArgs>(name);
+}
+
+class DoctorDetailsArgs {
+  const DoctorDetailsArgs({
+    this.key,
+    required this.doctor,
+  });
+
+  final Key? key;
+
+  final Doctor doctor;
+
+  @override
+  String toString() {
+    return 'DoctorDetailsArgs{key: $key, doctor: $doctor}';
+  }
 }
 
 /// generated route for
@@ -134,6 +236,20 @@ class DoctorLogin extends PageRouteInfo<void> {
         );
 
   static const String name = 'DoctorLogin';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [DoctorProfileScreen]
+class DoctorProfile extends PageRouteInfo<void> {
+  const DoctorProfile({List<PageRouteInfo>? children})
+      : super(
+          DoctorProfile.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'DoctorProfile';
 
   static const PageInfo<void> page = PageInfo<void>(name);
 }

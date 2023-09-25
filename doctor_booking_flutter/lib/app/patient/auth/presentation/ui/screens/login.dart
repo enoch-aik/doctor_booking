@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
@@ -264,8 +265,22 @@ class PatientLoginScreen extends HookConsumerWidget {
                     Loader.show(context);
                     final result = await auth.googleSignIn();
                     Loader.hide(context);
-                    result.when(success: (data) {
-                      //save user details here and
+                    result.when(success: (data) async {
+                      //check if user exist in db, if not, save user details to db
+                      final firebaseApi = ref.read(firebaseApiProvider);
+                      bool exists =
+                          await firebaseApi.getPatient(data.user?.email ?? '');
+                      if (!exists) {
+                        final user = NewUser(
+                            fullName: data.user?.displayName ?? '',
+                            emailAddress: data.user?.email ?? '',
+                            password: '',
+                            userId: data.user?.uid ?? '');
+                        await firebaseApi.storePatientData(
+                            newUser: user, credential: data);
+                      }
+
+                      //save user details here and navigator to the next screen
 
                       ref.read(storeProvider).savePatientInfo(Patient(
                           fullName: data.user?.displayName ?? '',

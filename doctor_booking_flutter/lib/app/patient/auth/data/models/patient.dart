@@ -1,4 +1,5 @@
 import 'package:doctor_booking_flutter/app/common/auth/data/models/user.dart';
+import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'patient.g.dart';
@@ -8,12 +9,12 @@ class Patient  {
   final String fullName;
   final String emailAddress;
   String? userId;
-  final List<DateTime> schedules;
+  final List<Appointment> appointments;
 
   Patient(
       {required this.fullName,
       required this.emailAddress,
-      this.schedules = const [],
+      this.appointments = const [],
       this.userId});
 
   factory Patient.fromJson(Map<String, dynamic> json) =>

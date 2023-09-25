@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
+import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +43,13 @@ class FirebaseApi {
     return exists;
   }
 
+  Future<Patient> getPatientData(String email) async {
+    DocumentReference docRef = firestore.collection('patients').doc(email);
+    return Patient.fromJson(await docRef
+        .get()
+        .then((value) => value.data()! as Map<String, dynamic>));
+  }
+
   //check if doctor exists
   Future<bool> getDoctor(String email) async {
     bool exists = false;
@@ -55,13 +63,13 @@ class FirebaseApi {
       FirebaseFirestore.instance.collection('bookings');
 
   ///This is how can you get the reference to your data from the collection, and serialize the data with the help of the Firestore [withConverter]. This function would be in your repository.
-  CollectionReference<BookingService> getBookingStream({required String docId}) {
+  CollectionReference<Appointment> getBookingStream({required String docId}) {
     return bookings
         .doc(docId)
         .collection('appointments')
-        .withConverter<BookingService>(
+        .withConverter<Appointment>(
           fromFirestore: (snapshots, _) =>
-              BookingService.fromJson(snapshots.data()!),
+              Appointment.fromJson(snapshots.data()!),
           toFirestore: (snapshots, _) => snapshots.toJson(),
         );
   }
@@ -92,7 +100,7 @@ class FirebaseApi {
 
   ///This is how you upload data to Firestore
   Future<dynamic> uploadBookingFirebase(
-      {required BookingService newAppointment}) async {
+      {required Appointment newAppointment}) async {
     await bookings
         .doc('your id, or autogenerate')
         .collection('bookings')

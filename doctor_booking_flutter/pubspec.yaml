@@ -51,8 +51,10 @@ dependencies:
   lottie: ^2.4.0
   #local persistence
   shared_preferences: ^2.1.1
-  booking_calendar: ^1.1.9
+  booking_calendar:
+    path: booking_calendar
   equatable: ^2.0.5
+  syncfusion_flutter_calendar: ^23.1.36
 
 dev_dependencies:
   flutter_lints: ^2.0.3
