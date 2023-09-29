@@ -8,8 +8,11 @@ import 'package:flutter/material.dart';
 
 class FirebaseApi {
   final FirebaseFirestore firestore;
+  late CollectionReference bookings;
 
-  FirebaseApi(this.firestore);
+   FirebaseApi(this.firestore) {
+    bookings = firestore.collection('bookings');
+  }
 
   ///add new patient details to patients collection
   Future<bool> storePatientData(
@@ -39,8 +42,8 @@ class FirebaseApi {
   //check if user exist
   Future<bool> getPatient(String email) async {
     bool exists = false;
-    await firestore.collection('patients').doc(email).get();
-    return exists;
+    var doc = await firestore.collection('patients').doc(email).get();
+    return doc.exists;
   }
 
   Future<Patient> getPatientData(String email) async {
@@ -59,8 +62,7 @@ class FirebaseApi {
 
   ///add new doctor details to doctors db
 
-  CollectionReference bookings =
-      FirebaseFirestore.instance.collection('bookings');
+
 
   ///This is how can you get the reference to your data from the collection, and serialize the data with the help of the Firestore [withConverter]. This function would be in your repository.
   CollectionReference<Appointment> getBookingStream({required String docId}) {
