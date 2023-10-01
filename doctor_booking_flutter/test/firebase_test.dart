@@ -6,6 +6,8 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
+import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 
 
 void main() {
@@ -93,6 +95,8 @@ void main() {
         Patient result = await firebaseApi.getPatientData(email);
         Patient original = user.toPatient();
 
+        print(result.userId);
+
         expect(result.emailAddress, original.emailAddress);
         expect(result.appointments, original.appointments);
         expect(result.fullName, original.fullName);
@@ -159,6 +163,66 @@ void main() {
         bool result = await firebaseApi.getDoctor(email);
 
         expect(result, true);
+      });
+    });
+
+    group("AppointmentTest", () {
+      test("Check Appointment Insert Single Patient & Doctor",  () async {
+        final instance = FakeFirebaseFirestore();
+        final auth = MockFirebaseAuth();
+        FirebaseApi firebaseApi = FirebaseApi(instance);
+
+        // Insert Doctor
+        const doctorMail = "doctor1@bth.se";
+        final doctorUser = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: doctorMail, password: "password", speciality: "Optometrist");
+        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctorUser.emailAddress, password: doctorUser.password);
+        firebaseApi.storeDoctorData(newDoctor: doctorUser, credential: doctorCred);
+        Doctor doctor = await firebaseApi.getDoctorData(doctorMail);
+
+        // Insert Patient
+        const patientMail = "patient1@bth.se";
+        final patientUser = NewUser(fullName: "John Doe", emailAddress: patientMail, password: "password");
+        final patientCred = await auth.createUserWithEmailAndPassword(email: patientUser.emailAddress, password: patientUser.password);
+        firebaseApi.storePatientData(newUser: patientUser, credential: patientCred);
+        Patient patient = await firebaseApi.getPatientData(patientMail);
+
+        // Insert Appointments
+        final appointmentStart = DateTime.utc(2023, 10, 2, 12, 0, 0);
+        final appointmentEnd = appointmentStart.add(const Duration(minutes: 30));
+        final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity");
+        // Note: Unclear Reference "userEmail" for appointment (doctor or patient?)
+        final key = await firebaseApi.uploadBookingFirebase(newAppointment: appointment);
+        // Need something as return value (some id)
+
+        // todo: check whether successful
+        expect(key != null, true);
+      });
+
+      test("Check Doctor Data Insert",  () async {
+        final instance = FakeFirebaseFirestore();
+        final auth = MockFirebaseAuth();
+        FirebaseApi firebaseApi = FirebaseApi(instance);
+
+        // Insert Doctor
+        String email = "doctor1@bth.se";
+        final doctor = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: email, password: "password", speciality: "Optometrist");
+        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctor.emailAddress, password: doctor.password);
+        firebaseApi.storeDoctorData(newDoctor: doctor, credential: doctorCred);
+
+        // Insert Multiple Users
+        for (int i=0; i<5; i++){
+          String char = String.fromCharCode(i);
+          String name = char*3;
+          String mail = "$name@test.com";
+          var user = NewUser(fullName: name, emailAddress: mail, password: name);
+          final userCred = await auth.createUserWithEmailAndPassword(email: user.emailAddress, password: user.password);
+          firebaseApi.storePatientData(newUser: user, credential: userCred);
+        }
+
+        // Insert Appointments
+        // Todo: After appointment functionality is given
+
+        expect(false, true);
       });
     });
   });

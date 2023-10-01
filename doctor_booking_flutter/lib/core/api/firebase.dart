@@ -3,6 +3,7 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -41,7 +42,7 @@ class FirebaseApi {
 
   //check if user exist
   Future<bool> getPatient(String email) async {
-    bool exists = false;
+    // bool exists = false;
     var doc = await firestore.collection('patients').doc(email).get();
     return doc.exists;
   }
@@ -58,6 +59,14 @@ class FirebaseApi {
     bool exists = false;
     await firestore.collection('doctors').doc(email).get();
     return exists;
+  }
+
+  // Debugging function to get reliable access to DoctorId
+  Future<Doctor> getDoctorData(String email) async {
+    DocumentReference docRef = firestore.collection('doctors').doc(email);
+    return Doctor.fromJson(await docRef
+        .get()
+        .then((value) => value.data()! as Map<String, dynamic>));
   }
 
   ///add new doctor details to doctors db
