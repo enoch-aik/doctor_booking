@@ -4,8 +4,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'patient.g.dart';
 
-@JsonSerializable()
-class Patient  {
+@JsonSerializable(explicitToJson: true)
+class Patient {
   final String fullName;
   final String emailAddress;
   String? userId;
@@ -21,4 +21,8 @@ class Patient  {
       _$PatientFromJson(json);
 
   Map<String, dynamic> toJson() => _$PatientToJson(this);
+
+  List<Appointment> get upcomingAppointments => appointments
+      .where((element) => element.bookingStart!.isAfter(DateTime.now()))
+      .toList();
 }

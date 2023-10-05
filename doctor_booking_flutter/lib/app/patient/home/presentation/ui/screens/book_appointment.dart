@@ -9,6 +9,7 @@ import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/core/services/add_event_to_calendar.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
+import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -76,6 +77,7 @@ class BookAppointmentScreen extends HookConsumerWidget {
               ),
               FilledButton.tonal(
                 onPressed: () async {
+                  Navigator.pop(context);
                   await CalendarService()
                       .addToCalendar(appointment: newAppointment);
                 },
