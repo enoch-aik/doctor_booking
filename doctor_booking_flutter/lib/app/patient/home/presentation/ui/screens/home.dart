@@ -141,7 +141,7 @@ class _PatientHomeView extends ConsumerWidget {
               }
 
               return ListView.builder(
-                shrinkWrap: true,
+                shrinkWrap: true,physics: const NeverScrollableScrollPhysics(),
                 itemCount: ref.watch(selectedDoctorSpeciality) == null
                     ? data.length
                     : filteredList.length,

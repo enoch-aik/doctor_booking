@@ -12,6 +12,8 @@ class Appointment {
   final String? userEmail;
   final String? patientNote;
   final bool? valid;
+  final String? doctorName;
+  final String? doctorSpeciality;
 
   bool get isActive => bookingEnd?.isBefore(DateTime.now()) ?? false;
 
@@ -36,6 +38,7 @@ class Appointment {
       this.doctorId,
       this.userEmail,
       this.patientNote,
+      this.doctorName,this.doctorSpeciality,
       this.valid = true});
 
   /// Connect the generated [_$SportBookingFromJson] function to the `fromJson`
@@ -49,7 +52,4 @@ class Appointment {
   //convert appointment to DateTimerRange
   DateTimeRange get toDateTimeRange =>
       DateTimeRange(start: bookingStart!, end: bookingEnd!);
-
 }
-
-

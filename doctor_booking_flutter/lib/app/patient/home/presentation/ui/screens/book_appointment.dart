@@ -6,9 +6,11 @@ import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
+import 'package:doctor_booking_flutter/core/services/add_event_to_calendar.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
+import 'package:doctor_booking_flutter/src/widgets/toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 @RoutePage(name: 'bookAppointment')
@@ -46,19 +48,47 @@ class BookAppointmentScreen extends HookConsumerWidget {
         patientId: currentUser.uid,
         userEmail: currentUser.email,
         doctorId: doctor.emailAddress,
+        doctorName: doctor.fullName,
+        doctorSpeciality: doctor.speciality,
         patientNote: '',
       );
       final result = await ref.read(appointmentRepo).bookDoctorAppointment(
           newAppointment: newAppointment,
           doctor: doctor,
           patientEmail: currentUser.email!);
-      result.when(
-          success: (data) {
-            AutoRouter.of(context).popUntilRoot();
-            showMessageAlertDialog(context,
-                text: 'Appointment booked successfully');
-          },
-          apiFailure: (e, _) {});
+      result.when(success: (data) {
+        //go to home screen
+        AutoRouter.of(context).popUntilRoot();
+        //add appointment to calendar
+        //show dialog to notify user that the appointment has been booked and ask if they want to add it to calendar
+        showAdaptiveDialog(
+          context: context,
+          builder: (context) => AlertDialog.adaptive(
+            title: const Text('Booking complete'),
+            content: const Text(
+                'Your appoint has been booked successfully, do you want to add this appointment to your Calendar?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('No'),
+              ),
+              FilledButton.tonal(
+                onPressed: () async {
+                  await CalendarService()
+                      .addToCalendar(appointment: newAppointment);
+                },
+                child: const Text('Yes'),
+              ),
+            ],
+          ),
+        );
+      }, apiFailure: (e, _) {
+        //show snackbar to notify user that the appointment failed
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: KText('Appointment booking failed')));
+      });
     }
 
     List<DateTimeRange> convertStreamResult({required dynamic streamResult}) {
@@ -69,25 +99,6 @@ class BookAppointmentScreen extends HookConsumerWidget {
       } else {
         return [];
       }
-      /*DateTime first = now;
-      DateTime tomorrow = now.add(const Duration(days: 1));
-      DateTime second = now.add(const Duration(minutes: 55));
-      DateTime third = now.subtract(const Duration(minutes: 240));
-      DateTime fourth = now.subtract(const Duration(minutes: 500));
-      converted.add(DateTimeRange(
-          start: first, end: now.add(const Duration(minutes: 30))));
-      converted.add(DateTimeRange(
-          start: second, end: second.add(const Duration(minutes: 23))));
-      converted.add(DateTimeRange(
-          start: third, end: third.add(const Duration(minutes: 15))));
-      converted.add(DateTimeRange(
-          start: fourth, end: fourth.add(const Duration(minutes: 50))));
-
-      //book whole day example
-      converted.add(DateTimeRange(
-          start: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 5, 0),
-          end: DateTime(tomorrow.year, tomorrow.month, tomorrow.day, 23, 0)));
-      return converted;*/
     }
 
     return Scaffold(
@@ -106,21 +117,6 @@ class BookAppointmentScreen extends HookConsumerWidget {
         uploadBooking: uploadBooking,
         convertStreamResultToDateTimeRanges: convertStreamResult,
 
-        //bookingButtonColor: bookingButtonColor,
-        //  bookingButtonText: bookingButtonText,
-        //  bookingExplanation: bookingExplanation,
-        // bookingGridChildAspectRatio: bookingGridChildAspectRatio,
-        //  bookingGridCrossAxisCount: bookingGridCrossAxisCount,
-        // formatDateTime: formatDateTime,
-        // availableSlotColor: availableSlotColor,
-        // availableSlotText: availableSlotText,
-        // bookedSlotColor: bookedSlotColor,
-        // bookedSlotText: bookedSlotText,
-        // selectedSlotColor: selectedSlotColor,
-        // selectedSlotText: selectedSlotText,
-        // gridScrollPhysics: gridScrollPhysics,
-        //loadingWidget: loadingWidget,
-        //errorWidget: errorWidget,
         uploadingWidget: const Center(
           child: CircularProgressIndicator(),
         ),
@@ -131,7 +127,7 @@ class BookAppointmentScreen extends HookConsumerWidget {
         hideBreakTime: false,
         //locale: locale,
         disabledDays: const [6, 7],
-        // startingDayOfWeek: startingDayOfWeek,
+        // startingDayOfWeek: 1,
         bookingService: BookingService(
             serviceName: 'Appointments',
             userEmail: currentUser.email,
@@ -144,7 +140,8 @@ class BookAppointmentScreen extends HookConsumerWidget {
   }
 }
 
-//create a function that returns a list of DateTimeRange for the next 120 days where the start for each day is 11:30 am and end is 12:30pm
+///to blank out all 11:30 to 12:30 for the next 120 days
+//function that returns a list of DateTimeRange for the next 120 days where the start for each day is 11:30 am and end is 12:30pm
 List<DateTimeRange> get120Days() {
   List<DateTimeRange> converted = [];
   DateTime now = DateTime.now();
