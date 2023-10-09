@@ -55,6 +55,8 @@ dependencies:
     path: booking_calendar
   equatable: ^2.0.5
   syncfusion_flutter_calendar: ^23.1.36
+  add_2_calendar: ^2.2.4
+  skeletonizer: ^0.8.0
 
 dev_dependencies:
   flutter_lints: ^2.0.3

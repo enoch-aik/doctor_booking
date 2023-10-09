@@ -10,8 +10,6 @@ import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
 import 'package:flutter/gestures.dart';
 
-
-
 @RoutePage(name: 'login')
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -30,7 +28,6 @@ class LoginScreen extends HookConsumerWidget {
     //formKey
     final GlobalKey<FormState> formKey = GlobalKey();
 
-
     return Scaffold(
       appBar: AppBar(),
       body: Form(
@@ -38,7 +35,6 @@ class LoginScreen extends HookConsumerWidget {
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
           children: [
-
             KText(
               'Welcome!',
               fontSize: 24.sp,
@@ -233,11 +229,9 @@ class LoginScreen extends HookConsumerWidget {
                       Loader.hide(context);
                       result.when(success: (data) {
                         //if the login was successful, navigate to home screen
-
                       }, apiFailure: (e, _) {
                         showMessageAlertDialog(context, text: e.message);
                       });
-
                     }
                   },
                   child: const KText('Login')),
@@ -258,9 +252,7 @@ class LoginScreen extends HookConsumerWidget {
                     final result = await auth.googleSignIn();
                     Loader.hide(context);
                     result.when(
-                        success: (data) {
-
-                        },
+                        success: (data) {},
                         apiFailure: (e, _) {
                           showMessageAlertDialog(context, text: e.message);
                         });

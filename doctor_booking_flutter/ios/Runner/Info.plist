@@ -33,6 +33,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>NSCalendarsUsageDescription</key>
+    <string>Doctor Booking need access to your calendar to add appointment you book in the app for you</string>
+	<key>NSContactsUsageDescription</key>
+    <string>Doctor Booking need access to your calendar to add appointment you book in the app for you</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
