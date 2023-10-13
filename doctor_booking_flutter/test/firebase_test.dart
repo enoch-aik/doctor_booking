@@ -8,6 +8,22 @@ import 'package:firebase_auth_mocks/firebase_auth_mocks.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
+import 'package:doctor_booking_flutter/app/patient/home/data/data_source/appointment_datasource_impl.dart';
+
+
+bool isSameAppointments(Appointment a, Appointment b){
+  bool isIdentical = true;
+  isIdentical = isIdentical &&(a.valid == b.valid);
+  if (a.bookingStart != null && b.bookingStart!= null) {
+    isIdentical = isIdentical && (a.bookingStart!.isAtSameMomentAs(b.bookingStart!));
+  }
+  if (a.bookingEnd != null && b.bookingEnd!= null) {
+    isIdentical = isIdentical && (a.bookingEnd!.isAtSameMomentAs(b.bookingEnd!));
+  }
+  isIdentical = isIdentical &&(a.doctorId == b.doctorId);
+  isIdentical = isIdentical &&(a.patientId == b.patientId);
+  return isIdentical;
+}
 
 
 void main() {
@@ -160,9 +176,12 @@ void main() {
         FirebaseApi firebaseApi = FirebaseApi(instance);
 
         firebaseApi.storeDoctorData(newDoctor: doctor, credential: doctorCred);
-        bool result = await firebaseApi.getDoctor(email);
+        final retrievedDoctor = await firebaseApi.getDoctorData(email);
 
-        expect(result, true);
+        expect(retrievedDoctor.speciality, doctor.speciality);
+        expect(retrievedDoctor.emailAddress, doctor.emailAddress);
+        expect(retrievedDoctor.fullName, doctor.fullName);
+        expect(retrievedDoctor.userId, doctor.userId);
       });
     });
 
@@ -171,6 +190,8 @@ void main() {
         final instance = FakeFirebaseFirestore();
         final auth = MockFirebaseAuth();
         FirebaseApi firebaseApi = FirebaseApi(instance);
+
+        final AppointmentDataSourceImpl appointmentDS = AppointmentDataSourceImpl(instance, firebaseApi);
 
         // Insert Doctor
         const doctorMail = "doctor1@bth.se";
@@ -189,41 +210,171 @@ void main() {
         // Insert Appointments
         final appointmentStart = DateTime.utc(2023, 10, 2, 12, 0, 0);
         final appointmentEnd = appointmentStart.add(const Duration(minutes: 30));
-        final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity");
+        final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity", doctorName: doctor.fullName, doctorSpeciality: doctor.speciality);
         // Note: Unclear Reference "userEmail" for appointment (doctor or patient?)
-        final key = await firebaseApi.uploadBookingFirebase(newAppointment: appointment);
-        // Need something as return value (some id)
 
-        // todo: check whether successful
-        expect(key != null, true);
+        // unclear whether any other value can be returned => Todo: test for error
+        final returnV = await appointmentDS.bookDoctorAppointment(newAppointment: appointment, doctor: doctor, patientEmail: patient.emailAddress);
+
+        expect(returnV, true);
       });
 
-      test("Check Doctor Data Insert",  () async {
+
+
+      test("Check Appointment Correctly Added - Single Doctor & patient",  () async {
         final instance = FakeFirebaseFirestore();
         final auth = MockFirebaseAuth();
         FirebaseApi firebaseApi = FirebaseApi(instance);
 
-        // Insert Doctor
-        String email = "doctor1@bth.se";
-        final doctor = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: email, password: "password", speciality: "Optometrist");
-        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctor.emailAddress, password: doctor.password);
-        firebaseApi.storeDoctorData(newDoctor: doctor, credential: doctorCred);
+        final AppointmentDataSourceImpl appointmentDS = AppointmentDataSourceImpl(instance, firebaseApi);
 
-        // Insert Multiple Users
+        // Insert Doctor
+        const doctorMail = "doctor1@bth.se";
+        final doctorUser = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: doctorMail, password: "password", speciality: "Optometrist");
+        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctorUser.emailAddress, password: doctorUser.password);
+        firebaseApi.storeDoctorData(newDoctor: doctorUser, credential: doctorCred);
+        Doctor doctor = await firebaseApi.getDoctorData(doctorMail);
+
+        // Insert Patient
+        const patientMail = "patient1@bth.se";
+        final patientUser = NewUser(fullName: "John Doe", emailAddress: patientMail, password: "password");
+        final patientCred = await auth.createUserWithEmailAndPassword(email: patientUser.emailAddress, password: patientUser.password);
+        firebaseApi.storePatientData(newUser: patientUser, credential: patientCred);
+        Patient patient = await firebaseApi.getPatientData(patientMail);
+
+        // Insert Appointments
+        final appointmentStart = DateTime.utc(2023, 10, 2, 12, 0, 0);
+        final appointmentEnd = appointmentStart.add(const Duration(minutes: 30));
+        final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity", doctorName: doctor.fullName, doctorSpeciality: doctor.speciality);
+        // Note: Unclear Reference "userEmail" for appointment (doctor or patient?)
+
+        // unclear whether any other value can be returned => Todo: test for error
+        await appointmentDS.bookDoctorAppointment(newAppointment: appointment, doctor: doctor, patientEmail: patient.emailAddress);
+        bool valid = true;
+        final patientAppointments =(await firebaseApi.getPatientData(patientMail)).appointments;
+        final doctorAppointments =(await firebaseApi.getDoctorData(doctorMail)).appointments;
+        // appointment might profit from a unique id.
+        //print(patientAppointments.map((e) => e.hashCode).first)
+        valid = valid && patientAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+        valid = valid && doctorAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+        expect(valid, true);
+      });
+
+
+      test("Check Appointment Correctly Added - Single Doctor & Multiple patients - No Doctor reloading",  () async {
+        final instance = FakeFirebaseFirestore();
+        final auth = MockFirebaseAuth();
+        FirebaseApi firebaseApi = FirebaseApi(instance);
+
+        final AppointmentDataSourceImpl appointmentDS = AppointmentDataSourceImpl(instance, firebaseApi);
+
+        // Insert Doctor
+        const doctorMail = "doctor1@bth.se";
+        final doctorUser = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: doctorMail, password: "password", speciality: "Optometrist");
+        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctorUser.emailAddress, password: doctorUser.password);
+        firebaseApi.storeDoctorData(newDoctor: doctorUser, credential: doctorCred);
+        Doctor doctor = await firebaseApi.getDoctorData(doctorMail);
+
+        List<String> mails = [];
+        List<Appointment> appointments = [];
+        var appointmentStart = DateTime.utc(2023, 10, 2, 12, 0, 0);
         for (int i=0; i<5; i++){
           String char = String.fromCharCode(i);
           String name = char*3;
-          String mail = "$name@test.com";
-          var user = NewUser(fullName: name, emailAddress: mail, password: name);
+          String patientMail = "$name@test.com";
+          mails.add(patientMail);
+          var user = NewUser(fullName: name, emailAddress: patientMail, password: name);
           final userCred = await auth.createUserWithEmailAndPassword(email: user.emailAddress, password: user.password);
           firebaseApi.storePatientData(newUser: user, credential: userCred);
+          Patient patient = await firebaseApi.getPatientData(patientMail);
+          // Insert Appointments
+
+          final appointmentEnd = appointmentStart.add(const Duration(minutes: 30));
+          appointmentStart = appointmentStart.add(const Duration(minutes: 30));
+
+          final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity", doctorName: doctor.fullName, doctorSpeciality: doctor.speciality);
+          appointments.add(appointment);
+          // Note: Unclear Reference "userEmail" for appointment (doctor or patient?)
+          await appointmentDS.bookDoctorAppointment(newAppointment: appointment, doctor: doctor, patientEmail: patient.emailAddress);
         }
 
-        // Insert Appointments
-        // Todo: After appointment functionality is given
+        bool valid = true;
+        final doctorAppointments =(await firebaseApi.getDoctorData(doctorMail)).appointments;
+        for (int i=0; i<5;i++){
+          final patientMail = mails.elementAt(i);
+          final appointment = appointments.elementAt(i);
+          bool check = valid;
 
-        expect(false, true);
+          // appointment might profit from a unique id.
+          final patientAppointments =(await firebaseApi.getPatientData(patientMail)).appointments;
+
+          valid = valid && patientAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+          valid = valid && doctorAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+          if (valid != check) print("Mistake in $i");
+        }
+        // Will fail because Doctor is only generated once and update takes a fixed doctor for some reason
+        // Fine for single service. May serve as race condition in actual application (hard to synchronize, while patient update works more quickly)
+        expect(valid, true);
       });
+
+
+      test("Check Appointment Correctly Added - Single Doctor & Multiple patients",  () async {
+        final instance = FakeFirebaseFirestore();
+        final auth = MockFirebaseAuth();
+        FirebaseApi firebaseApi = FirebaseApi(instance);
+
+        final AppointmentDataSourceImpl appointmentDS = AppointmentDataSourceImpl(instance, firebaseApi);
+
+        // Insert Doctor
+        const doctorMail = "doctor1@bth.se";
+        final doctorUser = NewDoctor(fullName: "Jane Doe, M.D.", emailAddress: doctorMail, password: "password", speciality: "Optometrist");
+        final doctorCred = await auth.createUserWithEmailAndPassword(email: doctorUser.emailAddress, password: doctorUser.password);
+        firebaseApi.storeDoctorData(newDoctor: doctorUser, credential: doctorCred);
+        Doctor doctor;
+
+        List<String> mails = [];
+        List<Appointment> appointments = [];
+        var appointmentStart = DateTime.utc(2023, 10, 2, 12, 0, 0);
+        for (int i=0; i<5; i++){
+          doctor = await firebaseApi.getDoctorData(doctorMail);
+          String char = String.fromCharCode(i);
+          String name = char*3;
+          String patientMail = "$name@test.com";
+          mails.add(patientMail);
+          var user = NewUser(fullName: name, emailAddress: patientMail, password: name);
+          final userCred = await auth.createUserWithEmailAndPassword(email: user.emailAddress, password: user.password);
+          firebaseApi.storePatientData(newUser: user, credential: userCred);
+          Patient patient = await firebaseApi.getPatientData(patientMail);
+          // Insert Appointments
+
+          final appointmentEnd = appointmentStart.add(const Duration(minutes: 30));
+          //appointmentStart = appointmentStart.add(const Duration(minutes: 30));
+
+          final appointment = Appointment(bookingStart: appointmentStart, bookingEnd: appointmentEnd, patientId: patient.userId, doctorId: doctor.userId, userEmail: patient.emailAddress, patientNote: "assessment of visual acuity", doctorName: doctor.fullName, doctorSpeciality: doctor.speciality);
+          appointments.add(appointment);
+          // Note: Unclear Reference "userEmail" for appointment (doctor or patient?)
+          await appointmentDS.bookDoctorAppointment(newAppointment: appointment, doctor: doctor, patientEmail: patient.emailAddress);
+        }
+
+        bool valid = true;
+        final doctorAppointments =(await firebaseApi.getDoctorData(doctorMail)).appointments;
+        for (int i=0; i<5;i++){
+          final patientMail = mails.elementAt(i);
+          final appointment = appointments.elementAt(i);
+          bool check = valid;
+
+          // appointment might profit from a unique id.
+          final patientAppointments =(await firebaseApi.getPatientData(patientMail)).appointments;
+
+          valid = valid && patientAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+          valid = valid && doctorAppointments.map((e) => isSameAppointments(e,appointment)).contains(true);
+          if (valid != check) print("Mistake in $i");
+        }
+        // Note: The upload command does not prevent multiple bookings at the same time -> See booking_calendar/lib/src/core/booking_controller.dart
+        expect(valid, true);
+      });
+
+      // Todo: Check double bookings (over booking controller, booking_calendar and more ....)
     });
   });
 }

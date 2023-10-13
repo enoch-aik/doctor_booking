@@ -57,7 +57,8 @@ class FirebaseApi {
   //check if doctor exists
   Future<bool> getDoctor(String email) async {
     bool exists = false;
-    await firestore.collection('doctors').doc(email).get();
+    var doc = await firestore.collection('doctors').doc(email).get();
+    exists = doc.exists;
     return exists;
   }
 
