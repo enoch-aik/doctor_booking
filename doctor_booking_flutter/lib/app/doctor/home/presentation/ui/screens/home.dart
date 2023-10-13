@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:auto_route/annotations.dart';
+import 'package:doctor_booking_flutter/app/doctor/calendar/presentation/ui/screens/calendar.dart';
 import 'package:doctor_booking_flutter/app/doctor/profile/presentation/ui/screens/profile.dart';
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
@@ -15,6 +16,7 @@ class DoctorHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const List<Widget> _body = [
       _DoctorHomeView(),
+      DoctorCalendarScreen(),
       DoctorProfileScreen(),
     ];
 
@@ -29,7 +31,7 @@ class DoctorHomeScreen extends ConsumerWidget {
             onTap: (index) {
               ref.read(doctorSelectedHomeIndex.notifier).state = index;
             },
-            currentIndex: ref.watch(patientSelectedHomeIndex),
+            currentIndex: ref.watch(doctorSelectedHomeIndex),
             items: doctorAppNavItems,
             type: BottomNavigationBarType.fixed,
             showSelectedLabels: false,

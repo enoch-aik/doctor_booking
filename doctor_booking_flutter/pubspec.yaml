@@ -55,8 +55,8 @@ dependencies:
     path: booking_calendar
   equatable: ^2.0.5
   syncfusion_flutter_calendar: ^23.1.36
-  fake_cloud_firestore: ^2.4.1+1
-  firebase_auth_mocks: ^0.12.0
+  add_2_calendar: ^2.2.4
+  skeletonizer: ^0.8.0
 
 dev_dependencies:
   flutter_lints: ^2.0.3
@@ -65,7 +65,6 @@ dev_dependencies:
   json_serializable: ^6.6.2
   flutter_test:
     sdk: flutter
-  test: ^1.24.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

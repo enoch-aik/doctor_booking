@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor_speciality.dart';
+import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
 import 'package:doctor_booking_flutter/app/patient/home/data/data_source/appointment_datasource.dart';
 import 'package:doctor_booking_flutter/app/patient/home/data/data_source/appointment_datasource_impl.dart';
 import 'package:doctor_booking_flutter/app/patient/home/data/repo_impl/appointment_repo_impl.dart';
@@ -41,6 +42,29 @@ final doctorScheduleStreamProvider =
       .map((querySnapshot) {
     return querySnapshot.docs
         .map((e) => Doctor.fromJson(e.data()))
+        .toList()
+        .first;
+  });
+});
+
+/// patient data stream provider
+final patientAppointmentsStreamProvider =
+    StreamProvider.family<Patient, String>((ref, email) {
+  return FirebaseFirestore.instance
+      .collection('patients')
+      .doc(email)
+      .snapshots()
+      .map((querySnapshot) {
+    return Patient.fromJson(querySnapshot.data()!);
+  });
+
+  return FirebaseFirestore.instance
+      .collection('patients')
+      .where('emailAddress', isEqualTo: email)
+      .snapshots()
+      .map((querySnapshot) {
+    return querySnapshot.docs
+        .map((e) => Patient.fromJson(e.data()))
         .toList()
         .first;
   });

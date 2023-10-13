@@ -36,7 +36,7 @@ class DoctorDetailsScreen extends ConsumerWidget {
                     width: 120.w,
                     height: 120.w,
                     decoration: BoxDecoration(
-                      color: context.tertiaryContainer,
+                      color: context.primaryContainer,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
                   ),
@@ -87,7 +87,7 @@ class DoctorDetailsScreen extends ConsumerWidget {
                 ColSpacing(8.h),
                 KText(
                     '${doctor.fullName.capitalizeFirstLetter()} is a professional '
-                    '${doctor.speciality} specialist in Sweden. He practices'
+                    '${doctor.speciality} in Sweden. He practices'
                     ' general at Elisabeth Hospital in Semarang ...')
               ],
             ),
@@ -100,7 +100,7 @@ class DoctorDetailsScreen extends ConsumerWidget {
           padding: EdgeInsets.only(bottom: 16.h, right: 16.w, left: 16.w),
           child: FilledButton(
               onPressed: () {
-                 AppNavigator.of(context).push(BookAppointment(doctor:doctor));
+                AppNavigator.of(context).push(BookAppointment(doctor: doctor));
               },
               child: Text('Book Appointment')),
         ),

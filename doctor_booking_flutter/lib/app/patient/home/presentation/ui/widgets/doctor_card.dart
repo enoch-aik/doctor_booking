@@ -36,7 +36,7 @@ class DoctorCard extends StatelessWidget {
                 width: 80.w,
                 height: 80.w,
                 decoration: BoxDecoration(
-                  color: context.tertiaryContainer,
+                  color: context.primaryContainer,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
               ),
