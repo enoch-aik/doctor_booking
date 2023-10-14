@@ -120,7 +120,7 @@ class _PatientHomeView extends HookConsumerWidget {
                 return Column(
                   children: [
                     CategoryHeader(
-                      title: 'Upcoming Schedules',
+                      title: 'Upcoming Appointments',
                       onPressed: () {
                         //navigate to upcoming schedules
                         AppNavigator.of(context).push(

@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppointmentDetails.name: (routeData) {
+      final args = routeData.argsAs<AppointmentDetailsArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AppointmentDetailsScreen(
+          key: args.key,
+          appointment: args.appointment,
+        ),
+      );
+    },
     BookAppointment.name: (routeData) {
       final args = routeData.argsAs<BookAppointmentArgs>();
       return AutoRoutePage<dynamic>(
@@ -131,6 +141,44 @@ abstract class _$AppRouter extends RootStackRouter {
       );
     },
   };
+}
+
+/// generated route for
+/// [AppointmentDetailsScreen]
+class AppointmentDetails extends PageRouteInfo<AppointmentDetailsArgs> {
+  AppointmentDetails({
+    Key? key,
+    required Appointment appointment,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AppointmentDetails.name,
+          args: AppointmentDetailsArgs(
+            key: key,
+            appointment: appointment,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AppointmentDetails';
+
+  static const PageInfo<AppointmentDetailsArgs> page =
+      PageInfo<AppointmentDetailsArgs>(name);
+}
+
+class AppointmentDetailsArgs {
+  const AppointmentDetailsArgs({
+    this.key,
+    required this.appointment,
+  });
+
+  final Key? key;
+
+  final Appointment appointment;
+
+  @override
+  String toString() {
+    return 'AppointmentDetailsArgs{key: $key, appointment: $appointment}';
+  }
 }
 
 /// generated route for
