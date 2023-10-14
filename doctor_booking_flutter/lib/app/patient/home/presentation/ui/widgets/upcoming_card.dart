@@ -1,5 +1,6 @@
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/lib.dart';
+import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/extensions/date_range.dart';
 import 'package:doctor_booking_flutter/src/extensions/string.dart';
@@ -37,6 +38,9 @@ class UpcomingScheduleCard extends StatelessWidget {
                           color: context.tertiaryContainer,
                           borderRadius: BorderRadius.circular(8.r),
                         ),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(8.r),
+                            child: Image.asset(AppAssets.getRandomAvatar())),
                       ),
                       RowSpacing(16.w),
                       Column(

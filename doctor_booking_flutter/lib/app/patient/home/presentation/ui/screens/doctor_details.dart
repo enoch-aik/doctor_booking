@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:auto_route/annotations.dart';
 import 'package:booking_calendar/booking_calendar.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/lib.dart';
+import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/extensions/string.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
@@ -9,9 +12,10 @@ import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 
 @RoutePage(name: 'doctorDetails')
 class DoctorDetailsScreen extends ConsumerWidget {
-  const DoctorDetailsScreen({super.key, required this.doctor});
+  const DoctorDetailsScreen({super.key, required this.doctor,required this.doctorImage});
 
   final Doctor doctor;
+  final String doctorImage;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,6 +43,9 @@ class DoctorDetailsScreen extends ConsumerWidget {
                       color: context.primaryContainer,
                       borderRadius: BorderRadius.circular(8.r),
                     ),
+                    child:  ClipRRect(
+                          borderRadius: BorderRadius.circular(8.r),
+                          child: Image.asset(doctorImage))
                   ),
                   RowSpacing(16.w),
                   Column(
@@ -70,7 +77,7 @@ class DoctorDetailsScreen extends ConsumerWidget {
               borderRadius: BorderRadius.circular(24.r),
               boxShadow: [
                 BoxShadow(
-                    color: Colors.grey.shade300,
+                    color: context.outline.withOpacity(0.4),
                     spreadRadius: 1,
                     blurRadius: 16)
               ],

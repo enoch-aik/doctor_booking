@@ -117,17 +117,17 @@ class _DoctorHomeView extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(top: 80.h),
         child:
-            getScheduleViewCalendar(scheduleViewBuilder: scheduleViewBuilder),
+            getScheduleViewCalendar(scheduleViewBuilder: scheduleViewBuilder,sources: []),
       ),
     );
   }
 
-  SfCalendar getScheduleViewCalendar({dynamic scheduleViewBuilder}) {
+  SfCalendar getScheduleViewCalendar({dynamic scheduleViewBuilder,required List<Appointment> sources}) {
     return SfCalendar(
       showDatePickerButton: true,
       scheduleViewMonthHeaderBuilder: scheduleViewBuilder,
       view: CalendarView.schedule,
-      dataSource: _DataSource([]),
+      dataSource: _DataSource(sources),
     );
   }
 }

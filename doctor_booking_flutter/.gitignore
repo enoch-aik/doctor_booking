@@ -45,3 +45,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
+
+# Avatar images
+assets/images/avatars/
+/assets/images/avatars/
+assets/images/avatars/*.png

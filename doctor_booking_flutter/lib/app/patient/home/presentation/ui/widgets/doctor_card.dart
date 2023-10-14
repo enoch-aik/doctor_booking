@@ -1,5 +1,6 @@
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/lib.dart';
+import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/extensions/string.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
@@ -12,11 +13,13 @@ class DoctorCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    String doctorImage = AppAssets.getRandomAvatar();
     return Padding(
       padding: EdgeInsets.only(bottom: 16.h),
       child: GestureDetector(
         onTap: () {
-          AppNavigator.of(context).push(DoctorDetails(doctor: doctor));
+          AppNavigator.of(context).push(DoctorDetails(doctor: doctor,doctorImage:doctorImage));
         },
         child: Container(
           padding: EdgeInsets.all(16.w),
@@ -39,6 +42,10 @@ class DoctorCard extends StatelessWidget {
                   color: context.primaryContainer,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
+                child: ClipRRect(
+                    
+                    borderRadius: BorderRadius.circular(8.r),
+                    child: Image.asset(doctorImage)),
               ),
               RowSpacing(16.w),
               Column(

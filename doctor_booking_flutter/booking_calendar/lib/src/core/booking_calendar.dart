@@ -11,7 +11,7 @@ class BookingCalendar extends StatelessWidget {
       {Key? key,
       required this.bookingService,
       required this.getBookingStream,
-      required this.uploadBooking,
+      required this.uploadBooking, this.onBookingButtonPressed,
       required this.convertStreamResultToDateTimeRanges,
       this.bookingExplanation,
       this.bookingGridCrossAxisCount,
@@ -52,6 +52,7 @@ class BookingCalendar extends StatelessWidget {
   ///the [BookingService.bookingStart] and [BookingService.bookingEnd] date of the booking
   final BookingService bookingService;
 
+  final void Function()? onBookingButtonPressed;
   ///this function returns a [Stream] which will be passed to the [StreamBuilder],
   ///so we can track realtime changes in our Booking Calendar
   ///this is a callback function, and the calendar will call this function whenever the user changes the selected date
@@ -153,7 +154,7 @@ class BookingCalendar extends StatelessWidget {
           bookingService: bookingService, pauseSlots: pauseSlots),
       child: BookingCalendarMain(
         key: key,
-        getBookingStream: getBookingStream,
+        getBookingStream: getBookingStream,onBookingButtonPressed: onBookingButtonPressed,
         uploadBooking: uploadBooking,
         bookingButtonColor: bookingButtonColor,
         bookingButtonText: bookingButtonText,

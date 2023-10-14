@@ -20,6 +20,7 @@ class BookingCalendarMain extends StatefulWidget {
     required this.getBookingStream,
     required this.convertStreamResultToDateTimeRanges,
     required this.uploadBooking,
+    this.onBookingButtonPressed,
     this.bookingExplanation,
     this.bookingGridCrossAxisCount,
     this.bookingGridChildAspectRatio,
@@ -63,6 +64,7 @@ class BookingCalendarMain extends StatefulWidget {
   final double? bookingGridChildAspectRatio;
   final String Function(DateTime dt)? formatDateTime;
   final String? bookingButtonText;
+  final void Function()? onBookingButtonPressed;
   final Color? bookingButtonColor;
   final Color? bookedSlotColor;
   final Color? selectedSlotColor;
@@ -163,6 +165,7 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
             : Column(
                 children: [
                   CommonCard(
+                    color: Theme.of(context).colorScheme.onTertiary,
                     child: TableCalendar(
                       startingDayOfWeek: widget.startingDayOfWeek?.toTC() ??
                           tc.StartingDayOfWeek.monday,
@@ -206,8 +209,11 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                           DateTime.now().add(const Duration(days: 1000)),
                       focusedDay: _focusedDay,
                       calendarFormat: _calendarFormat,
-                      calendarStyle:
-                          const CalendarStyle(isTodayHighlighted: true),
+                      calendarStyle: CalendarStyle(
+                          isTodayHighlighted: true,
+                          selectedDecoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.inversePrimary,
+                              shape: BoxShape.circle)),
                       selectedDayPredicate: (day) {
                         return isSameDay(_selectedDay, day);
                       },
@@ -315,7 +321,9 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                                     isBooked: controller.isSlotBooked(index),
                                     isSelected:
                                         index == controller.selectedSlot,
-                                    isEnabled: !DateTime.now().isAfter(slot)?true:false,
+                                    isEnabled: !DateTime.now().isAfter(slot)
+                                        ? true
+                                        : false,
                                     onTap: () {
                                       if (!DateTime.now().isAfter(slot)) {
                                         controller.selectSlot(index);
@@ -325,7 +333,13 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                                       child: Text(
                                         widget.formatDateTime?.call(slot) ??
                                             BookingUtil.formatDateTime(slot),
-                                        style: getTextStyle()??const TextStyle().copyWith(decoration:!DateTime.now().isAfter(slot)?null: TextDecoration.lineThrough ),
+                                        style: getTextStyle() ??
+                                            const TextStyle().copyWith(
+                                                decoration: !DateTime.now()
+                                                        .isAfter(slot)
+                                                    ? null
+                                                    : TextDecoration
+                                                        .lineThrough),
                                       ),
                                     ),
                                   );
@@ -346,13 +360,13 @@ class _BookingCalendarMainState extends State<BookingCalendarMain> {
                   ),
                   CommonButton(
                     text: widget.bookingButtonText ?? 'BOOK',
-                    onTap: () async {
-                      controller.toggleUploading();
+                    onTap: /*widget.onBookingButtonPressed*/ () async {
+                      //controller.toggleUploading();
                       await widget.uploadBooking(
                           newBooking:
                               controller.generateNewBookingForUploading());
-                      controller.toggleUploading();
-                      controller.resetSelectedSlot();
+                      //  controller.toggleUploading();
+                      // controller.resetSelectedSlot();
                     },
                     isDisabled: controller.selectedSlot == -1,
                     buttonActiveColor: widget.bookingButtonColor,

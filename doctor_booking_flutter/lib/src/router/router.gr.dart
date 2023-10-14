@@ -38,6 +38,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: DoctorDetailsScreen(
           key: args.key,
           doctor: args.doctor,
+          doctorImage: args.doctorImage,
         ),
       );
     },
@@ -119,6 +120,16 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const SplashScreen(),
       );
     },
+    UpcomingSchedules.name: (routeData) {
+      final args = routeData.argsAs<UpcomingSchedulesArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: UpcomingSchedulesScreen(
+          key: args.key,
+          appointments: args.appointments,
+        ),
+      );
+    },
   };
 }
 
@@ -180,12 +191,14 @@ class DoctorDetails extends PageRouteInfo<DoctorDetailsArgs> {
   DoctorDetails({
     Key? key,
     required Doctor doctor,
+    required String doctorImage,
     List<PageRouteInfo>? children,
   }) : super(
           DoctorDetails.name,
           args: DoctorDetailsArgs(
             key: key,
             doctor: doctor,
+            doctorImage: doctorImage,
           ),
           initialChildren: children,
         );
@@ -200,15 +213,18 @@ class DoctorDetailsArgs {
   const DoctorDetailsArgs({
     this.key,
     required this.doctor,
+    required this.doctorImage,
   });
 
   final Key? key;
 
   final Doctor doctor;
 
+  final String doctorImage;
+
   @override
   String toString() {
-    return 'DoctorDetailsArgs{key: $key, doctor: $doctor}';
+    return 'DoctorDetailsArgs{key: $key, doctor: $doctor, doctorImage: $doctorImage}';
   }
 }
 
@@ -392,4 +408,42 @@ class Splash extends PageRouteInfo<void> {
   static const String name = 'Splash';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpcomingSchedulesScreen]
+class UpcomingSchedules extends PageRouteInfo<UpcomingSchedulesArgs> {
+  UpcomingSchedules({
+    Key? key,
+    required List<Appointment> appointments,
+    List<PageRouteInfo>? children,
+  }) : super(
+          UpcomingSchedules.name,
+          args: UpcomingSchedulesArgs(
+            key: key,
+            appointments: appointments,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'UpcomingSchedules';
+
+  static const PageInfo<UpcomingSchedulesArgs> page =
+      PageInfo<UpcomingSchedulesArgs>(name);
+}
+
+class UpcomingSchedulesArgs {
+  const UpcomingSchedulesArgs({
+    this.key,
+    required this.appointments,
+  });
+
+  final Key? key;
+
+  final List<Appointment> appointments;
+
+  @override
+  String toString() {
+    return 'UpcomingSchedulesArgs{key: $key, appointments: $appointments}';
+  }
 }

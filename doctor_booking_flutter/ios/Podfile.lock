@@ -628,6 +628,8 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - add_2_calendar (0.0.1):
+    - Flutter
   - AppAuth (1.6.2):
     - AppAuth/Core (= 1.6.2)
     - AppAuth/ExternalUserAgent (= 1.6.2)
@@ -819,6 +821,7 @@ PODS:
     - FlutterMacOS
 
 DEPENDENCIES:
+  - add_2_calendar (from `.symlinks/plugins/add_2_calendar/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - connectivity_plus (from `.symlinks/plugins/connectivity_plus/ios`)
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
@@ -855,6 +858,8 @@ SPEC REPOS:
     - ReachabilitySwift
 
 EXTERNAL SOURCES:
+  add_2_calendar:
+    :path: ".symlinks/plugins/add_2_calendar/ios"
   cloud_firestore:
     :path: ".symlinks/plugins/cloud_firestore/ios"
   connectivity_plus:
@@ -876,6 +881,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   abseil: 926fb7a82dc6d2b8e1f2ed7f3a718bce691d1e46
+  add_2_calendar: e9d68636aed37fb18e12f5a3d74c2e0589487af0
   AppAuth: 3bb1d1cd9340bd09f5ed189fb00b1cc28e1e8570
   BoringSSL-GRPC: 3175b25143e648463a56daeaaa499c6cb86dad33
   cloud_firestore: 85d66b543b25130c45258412a39e851e230186e7

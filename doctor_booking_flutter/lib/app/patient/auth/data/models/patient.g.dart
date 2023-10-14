@@ -20,5 +20,5 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'fullName': instance.fullName,
       'emailAddress': instance.emailAddress,
       'userId': instance.userId,
-      'appointments': instance.appointments,
+      'appointments': instance.appointments.map((e) => e.toJson()).toList(),
     };
