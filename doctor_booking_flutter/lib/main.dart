@@ -20,10 +20,12 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-
+  print(Firebase.apps);
   //Initialize FirebaseApp and FirebaseAuth into app
   app = await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

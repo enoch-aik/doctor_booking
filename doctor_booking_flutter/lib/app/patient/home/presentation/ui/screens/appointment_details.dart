@@ -17,9 +17,9 @@ class AppointmentDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool lessThan24HrsToAppointment =
-        appointment.bookingStart!.difference(DateTime.now()) <
-            const Duration(hours: 24);
+    // bool lessThan24HrsToAppointment =
+    //     appointment.bookingStart!.difference(DateTime.now()) <
+    //         const Duration(hours: 24);
 
     return Scaffold(
       appBar: AppBar(
@@ -136,7 +136,7 @@ class AppointmentDetailsScreen extends StatelessWidget {
                       appointment.toDateTimeRange.formatBookingDateTime(),
                       fontSize: 16.sp,
                       fontWeight: FontWeight.w500,
-                      color: context.primary,
+                      // color: context.primary,
                     )
                   ],
                 ),
@@ -182,9 +182,12 @@ class AppointmentDetailsScreen extends StatelessWidget {
                 width: double.maxFinite,
                 child: FilledButton(
                     onPressed: () {
-                      if (lessThan24HrsToAppointment) {
+                      if (appointment
+                          .toDateTimeRange.isLessThan24HrsToAppointment) {
+                        //You can only cancel 24 hours before the appointment
                         Toast.error(
-                            'You cannot cancel this appointment, it is less than 24 hours to the appointment',
+                            'You can only cancel 24 hours before the appointment',
+                            // 'You can only cancel an appointment 24 hours before cannot cancel this appointment, it is less than 24 hours to the appointment',
                             title: 'Unable to cancel appointment',
                             context);
                       } else {

@@ -9,6 +9,7 @@ part 'appointment.g.dart';
 class Appointment extends Equatable {
   /// The generated code assumes these values exist in JSON.
   final String? patientId;
+  final String? patientName;
   final String? doctorId;
   final String? userEmail;
   final String? patientNote;
@@ -31,10 +32,10 @@ class Appointment extends Equatable {
   @JsonKey(fromJson: timeStampToDateTime, toJson: dateTimeToTimeStamp)
   final DateTime? bookingEnd;
 
-  Appointment(
+  const Appointment(
       {this.bookingStart,
       this.bookingEnd,
-      this.patientId,
+      this.patientId,this.patientName,
       this.doctorId,
       this.userEmail,
       this.patientNote,
@@ -61,7 +62,7 @@ class Appointment extends Equatable {
   List<Object?> get props => [
         bookingStart,
         bookingEnd,
-        patientId,
+        patientId,patientName,
         doctorId,
         userEmail,
         patientNote,

@@ -81,7 +81,7 @@ class _PatientHomeView extends HookConsumerWidget {
           ),
         ],
       ),
-      body: RefreshIndicator(
+      body: RefreshIndicator.adaptive(
         //refresh both upcoming schedule and doctor list
         onRefresh: () async => await Future.wait([
           ref.refresh(patientAppointmentsStreamProvider(

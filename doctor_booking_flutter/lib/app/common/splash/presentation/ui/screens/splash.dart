@@ -18,9 +18,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
     super.initState();
     //check if the app has a current user
     bool hasCurrentUser = ref.read(isLoggedIn.notifier).state;
+    bool hasUserData = ref.read(storeProvider).fetchUserType() != null;
 
     Future.delayed(const Duration(seconds: 3), () {
-      if (hasCurrentUser) {
+      if (hasCurrentUser && hasUserData) {
         //Check if the current user is a doctor or patient
         String userType = ref.read(storeProvider).fetchUserType()!;
 

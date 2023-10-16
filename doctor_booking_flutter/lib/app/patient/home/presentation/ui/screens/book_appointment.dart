@@ -104,15 +104,15 @@ class BookAppointmentScreen extends HookConsumerWidget {
 
         if (patientNote != null) {
           Appointment newAppointment = Appointment(
-            bookingStart: newBooking.bookingStart,
-            bookingEnd: newBooking.bookingEnd,
-            patientId: currentUser.uid,
-            userEmail: currentUser.email,
-            doctorId: doctor.emailAddress,
-            doctorName: doctor.fullName,
-            doctorSpeciality: doctor.speciality,
-            patientNote: patientNote,
-          );
+              bookingStart: newBooking.bookingStart,
+              bookingEnd: newBooking.bookingEnd,
+              patientId: currentUser.uid,
+              userEmail: currentUser.email,
+              doctorId: doctor.emailAddress,
+              doctorName: doctor.fullName,
+              doctorSpeciality: doctor.speciality,
+              patientNote: patientNote,
+              patientName: currentUser.displayName ?? currentUser.email);
           final result = await ref.read(appointmentRepo).bookDoctorAppointment(
               newAppointment: newAppointment,
               doctor: doctor,
