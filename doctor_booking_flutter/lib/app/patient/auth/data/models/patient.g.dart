@@ -13,6 +13,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
               ?.map((e) => Appointment.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
+      fcmToken: json['fcmToken'] as String?,
       userId: json['userId'] as String?,
     );
 
@@ -21,4 +22,5 @@ Map<String, dynamic> _$PatientToJson(Patient instance) => <String, dynamic>{
       'emailAddress': instance.emailAddress,
       'userId': instance.userId,
       'appointments': instance.appointments.map((e) => e.toJson()).toList(),
+      'fcmToken': instance.fcmToken,
     };

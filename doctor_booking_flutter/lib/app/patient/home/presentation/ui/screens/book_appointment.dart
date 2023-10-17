@@ -30,6 +30,7 @@ class BookAppointmentScreen extends HookConsumerWidget {
     getBookingStream({required DateTime end, required DateTime start}) {
       return ref.watch(doctorScheduleStreamProvider(doctor.emailAddress)).when(
           data: (data) {
+
             doctorData.value = data;
             return Stream.value(data);
           },
@@ -110,10 +111,12 @@ class BookAppointmentScreen extends HookConsumerWidget {
               userEmail: currentUser.email,
               doctorId: doctor.emailAddress,
               doctorName: doctor.fullName,
+              doctorEmail: doctor.emailAddress,
+              patientEmail: currentUser.email,
               doctorSpeciality: doctor.speciality,
               patientNote: patientNote,
               patientName: currentUser.displayName ?? currentUser.email);
-          final result = await ref.read(appointmentRepo).bookDoctorAppointment(
+          final result = await ref.read(appointmentRepoProvider).bookDoctorAppointment(
               newAppointment: newAppointment,
               doctor: doctor,
               patientEmail: currentUser.email!);
@@ -133,15 +136,22 @@ class BookAppointmentScreen extends HookConsumerWidget {
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('No'),
+                    child: Text(
+                      'No',
+                      style:
+                          AppStyle.textStyle.copyWith(color: context.outline),
+                    ),
                   ),
-                  FilledButton.tonal(
+                  TextButton(
                     onPressed: () async {
                       Navigator.pop(context);
                       await CalendarService()
                           .addToCalendar(appointment: newAppointment);
                     },
-                    child: const Text('Yes'),
+                    child: Text(
+                      'Yes',
+                      style: AppStyle.textStyle.copyWith(color: Colors.black),
+                    ),
                   ),
                 ],
               ),
@@ -181,31 +191,33 @@ class BookAppointmentScreen extends HookConsumerWidget {
           fontWeight: FontWeight.w500,
         ),
       ),
-      body: BookingCalendar(
-        key: key,
-        bookingGridCrossAxisCount: 4,
-        getBookingStream: getBookingStream,
-        uploadBooking: uploadBooking,
-        convertStreamResultToDateTimeRanges: convertStreamResult,
-        uploadingWidget: const Center(
-          child: CircularProgressIndicator(),
+      body: SafeArea(
+        child: BookingCalendar(
+          key: key,
+          bookingGridCrossAxisCount: 4,
+          getBookingStream: getBookingStream,
+          uploadBooking: uploadBooking,
+          convertStreamResultToDateTimeRanges: convertStreamResult,
+          uploadingWidget: const Center(
+            child: CircularProgressIndicator(),
+          ),
+          pauseSlotColor: context.outlineVariant,
+          availableSlotColor: context.primary,
+          availableSlotTextStyle:
+              AppStyle.textStyle.copyWith(color: context.onPrimary),
+          pauseSlots: get120Days(),
+          hideBreakTime: false,
+          bookingButtonColor: context.primary,
+          bookingButtonText: 'Book Appointment',
+          disabledDays: const [6, 7],
+          bookingService: BookingService(
+              serviceName: 'Appointments',
+              userEmail: currentUser.email,
+              userId: currentUser.uid,
+              serviceDuration: 30,
+              bookingEnd: DateTime(now.year, now.month, now.day, 18, 0),
+              bookingStart: DateTime(now.year, now.month, now.day, 8, 0)),
         ),
-        pauseSlotColor: context.outlineVariant,
-        availableSlotColor: context.primary,
-        availableSlotTextStyle:
-            AppStyle.textStyle.copyWith(color: context.onPrimary),
-        pauseSlots: get120Days(),
-        hideBreakTime: false,
-        bookingButtonColor: context.primaryContainer,
-        bookingButtonText: 'Book Appointment',
-        disabledDays: const [6, 7],
-        bookingService: BookingService(
-            serviceName: 'Appointments',
-            userEmail: currentUser.email,
-            userId: currentUser.uid,
-            serviceDuration: 30,
-            bookingEnd: DateTime(now.year, now.month, now.day, 18, 0),
-            bookingStart: DateTime(now.year, now.month, now.day, 8, 0)),
       ),
     );
   }

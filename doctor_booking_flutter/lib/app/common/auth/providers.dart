@@ -4,8 +4,7 @@ import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-final authDataSourceProvider =
-    Provider((ref) => AuthDataSourceImpl(ref.watch(firebaseAuthProvider)));
+final authDataSourceProvider = Provider((ref) => AuthDataSourceImpl(ref));
 
 final authRepoProvider =
     Provider((ref) => AuthRepoImpl(ref.watch(authDataSourceProvider)));
@@ -18,3 +17,5 @@ final isLoggedIn = StateProvider<bool>((ref) {
 final currentUserProvider = StateProvider<User?>((ref) {
   return ref.watch(firebaseAuthProvider).currentUser;
 });
+
+final fcmTokenProvider = StateProvider<String>((ref) => '');

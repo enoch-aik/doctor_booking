@@ -19,4 +19,12 @@ class AppointmentRepoImpl extends AppointmentRepo {
           newAppointment: newAppointment,
           doctor: doctor,
           patientEmail: patientEmail));
+
+  @override
+  Future<ApiResult<bool>> cancelDoctorAppointment(
+          {required Appointment appointment,
+          required String patientEmail}) =>
+      apiInterceptor(() => appointmentDataSource.cancelDoctorAppointment(
+          appointment: appointment,
+          patientEmail: patientEmail));
 }

@@ -39,4 +39,35 @@ class AppointmentDataSourceImpl extends AppointmentDataSource {
 
     return updated;
   }
+
+  @override
+  Future<bool> cancelDoctorAppointment(
+      {required Appointment appointment, required String patientEmail}) async {
+    bool updated = false;
+    //update doctors' appointment
+    DocumentReference doctorDbRef =
+        firestore.collection('doctors').doc(appointment.doctorEmail!);
+    //update patient's appointment
+    DocumentReference patientDbRef =
+        firestore.collection('patients').doc(patientEmail);
+    //get patient's data
+    Patient patient = await firebaseApi.getPatientData(patientEmail);
+
+    Doctor doctor = await firebaseApi.getDoctorData(appointment.doctorEmail!);
+    //remove appointment from patient's appointment list
+    patient.appointments.removeWhere((element) => element == appointment);
+
+    await patientDbRef.update({
+      'appointments': [...patient.appointments].map((e) => e.toJson()).toList()
+    });
+
+    //remove appointment from doctor's appointment list
+    doctor.appointments.removeWhere((element) => element == appointment);
+    await doctorDbRef.update({
+      'appointments': [...doctor.appointments].map((e) => e.toJson()).toList()
+    });
+    updated = true;
+
+    return updated;
+  }
 }

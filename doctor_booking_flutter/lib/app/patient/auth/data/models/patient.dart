@@ -10,11 +10,12 @@ class Patient {
   final String emailAddress;
   String? userId;
   final List<Appointment> appointments;
+  final String? fcmToken;
 
   Patient(
       {required this.fullName,
       required this.emailAddress,
-      this.appointments = const [],
+      this.appointments = const [],this.fcmToken,
       this.userId});
 
   factory Patient.fromJson(Map<String, dynamic> json) =>

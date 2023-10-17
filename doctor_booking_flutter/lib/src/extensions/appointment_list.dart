@@ -15,7 +15,7 @@ extension AppointmentList on List<Appointment> {
         Color(0xFF01A1EF),
         Color(0xFF3D4FB5),
         Color(0xFFE47C73),
-        Color(0xFF636363),
+       // Color(0xFF636363),
         Color(0xFF0A8043)
       ];
 
@@ -27,7 +27,7 @@ extension AppointmentList on List<Appointment> {
           endTime: e.bookingEnd!,notes: e.patientNote,
           color: e.bookingEnd!.isBefore(DateTime.now())
               ? const Color(0xFF636363)
-              : colorCollection[random.nextInt(9)],
+              : colorCollection[random.nextInt(8)],
           /*recurrenceRule: 'FREQ=DAILY;INTERVAL=10'*/
         )).toList();
   }

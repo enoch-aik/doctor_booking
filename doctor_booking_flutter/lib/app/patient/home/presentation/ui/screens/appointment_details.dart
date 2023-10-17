@@ -1,22 +1,25 @@
-import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor_speciality.dart';
+import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/extensions/date_range.dart';
 import 'package:doctor_booking_flutter/src/res/assets/svg.dart';
+import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 import 'package:doctor_booking_flutter/src/widgets/toast/toast.dart';
 
 @RoutePage(name: 'appointmentDetails')
-class AppointmentDetailsScreen extends StatelessWidget {
+class AppointmentDetailsScreen extends ConsumerWidget {
   final Appointment appointment;
 
   const AppointmentDetailsScreen({super.key, required this.appointment});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     // bool lessThan24HrsToAppointment =
     //     appointment.bookingStart!.difference(DateTime.now()) <
     //         const Duration(hours: 24);
@@ -191,7 +194,46 @@ class AppointmentDetailsScreen extends StatelessWidget {
                             title: 'Unable to cancel appointment',
                             context);
                       } else {
-                        //get doctor appointment and update the appointment,
+
+                        showAdaptiveDialog(
+                            context: context,
+                            builder: (context) => AlertDialog.adaptive(
+                              title: const Text('Cancel appointment'),
+                              content: const Text('Are you sure you want to cancel this appointment?'),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child:  Text('No',style: AppStyle.textStyle.copyWith(color: context.outline),),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    Loader.show(context);
+                                    final appointmentRepo =
+                                    ref.read(appointmentRepoProvider);
+                                    final result =
+                                    await appointmentRepo.cancelDoctorAppointment(
+                                        appointment: appointment,
+                                        patientEmail:
+                                        ref.watch(currentUserProvider)!.email!);
+                                    Loader.hide(context);
+                                    result.when(success: (data) {
+                                      context.router.popUntilRoot();
+                                      Toast.success(
+                                        'Appointment cancelled successfully',
+                                        context,
+                                      );
+                                    }, apiFailure: (e, _) {
+                                      Navigator.pop(context);
+                                      Toast.error('Unexpected error encountered', context,
+                                          title: 'Unable to cancel appointment');
+                                    });
+                                  },
+                                  child:  Text('Yes, Cancel',style: AppStyle.textStyle.copyWith(color: context.error),),
+                                ),
+                              ],
+                            ));
 
                         // get the doctor's fcm token and send a notification
 
@@ -199,7 +241,7 @@ class AppointmentDetailsScreen extends StatelessWidget {
                         // const Uuid().v4()
                       }
                     },
-                    child: Text('Cancel Appointment')))
+                    child: const Text('Cancel Appointment')))
           ],
         ),
       ),

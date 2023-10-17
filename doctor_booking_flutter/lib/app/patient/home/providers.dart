@@ -18,7 +18,7 @@ final appointmentDataSourceProvider = Provider<AppointmentDataSource>((ref) {
   return AppointmentDataSourceImpl(
       ref.read(firestoreProvider), ref.read(firebaseApiProvider));
 });
-final appointmentRepo = Provider<AppointmentRepo>(
+final appointmentRepoProvider = Provider<AppointmentRepo>(
     (ref) => AppointmentRepoImpl(ref.read(appointmentDataSourceProvider)));
 
 final selectedDoctorSpeciality =

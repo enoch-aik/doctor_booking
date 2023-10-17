@@ -32,6 +32,9 @@ extension DateTimeRangeExtension on DateTimeRange {
   bool get isOngoing =>
       DateTime.now().isAfter(start) && DateTime.now().isBefore(end);
 
+  //get if this appointment is in the past
+  bool get isPast => DateTime.now().isAfter(end);
+
   bool get isLessThan24HrsToAppointment =>
       start.difference(DateTime.now()) < const Duration(hours: 24);
 }

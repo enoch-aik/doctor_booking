@@ -4,7 +4,6 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_creden
 import 'package:firebase_auth/firebase_auth.dart';
 
 abstract class AuthDataSource {
-  
   ///auth for patient
   Future<UserCredential> patientLogin(UserCred user);
 
@@ -18,4 +17,9 @@ abstract class AuthDataSource {
   Future<UserCredential> doctorSignUp(NewDoctor doctor);
 
   Future<UserCredential> doctorLogin(UserCred user);
+
+  Future<bool> updateFcmToken(
+      {required String fcmToken,
+      required String email,
+      required String userType});
 }

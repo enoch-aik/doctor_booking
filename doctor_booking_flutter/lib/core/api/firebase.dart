@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class FirebaseApi {
     return true;
   }
 
-  //check if user exist
+  ///check if user exist
   Future<bool> getPatient(String email) async {
     bool exists = false;
     await firestore.collection('patients').doc(email).get();
@@ -49,6 +50,12 @@ class FirebaseApi {
         .get()
         .then((value) => value.data()! as Map<String, dynamic>));
   }
+  Future<Doctor> getDoctorData(String email) async {
+    DocumentReference docRef = firestore.collection('doctors').doc(email);
+    return Doctor.fromJson(await docRef
+        .get()
+        .then((value) => value.data()! as Map<String, dynamic>));
+  }
 
   //check if doctor exists
   Future<bool> getDoctor(String email) async {
@@ -57,12 +64,10 @@ class FirebaseApi {
     return exists;
   }
 
-  ///add new doctor details to doctors db
 
   CollectionReference bookings =
       FirebaseFirestore.instance.collection('bookings');
 
-  ///This is how can you get the reference to your data from the collection, and serialize the data with the help of the Firestore [withConverter]. This function would be in your repository.
   CollectionReference<Appointment> getBookingStream({required String docId}) {
     return bookings
         .doc(docId)
@@ -74,8 +79,6 @@ class FirebaseApi {
         );
   }
 
-  ///How you actually get the stream of data from Firestore with the help of the previous function
-  ///note that this query filters are for my data structure, you need to adjust it to your solution.
   Stream<dynamic>? getBookingStreamFirebase(
       {required DateTime end, required DateTime start}) {
     return getBookingStream(docId: 'YOUR_DOC_ID')
@@ -84,11 +87,8 @@ class FirebaseApi {
         .snapshots();
   }
 
-  ///After you fetched the data from firestore, we only need to have a list of datetimes from the bookings:
   List<DateTimeRange> convertStreamResultFirebase(
       {required dynamic streamResult}) {
-    ///here you can parse the streamresult and convert to [List<DateTimeRange>]
-    ///Note that this is dynamic, so you need to know what properties are available on your result, in our case the [SportBooking] has bookingStart and bookingEnd property
     List<DateTimeRange> converted = [];
     for (var i = 0; i < streamResult.size; i++) {
       final item = streamResult.docs[i].data();
@@ -98,7 +98,6 @@ class FirebaseApi {
     return converted;
   }
 
-  ///This is how you upload data to Firestore
   Future<dynamic> uploadBookingFirebase(
       {required Appointment newAppointment}) async {
     await bookings
@@ -109,15 +108,3 @@ class FirebaseApi {
         .catchError((error) => print("Failed to add booking: $error"));
   }
 }
-
-/**AFTER YOU HAVE EVERY HELPER FUNCTION YOU CAN PASS THESE TO YOUR BOOKINGCALENDAR */
-
-/*BookingCalendar(
-bookingService: mockBookingService,
-convertStreamResultToDateTimeRanges: convertStreamResultFirebase,
-getBookingStream: getBookingStreamFirebase,
-uploadBooking: uploadBookingFirebase,
-uploadingWidget: const CircularProgressIndicator(),
-//... other customisation properties
-);
-}*/

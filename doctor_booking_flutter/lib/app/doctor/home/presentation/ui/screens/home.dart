@@ -96,104 +96,105 @@ class _DoctorHomeView extends ConsumerWidget {
       required List<Appointment> sources,
       required BuildContext context}) {
     void onAppointmentTap(CalendarTapDetails details) {
-      if (details.appointments!.first.endTime.isBefore(DateTime.now())) {
-        Appointment appointment = details.appointments!.first;
-        DateTimeRange dateTimeRange = DateTimeRange(
-            start: appointment.startTime, end: appointment.endTime);
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: SizedBox(
-                height: 400.h,
-                width: double.maxFinite,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16.h),
-                      child: KText(
-                        'Appointment Details',
+      // if (details.appointments!.first.endTime.isAfter(DateTime.now())) {
+      Appointment appointment = details.appointments!.first;
+      DateTimeRange dateTimeRange =
+          DateTimeRange(start: appointment.startTime, end: appointment.endTime);
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Padding(
+          padding:
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
+            child: SizedBox(
+              height: 400.h,
+              width: double.maxFinite,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16.h),
+                    child: KText(
+                      'Appointment Details',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20.sp,
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: KText(
+                      'Date',
+                      fontSize: 15.sp,
+                    ),
+                  ),
+                  ColSpacing(8.h),
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        icCalendar,
+                        width: 38.w,
+                      ),
+                      RowSpacing(16.w),
+                      KText(
+                        dateTimeRange.formatBookingDateTime(),
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.w500,
-                        fontSize: 20.sp,
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: KText(
-                        'Date',
-                        fontSize: 15.sp,
-                      ),
-                    ),
-                    ColSpacing(8.h),
-                    Row(
+                        //color: context.primary,
+                      )
+                    ],
+                  ),
+                  ColSpacing(16.h),
+                  if (appointment.notes != null &&
+                      appointment.notes!.isNotEmpty)
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SvgPicture.asset(
-                          icCalendar,
-                          width: 38.w,
-                        ),
-                        RowSpacing(16.w),
                         KText(
-                          dateTimeRange.formatBookingDateTime(),
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w500,
-                          //color: context.primary,
-                        )
+                          'Patient Note',
+                          fontSize: 15.sp,
+                        ),
+                        ColSpacing(8.h),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              icNote,
+                              width: 38.w,
+                            ),
+                            RowSpacing(16.w),
+                            SizedBox(
+                              width: 280.w,
+                              child: KText(
+                                appointment.notes ?? 'No note added',
+                                fontSize: 16.sp,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
-                    ColSpacing(16.h),
-                    if (appointment.notes != null &&
-                        appointment.notes!.isNotEmpty)
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          KText(
-                            'Patient Note',
-                            fontSize: 15.sp,
-                          ),
-                          ColSpacing(8.h),
-                          Row(
-                            children: [
-                              SvgPicture.asset(
-                                icNote,
-                                width: 38.w,
-                              ),
-                              RowSpacing(16.w),
-                              SizedBox(
-                                width: 280.w,
-                                child: KText(
-                                  appointment.notes ?? 'No note added',
-                                  fontSize: 16.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ColSpacing(16.h),
-                    Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                              text: 'INFO: ',
-                              style: AppStyle.textStyle.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  color: context.primary)),
-                          TextSpan(
-                              text:
-                                  'You have an ${dateTimeRange.isOngoing ? 'ongoing' : 'upcoming'} ${appointment.subject} ${dateTimeRange.formatToInfoDateTime()}'),
-                        ],
-                      ),
-                      style: AppStyle.textStyle.copyWith(
-                        fontSize: 15.sp,
-                        //    color: context.primaryContainer,
-                      ),
-                      //textAlign: TextAlign.center,
+                  ColSpacing(16.h),
+                  Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'INFO: ',
+                            style: AppStyle.textStyle.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: context.primary)),
+                        TextSpan(
+                            text:
+                                'You ${dateTimeRange.isPast ? 'had' : 'have'} an ${dateTimeRange.isPast ? '' : dateTimeRange.isOngoing ? 'ongoing' : 'upcoming'} ${appointment.subject} ${dateTimeRange.formatToInfoDateTime()}'),
+                      ],
                     ),
-                    ColSpacing(24.h),
+                    style: AppStyle.textStyle.copyWith(
+                      fontSize: 15.sp,
+                      //    color: context.primaryContainer,
+                    ),
+                    //textAlign: TextAlign.center,
+                  ),
+                  ColSpacing(24.h),
+                  if (!dateTimeRange.isPast)
                     SizedBox(
                       width: double.maxFinite,
                       child: FilledButton(
@@ -231,13 +232,13 @@ class _DoctorHomeView extends ConsumerWidget {
                           },
                           child: const Text('Cancel Appointment')),
                     ),
-                  ],
-                ),
+                ],
               ),
             ),
           ),
-        );
-      }
+        ),
+      );
+      //  }
     }
 
     return SfCalendar(

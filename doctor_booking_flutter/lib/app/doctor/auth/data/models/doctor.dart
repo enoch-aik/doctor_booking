@@ -12,6 +12,7 @@ class Doctor {
   final String speciality;
   final List<Appointment> appointments;
   final bool isApproved;
+  final String? fcmToken;
 
   List<DateTimeRange> get scheduleRangeList =>
       appointments.map((e) => e.toDateTimeRange).toList();
@@ -31,7 +32,7 @@ class Doctor {
       required this.emailAddress,
       this.appointments = const [],
       required this.speciality,
-      this.isApproved = false,
+      this.isApproved = false,this.fcmToken,
       this.userId});
 
   factory Doctor.fromJson(Map<String, dynamic> json) => _$DoctorFromJson(json);

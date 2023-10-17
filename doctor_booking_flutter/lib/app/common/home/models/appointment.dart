@@ -16,6 +16,10 @@ class Appointment extends Equatable {
   final bool? valid;
   final String? doctorName;
   final String? doctorSpeciality;
+  @JsonKey(includeIfNull: false)
+  final String? doctorEmail;
+  @JsonKey(includeIfNull: false)
+  final String? patientEmail;
 
   bool get isActive => bookingEnd?.isBefore(DateTime.now()) ?? false;
 
@@ -35,7 +39,7 @@ class Appointment extends Equatable {
   const Appointment(
       {this.bookingStart,
       this.bookingEnd,
-      this.patientId,this.patientName,
+      this.patientId,this.patientName,this.doctorEmail,this.patientEmail,
       this.doctorId,
       this.userEmail,
       this.patientNote,

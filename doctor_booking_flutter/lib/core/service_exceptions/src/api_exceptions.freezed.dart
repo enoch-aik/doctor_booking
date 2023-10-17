@@ -189,25 +189,25 @@ class _$ApiExceptionsCopyWithImpl<$Res, $Val extends ApiExceptions>
 }
 
 /// @nodoc
-abstract class _$$RequestCancelledCopyWith<$Res> {
-  factory _$$RequestCancelledCopyWith(
-          _$RequestCancelled value, $Res Function(_$RequestCancelled) then) =
-      __$$RequestCancelledCopyWithImpl<$Res>;
+abstract class _$$RequestCancelledImplCopyWith<$Res> {
+  factory _$$RequestCancelledImplCopyWith(_$RequestCancelledImpl value,
+          $Res Function(_$RequestCancelledImpl) then) =
+      __$$RequestCancelledImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RequestCancelledCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$RequestCancelled>
-    implements _$$RequestCancelledCopyWith<$Res> {
-  __$$RequestCancelledCopyWithImpl(
-      _$RequestCancelled _value, $Res Function(_$RequestCancelled) _then)
+class __$$RequestCancelledImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$RequestCancelledImpl>
+    implements _$$RequestCancelledImplCopyWith<$Res> {
+  __$$RequestCancelledImplCopyWithImpl(_$RequestCancelledImpl _value,
+      $Res Function(_$RequestCancelledImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RequestCancelled implements RequestCancelled {
-  const _$RequestCancelled();
+class _$RequestCancelledImpl implements RequestCancelled {
+  const _$RequestCancelledImpl();
 
   @override
   String toString() {
@@ -217,7 +217,7 @@ class _$RequestCancelled implements RequestCancelled {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RequestCancelled);
+        (other.runtimeType == runtimeType && other is _$RequestCancelledImpl);
   }
 
   @override
@@ -401,29 +401,29 @@ class _$RequestCancelled implements RequestCancelled {
 }
 
 abstract class RequestCancelled implements ApiExceptions {
-  const factory RequestCancelled() = _$RequestCancelled;
+  const factory RequestCancelled() = _$RequestCancelledImpl;
 }
 
 /// @nodoc
-abstract class _$$UnauthorisedRequestCopyWith<$Res> {
-  factory _$$UnauthorisedRequestCopyWith(_$UnauthorisedRequest value,
-          $Res Function(_$UnauthorisedRequest) then) =
-      __$$UnauthorisedRequestCopyWithImpl<$Res>;
+abstract class _$$UnauthorisedRequestImplCopyWith<$Res> {
+  factory _$$UnauthorisedRequestImplCopyWith(_$UnauthorisedRequestImpl value,
+          $Res Function(_$UnauthorisedRequestImpl) then) =
+      __$$UnauthorisedRequestImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnauthorisedRequestCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnauthorisedRequest>
-    implements _$$UnauthorisedRequestCopyWith<$Res> {
-  __$$UnauthorisedRequestCopyWithImpl(
-      _$UnauthorisedRequest _value, $Res Function(_$UnauthorisedRequest) _then)
+class __$$UnauthorisedRequestImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnauthorisedRequestImpl>
+    implements _$$UnauthorisedRequestImplCopyWith<$Res> {
+  __$$UnauthorisedRequestImplCopyWithImpl(_$UnauthorisedRequestImpl _value,
+      $Res Function(_$UnauthorisedRequestImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$UnauthorisedRequest implements UnauthorisedRequest {
-  const _$UnauthorisedRequest();
+class _$UnauthorisedRequestImpl implements UnauthorisedRequest {
+  const _$UnauthorisedRequestImpl();
 
   @override
   String toString() {
@@ -433,7 +433,8 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnauthorisedRequest);
+        (other.runtimeType == runtimeType &&
+            other is _$UnauthorisedRequestImpl);
   }
 
   @override
@@ -617,29 +618,29 @@ class _$UnauthorisedRequest implements UnauthorisedRequest {
 }
 
 abstract class UnauthorisedRequest implements ApiExceptions {
-  const factory UnauthorisedRequest() = _$UnauthorisedRequest;
+  const factory UnauthorisedRequest() = _$UnauthorisedRequestImpl;
 }
 
 /// @nodoc
-abstract class _$$BadRequestCopyWith<$Res> {
-  factory _$$BadRequestCopyWith(
-          _$BadRequest value, $Res Function(_$BadRequest) then) =
-      __$$BadRequestCopyWithImpl<$Res>;
+abstract class _$$BadRequestImplCopyWith<$Res> {
+  factory _$$BadRequestImplCopyWith(
+          _$BadRequestImpl value, $Res Function(_$BadRequestImpl) then) =
+      __$$BadRequestImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$BadRequestCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$BadRequest>
-    implements _$$BadRequestCopyWith<$Res> {
-  __$$BadRequestCopyWithImpl(
-      _$BadRequest _value, $Res Function(_$BadRequest) _then)
+class __$$BadRequestImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$BadRequestImpl>
+    implements _$$BadRequestImplCopyWith<$Res> {
+  __$$BadRequestImplCopyWithImpl(
+      _$BadRequestImpl _value, $Res Function(_$BadRequestImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$BadRequest implements BadRequest {
-  const _$BadRequest();
+class _$BadRequestImpl implements BadRequest {
+  const _$BadRequestImpl();
 
   @override
   String toString() {
@@ -649,7 +650,7 @@ class _$BadRequest implements BadRequest {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$BadRequest);
+        (other.runtimeType == runtimeType && other is _$BadRequestImpl);
   }
 
   @override
@@ -833,24 +834,24 @@ class _$BadRequest implements BadRequest {
 }
 
 abstract class BadRequest implements ApiExceptions {
-  const factory BadRequest() = _$BadRequest;
+  const factory BadRequest() = _$BadRequestImpl;
 }
 
 /// @nodoc
-abstract class _$$ErrorResponseCopyWith<$Res> {
-  factory _$$ErrorResponseCopyWith(
-          _$ErrorResponse value, $Res Function(_$ErrorResponse) then) =
-      __$$ErrorResponseCopyWithImpl<$Res>;
+abstract class _$$ErrorResponseImplCopyWith<$Res> {
+  factory _$$ErrorResponseImplCopyWith(
+          _$ErrorResponseImpl value, $Res Function(_$ErrorResponseImpl) then) =
+      __$$ErrorResponseImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$ErrorResponseCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$ErrorResponse>
-    implements _$$ErrorResponseCopyWith<$Res> {
-  __$$ErrorResponseCopyWithImpl(
-      _$ErrorResponse _value, $Res Function(_$ErrorResponse) _then)
+class __$$ErrorResponseImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$ErrorResponseImpl>
+    implements _$$ErrorResponseImplCopyWith<$Res> {
+  __$$ErrorResponseImplCopyWithImpl(
+      _$ErrorResponseImpl _value, $Res Function(_$ErrorResponseImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -858,7 +859,7 @@ class __$$ErrorResponseCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$ErrorResponse(
+    return _then(_$ErrorResponseImpl(
       error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -869,8 +870,8 @@ class __$$ErrorResponseCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorResponse implements ErrorResponse {
-  const _$ErrorResponse({required this.error});
+class _$ErrorResponseImpl implements ErrorResponse {
+  const _$ErrorResponseImpl({required this.error});
 
   @override
   final String error;
@@ -884,7 +885,7 @@ class _$ErrorResponse implements ErrorResponse {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$ErrorResponse &&
+            other is _$ErrorResponseImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -894,8 +895,8 @@ class _$ErrorResponse implements ErrorResponse {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$ErrorResponseCopyWith<_$ErrorResponse> get copyWith =>
-      __$$ErrorResponseCopyWithImpl<_$ErrorResponse>(this, _$identity);
+  _$$ErrorResponseImplCopyWith<_$ErrorResponseImpl> get copyWith =>
+      __$$ErrorResponseImplCopyWithImpl<_$ErrorResponseImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1075,28 +1076,30 @@ class _$ErrorResponse implements ErrorResponse {
 }
 
 abstract class ErrorResponse implements ApiExceptions {
-  const factory ErrorResponse({required final String error}) = _$ErrorResponse;
+  const factory ErrorResponse({required final String error}) =
+      _$ErrorResponseImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$ErrorResponseCopyWith<_$ErrorResponse> get copyWith =>
+  _$$ErrorResponseImplCopyWith<_$ErrorResponseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$NotFoundCopyWith<$Res> {
-  factory _$$NotFoundCopyWith(
-          _$NotFound value, $Res Function(_$NotFound) then) =
-      __$$NotFoundCopyWithImpl<$Res>;
+abstract class _$$NotFoundImplCopyWith<$Res> {
+  factory _$$NotFoundImplCopyWith(
+          _$NotFoundImpl value, $Res Function(_$NotFoundImpl) then) =
+      __$$NotFoundImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String reason});
 }
 
 /// @nodoc
-class __$$NotFoundCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotFound>
-    implements _$$NotFoundCopyWith<$Res> {
-  __$$NotFoundCopyWithImpl(_$NotFound _value, $Res Function(_$NotFound) _then)
+class __$$NotFoundImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotFoundImpl>
+    implements _$$NotFoundImplCopyWith<$Res> {
+  __$$NotFoundImplCopyWithImpl(
+      _$NotFoundImpl _value, $Res Function(_$NotFoundImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -1104,7 +1107,7 @@ class __$$NotFoundCopyWithImpl<$Res>
   $Res call({
     Object? reason = null,
   }) {
-    return _then(_$NotFound(
+    return _then(_$NotFoundImpl(
       null == reason
           ? _value.reason
           : reason // ignore: cast_nullable_to_non_nullable
@@ -1115,8 +1118,8 @@ class __$$NotFoundCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$NotFound implements NotFound {
-  const _$NotFound(this.reason);
+class _$NotFoundImpl implements NotFound {
+  const _$NotFoundImpl(this.reason);
 
   @override
   final String reason;
@@ -1130,7 +1133,7 @@ class _$NotFound implements NotFound {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$NotFound &&
+            other is _$NotFoundImpl &&
             (identical(other.reason, reason) || other.reason == reason));
   }
 
@@ -1140,8 +1143,8 @@ class _$NotFound implements NotFound {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$NotFoundCopyWith<_$NotFound> get copyWith =>
-      __$$NotFoundCopyWithImpl<_$NotFound>(this, _$identity);
+  _$$NotFoundImplCopyWith<_$NotFoundImpl> get copyWith =>
+      __$$NotFoundImplCopyWithImpl<_$NotFoundImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1321,34 +1324,34 @@ class _$NotFound implements NotFound {
 }
 
 abstract class NotFound implements ApiExceptions {
-  const factory NotFound(final String reason) = _$NotFound;
+  const factory NotFound(final String reason) = _$NotFoundImpl;
 
   String get reason;
   @JsonKey(ignore: true)
-  _$$NotFoundCopyWith<_$NotFound> get copyWith =>
+  _$$NotFoundImplCopyWith<_$NotFoundImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$MethodNotAllowedCopyWith<$Res> {
-  factory _$$MethodNotAllowedCopyWith(
-          _$MethodNotAllowed value, $Res Function(_$MethodNotAllowed) then) =
-      __$$MethodNotAllowedCopyWithImpl<$Res>;
+abstract class _$$MethodNotAllowedImplCopyWith<$Res> {
+  factory _$$MethodNotAllowedImplCopyWith(_$MethodNotAllowedImpl value,
+          $Res Function(_$MethodNotAllowedImpl) then) =
+      __$$MethodNotAllowedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$MethodNotAllowedCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$MethodNotAllowed>
-    implements _$$MethodNotAllowedCopyWith<$Res> {
-  __$$MethodNotAllowedCopyWithImpl(
-      _$MethodNotAllowed _value, $Res Function(_$MethodNotAllowed) _then)
+class __$$MethodNotAllowedImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$MethodNotAllowedImpl>
+    implements _$$MethodNotAllowedImplCopyWith<$Res> {
+  __$$MethodNotAllowedImplCopyWithImpl(_$MethodNotAllowedImpl _value,
+      $Res Function(_$MethodNotAllowedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$MethodNotAllowed implements MethodNotAllowed {
-  const _$MethodNotAllowed();
+class _$MethodNotAllowedImpl implements MethodNotAllowed {
+  const _$MethodNotAllowedImpl();
 
   @override
   String toString() {
@@ -1358,7 +1361,7 @@ class _$MethodNotAllowed implements MethodNotAllowed {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$MethodNotAllowed);
+        (other.runtimeType == runtimeType && other is _$MethodNotAllowedImpl);
   }
 
   @override
@@ -1542,29 +1545,29 @@ class _$MethodNotAllowed implements MethodNotAllowed {
 }
 
 abstract class MethodNotAllowed implements ApiExceptions {
-  const factory MethodNotAllowed() = _$MethodNotAllowed;
+  const factory MethodNotAllowed() = _$MethodNotAllowedImpl;
 }
 
 /// @nodoc
-abstract class _$$NotAcceptableCopyWith<$Res> {
-  factory _$$NotAcceptableCopyWith(
-          _$NotAcceptable value, $Res Function(_$NotAcceptable) then) =
-      __$$NotAcceptableCopyWithImpl<$Res>;
+abstract class _$$NotAcceptableImplCopyWith<$Res> {
+  factory _$$NotAcceptableImplCopyWith(
+          _$NotAcceptableImpl value, $Res Function(_$NotAcceptableImpl) then) =
+      __$$NotAcceptableImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NotAcceptableCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotAcceptable>
-    implements _$$NotAcceptableCopyWith<$Res> {
-  __$$NotAcceptableCopyWithImpl(
-      _$NotAcceptable _value, $Res Function(_$NotAcceptable) _then)
+class __$$NotAcceptableImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotAcceptableImpl>
+    implements _$$NotAcceptableImplCopyWith<$Res> {
+  __$$NotAcceptableImplCopyWithImpl(
+      _$NotAcceptableImpl _value, $Res Function(_$NotAcceptableImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NotAcceptable implements NotAcceptable {
-  const _$NotAcceptable();
+class _$NotAcceptableImpl implements NotAcceptable {
+  const _$NotAcceptableImpl();
 
   @override
   String toString() {
@@ -1574,7 +1577,7 @@ class _$NotAcceptable implements NotAcceptable {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NotAcceptable);
+        (other.runtimeType == runtimeType && other is _$NotAcceptableImpl);
   }
 
   @override
@@ -1758,29 +1761,29 @@ class _$NotAcceptable implements NotAcceptable {
 }
 
 abstract class NotAcceptable implements ApiExceptions {
-  const factory NotAcceptable() = _$NotAcceptable;
+  const factory NotAcceptable() = _$NotAcceptableImpl;
 }
 
 /// @nodoc
-abstract class _$$RequestTimeoutCopyWith<$Res> {
-  factory _$$RequestTimeoutCopyWith(
-          _$RequestTimeout value, $Res Function(_$RequestTimeout) then) =
-      __$$RequestTimeoutCopyWithImpl<$Res>;
+abstract class _$$RequestTimeoutImplCopyWith<$Res> {
+  factory _$$RequestTimeoutImplCopyWith(_$RequestTimeoutImpl value,
+          $Res Function(_$RequestTimeoutImpl) then) =
+      __$$RequestTimeoutImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$RequestTimeoutCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$RequestTimeout>
-    implements _$$RequestTimeoutCopyWith<$Res> {
-  __$$RequestTimeoutCopyWithImpl(
-      _$RequestTimeout _value, $Res Function(_$RequestTimeout) _then)
+class __$$RequestTimeoutImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$RequestTimeoutImpl>
+    implements _$$RequestTimeoutImplCopyWith<$Res> {
+  __$$RequestTimeoutImplCopyWithImpl(
+      _$RequestTimeoutImpl _value, $Res Function(_$RequestTimeoutImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$RequestTimeout implements RequestTimeout {
-  const _$RequestTimeout();
+class _$RequestTimeoutImpl implements RequestTimeout {
+  const _$RequestTimeoutImpl();
 
   @override
   String toString() {
@@ -1790,7 +1793,7 @@ class _$RequestTimeout implements RequestTimeout {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$RequestTimeout);
+        (other.runtimeType == runtimeType && other is _$RequestTimeoutImpl);
   }
 
   @override
@@ -1974,29 +1977,29 @@ class _$RequestTimeout implements RequestTimeout {
 }
 
 abstract class RequestTimeout implements ApiExceptions {
-  const factory RequestTimeout() = _$RequestTimeout;
+  const factory RequestTimeout() = _$RequestTimeoutImpl;
 }
 
 /// @nodoc
-abstract class _$$SendTimeoutCopyWith<$Res> {
-  factory _$$SendTimeoutCopyWith(
-          _$SendTimeout value, $Res Function(_$SendTimeout) then) =
-      __$$SendTimeoutCopyWithImpl<$Res>;
+abstract class _$$SendTimeoutImplCopyWith<$Res> {
+  factory _$$SendTimeoutImplCopyWith(
+          _$SendTimeoutImpl value, $Res Function(_$SendTimeoutImpl) then) =
+      __$$SendTimeoutImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$SendTimeoutCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$SendTimeout>
-    implements _$$SendTimeoutCopyWith<$Res> {
-  __$$SendTimeoutCopyWithImpl(
-      _$SendTimeout _value, $Res Function(_$SendTimeout) _then)
+class __$$SendTimeoutImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$SendTimeoutImpl>
+    implements _$$SendTimeoutImplCopyWith<$Res> {
+  __$$SendTimeoutImplCopyWithImpl(
+      _$SendTimeoutImpl _value, $Res Function(_$SendTimeoutImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$SendTimeout implements SendTimeout {
-  const _$SendTimeout();
+class _$SendTimeoutImpl implements SendTimeout {
+  const _$SendTimeoutImpl();
 
   @override
   String toString() {
@@ -2006,7 +2009,7 @@ class _$SendTimeout implements SendTimeout {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$SendTimeout);
+        (other.runtimeType == runtimeType && other is _$SendTimeoutImpl);
   }
 
   @override
@@ -2190,28 +2193,29 @@ class _$SendTimeout implements SendTimeout {
 }
 
 abstract class SendTimeout implements ApiExceptions {
-  const factory SendTimeout() = _$SendTimeout;
+  const factory SendTimeout() = _$SendTimeoutImpl;
 }
 
 /// @nodoc
-abstract class _$$ConflictCopyWith<$Res> {
-  factory _$$ConflictCopyWith(
-          _$Conflict value, $Res Function(_$Conflict) then) =
-      __$$ConflictCopyWithImpl<$Res>;
+abstract class _$$ConflictImplCopyWith<$Res> {
+  factory _$$ConflictImplCopyWith(
+          _$ConflictImpl value, $Res Function(_$ConflictImpl) then) =
+      __$$ConflictImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ConflictCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$Conflict>
-    implements _$$ConflictCopyWith<$Res> {
-  __$$ConflictCopyWithImpl(_$Conflict _value, $Res Function(_$Conflict) _then)
+class __$$ConflictImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$ConflictImpl>
+    implements _$$ConflictImplCopyWith<$Res> {
+  __$$ConflictImplCopyWithImpl(
+      _$ConflictImpl _value, $Res Function(_$ConflictImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$Conflict implements Conflict {
-  const _$Conflict();
+class _$ConflictImpl implements Conflict {
+  const _$ConflictImpl();
 
   @override
   String toString() {
@@ -2221,7 +2225,7 @@ class _$Conflict implements Conflict {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$Conflict);
+        (other.runtimeType == runtimeType && other is _$ConflictImpl);
   }
 
   @override
@@ -2405,29 +2409,29 @@ class _$Conflict implements Conflict {
 }
 
 abstract class Conflict implements ApiExceptions {
-  const factory Conflict() = _$Conflict;
+  const factory Conflict() = _$ConflictImpl;
 }
 
 /// @nodoc
-abstract class _$$InternalServerErrorCopyWith<$Res> {
-  factory _$$InternalServerErrorCopyWith(_$InternalServerError value,
-          $Res Function(_$InternalServerError) then) =
-      __$$InternalServerErrorCopyWithImpl<$Res>;
+abstract class _$$InternalServerErrorImplCopyWith<$Res> {
+  factory _$$InternalServerErrorImplCopyWith(_$InternalServerErrorImpl value,
+          $Res Function(_$InternalServerErrorImpl) then) =
+      __$$InternalServerErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$InternalServerErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$InternalServerError>
-    implements _$$InternalServerErrorCopyWith<$Res> {
-  __$$InternalServerErrorCopyWithImpl(
-      _$InternalServerError _value, $Res Function(_$InternalServerError) _then)
+class __$$InternalServerErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$InternalServerErrorImpl>
+    implements _$$InternalServerErrorImplCopyWith<$Res> {
+  __$$InternalServerErrorImplCopyWithImpl(_$InternalServerErrorImpl _value,
+      $Res Function(_$InternalServerErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$InternalServerError implements InternalServerError {
-  const _$InternalServerError();
+class _$InternalServerErrorImpl implements InternalServerError {
+  const _$InternalServerErrorImpl();
 
   @override
   String toString() {
@@ -2437,7 +2441,8 @@ class _$InternalServerError implements InternalServerError {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$InternalServerError);
+        (other.runtimeType == runtimeType &&
+            other is _$InternalServerErrorImpl);
   }
 
   @override
@@ -2621,29 +2626,29 @@ class _$InternalServerError implements InternalServerError {
 }
 
 abstract class InternalServerError implements ApiExceptions {
-  const factory InternalServerError() = _$InternalServerError;
+  const factory InternalServerError() = _$InternalServerErrorImpl;
 }
 
 /// @nodoc
-abstract class _$$NotImplementedCopyWith<$Res> {
-  factory _$$NotImplementedCopyWith(
-          _$NotImplemented value, $Res Function(_$NotImplemented) then) =
-      __$$NotImplementedCopyWithImpl<$Res>;
+abstract class _$$NotImplementedImplCopyWith<$Res> {
+  factory _$$NotImplementedImplCopyWith(_$NotImplementedImpl value,
+          $Res Function(_$NotImplementedImpl) then) =
+      __$$NotImplementedImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NotImplementedCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotImplemented>
-    implements _$$NotImplementedCopyWith<$Res> {
-  __$$NotImplementedCopyWithImpl(
-      _$NotImplemented _value, $Res Function(_$NotImplemented) _then)
+class __$$NotImplementedImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$NotImplementedImpl>
+    implements _$$NotImplementedImplCopyWith<$Res> {
+  __$$NotImplementedImplCopyWithImpl(
+      _$NotImplementedImpl _value, $Res Function(_$NotImplementedImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NotImplemented implements NotImplemented {
-  const _$NotImplemented();
+class _$NotImplementedImpl implements NotImplemented {
+  const _$NotImplementedImpl();
 
   @override
   String toString() {
@@ -2653,7 +2658,7 @@ class _$NotImplemented implements NotImplemented {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NotImplemented);
+        (other.runtimeType == runtimeType && other is _$NotImplementedImpl);
   }
 
   @override
@@ -2837,29 +2842,29 @@ class _$NotImplemented implements NotImplemented {
 }
 
 abstract class NotImplemented implements ApiExceptions {
-  const factory NotImplemented() = _$NotImplemented;
+  const factory NotImplemented() = _$NotImplementedImpl;
 }
 
 /// @nodoc
-abstract class _$$ServiceUnavailableCopyWith<$Res> {
-  factory _$$ServiceUnavailableCopyWith(_$ServiceUnavailable value,
-          $Res Function(_$ServiceUnavailable) then) =
-      __$$ServiceUnavailableCopyWithImpl<$Res>;
+abstract class _$$ServiceUnavailableImplCopyWith<$Res> {
+  factory _$$ServiceUnavailableImplCopyWith(_$ServiceUnavailableImpl value,
+          $Res Function(_$ServiceUnavailableImpl) then) =
+      __$$ServiceUnavailableImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ServiceUnavailableCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$ServiceUnavailable>
-    implements _$$ServiceUnavailableCopyWith<$Res> {
-  __$$ServiceUnavailableCopyWithImpl(
-      _$ServiceUnavailable _value, $Res Function(_$ServiceUnavailable) _then)
+class __$$ServiceUnavailableImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$ServiceUnavailableImpl>
+    implements _$$ServiceUnavailableImplCopyWith<$Res> {
+  __$$ServiceUnavailableImplCopyWithImpl(_$ServiceUnavailableImpl _value,
+      $Res Function(_$ServiceUnavailableImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ServiceUnavailable implements ServiceUnavailable {
-  const _$ServiceUnavailable();
+class _$ServiceUnavailableImpl implements ServiceUnavailable {
+  const _$ServiceUnavailableImpl();
 
   @override
   String toString() {
@@ -2869,7 +2874,7 @@ class _$ServiceUnavailable implements ServiceUnavailable {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ServiceUnavailable);
+        (other.runtimeType == runtimeType && other is _$ServiceUnavailableImpl);
   }
 
   @override
@@ -3053,29 +3058,29 @@ class _$ServiceUnavailable implements ServiceUnavailable {
 }
 
 abstract class ServiceUnavailable implements ApiExceptions {
-  const factory ServiceUnavailable() = _$ServiceUnavailable;
+  const factory ServiceUnavailable() = _$ServiceUnavailableImpl;
 }
 
 /// @nodoc
-abstract class _$$NoInternetConnectionCopyWith<$Res> {
-  factory _$$NoInternetConnectionCopyWith(_$NoInternetConnection value,
-          $Res Function(_$NoInternetConnection) then) =
-      __$$NoInternetConnectionCopyWithImpl<$Res>;
+abstract class _$$NoInternetConnectionImplCopyWith<$Res> {
+  factory _$$NoInternetConnectionImplCopyWith(_$NoInternetConnectionImpl value,
+          $Res Function(_$NoInternetConnectionImpl) then) =
+      __$$NoInternetConnectionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$NoInternetConnectionCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$NoInternetConnection>
-    implements _$$NoInternetConnectionCopyWith<$Res> {
-  __$$NoInternetConnectionCopyWithImpl(_$NoInternetConnection _value,
-      $Res Function(_$NoInternetConnection) _then)
+class __$$NoInternetConnectionImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$NoInternetConnectionImpl>
+    implements _$$NoInternetConnectionImplCopyWith<$Res> {
+  __$$NoInternetConnectionImplCopyWithImpl(_$NoInternetConnectionImpl _value,
+      $Res Function(_$NoInternetConnectionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$NoInternetConnection implements NoInternetConnection {
-  const _$NoInternetConnection();
+class _$NoInternetConnectionImpl implements NoInternetConnection {
+  const _$NoInternetConnectionImpl();
 
   @override
   String toString() {
@@ -3085,7 +3090,8 @@ class _$NoInternetConnection implements NoInternetConnection {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$NoInternetConnection);
+        (other.runtimeType == runtimeType &&
+            other is _$NoInternetConnectionImpl);
   }
 
   @override
@@ -3269,29 +3275,29 @@ class _$NoInternetConnection implements NoInternetConnection {
 }
 
 abstract class NoInternetConnection implements ApiExceptions {
-  const factory NoInternetConnection() = _$NoInternetConnection;
+  const factory NoInternetConnection() = _$NoInternetConnectionImpl;
 }
 
 /// @nodoc
-abstract class _$$FormatExceptionCopyWith<$Res> {
-  factory _$$FormatExceptionCopyWith(
-          _$FormatException value, $Res Function(_$FormatException) then) =
-      __$$FormatExceptionCopyWithImpl<$Res>;
+abstract class _$$FormatExceptionImplCopyWith<$Res> {
+  factory _$$FormatExceptionImplCopyWith(_$FormatExceptionImpl value,
+          $Res Function(_$FormatExceptionImpl) then) =
+      __$$FormatExceptionImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$FormatExceptionCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$FormatException>
-    implements _$$FormatExceptionCopyWith<$Res> {
-  __$$FormatExceptionCopyWithImpl(
-      _$FormatException _value, $Res Function(_$FormatException) _then)
+class __$$FormatExceptionImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$FormatExceptionImpl>
+    implements _$$FormatExceptionImplCopyWith<$Res> {
+  __$$FormatExceptionImplCopyWithImpl(
+      _$FormatExceptionImpl _value, $Res Function(_$FormatExceptionImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$FormatException implements FormatException {
-  const _$FormatException();
+class _$FormatExceptionImpl implements FormatException {
+  const _$FormatExceptionImpl();
 
   @override
   String toString() {
@@ -3301,7 +3307,7 @@ class _$FormatException implements FormatException {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$FormatException);
+        (other.runtimeType == runtimeType && other is _$FormatExceptionImpl);
   }
 
   @override
@@ -3485,29 +3491,29 @@ class _$FormatException implements FormatException {
 }
 
 abstract class FormatException implements ApiExceptions {
-  const factory FormatException() = _$FormatException;
+  const factory FormatException() = _$FormatExceptionImpl;
 }
 
 /// @nodoc
-abstract class _$$UnableToProcessCopyWith<$Res> {
-  factory _$$UnableToProcessCopyWith(
-          _$UnableToProcess value, $Res Function(_$UnableToProcess) then) =
-      __$$UnableToProcessCopyWithImpl<$Res>;
+abstract class _$$UnableToProcessImplCopyWith<$Res> {
+  factory _$$UnableToProcessImplCopyWith(_$UnableToProcessImpl value,
+          $Res Function(_$UnableToProcessImpl) then) =
+      __$$UnableToProcessImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnableToProcessCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnableToProcess>
-    implements _$$UnableToProcessCopyWith<$Res> {
-  __$$UnableToProcessCopyWithImpl(
-      _$UnableToProcess _value, $Res Function(_$UnableToProcess) _then)
+class __$$UnableToProcessImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnableToProcessImpl>
+    implements _$$UnableToProcessImplCopyWith<$Res> {
+  __$$UnableToProcessImplCopyWithImpl(
+      _$UnableToProcessImpl _value, $Res Function(_$UnableToProcessImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$UnableToProcess implements UnableToProcess {
-  const _$UnableToProcess();
+class _$UnableToProcessImpl implements UnableToProcess {
+  const _$UnableToProcessImpl();
 
   @override
   String toString() {
@@ -3517,7 +3523,7 @@ class _$UnableToProcess implements UnableToProcess {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnableToProcess);
+        (other.runtimeType == runtimeType && other is _$UnableToProcessImpl);
   }
 
   @override
@@ -3701,24 +3707,24 @@ class _$UnableToProcess implements UnableToProcess {
 }
 
 abstract class UnableToProcess implements ApiExceptions {
-  const factory UnableToProcess() = _$UnableToProcess;
+  const factory UnableToProcess() = _$UnableToProcessImpl;
 }
 
 /// @nodoc
-abstract class _$$DefaultErrorCopyWith<$Res> {
-  factory _$$DefaultErrorCopyWith(
-          _$DefaultError value, $Res Function(_$DefaultError) then) =
-      __$$DefaultErrorCopyWithImpl<$Res>;
+abstract class _$$DefaultErrorImplCopyWith<$Res> {
+  factory _$$DefaultErrorImplCopyWith(
+          _$DefaultErrorImpl value, $Res Function(_$DefaultErrorImpl) then) =
+      __$$DefaultErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$DefaultErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$DefaultError>
-    implements _$$DefaultErrorCopyWith<$Res> {
-  __$$DefaultErrorCopyWithImpl(
-      _$DefaultError _value, $Res Function(_$DefaultError) _then)
+class __$$DefaultErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$DefaultErrorImpl>
+    implements _$$DefaultErrorImplCopyWith<$Res> {
+  __$$DefaultErrorImplCopyWithImpl(
+      _$DefaultErrorImpl _value, $Res Function(_$DefaultErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -3726,7 +3732,7 @@ class __$$DefaultErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$DefaultError(
+    return _then(_$DefaultErrorImpl(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -3737,8 +3743,8 @@ class __$$DefaultErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$DefaultError implements DefaultError {
-  const _$DefaultError(this.error);
+class _$DefaultErrorImpl implements DefaultError {
+  const _$DefaultErrorImpl(this.error);
 
   @override
   final String error;
@@ -3752,7 +3758,7 @@ class _$DefaultError implements DefaultError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$DefaultError &&
+            other is _$DefaultErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -3762,8 +3768,8 @@ class _$DefaultError implements DefaultError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$DefaultErrorCopyWith<_$DefaultError> get copyWith =>
-      __$$DefaultErrorCopyWithImpl<_$DefaultError>(this, _$identity);
+  _$$DefaultErrorImplCopyWith<_$DefaultErrorImpl> get copyWith =>
+      __$$DefaultErrorImplCopyWithImpl<_$DefaultErrorImpl>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -3943,34 +3949,34 @@ class _$DefaultError implements DefaultError {
 }
 
 abstract class DefaultError implements ApiExceptions {
-  const factory DefaultError(final String error) = _$DefaultError;
+  const factory DefaultError(final String error) = _$DefaultErrorImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$DefaultErrorCopyWith<_$DefaultError> get copyWith =>
+  _$$DefaultErrorImplCopyWith<_$DefaultErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$UnexpectedErrorCopyWith<$Res> {
-  factory _$$UnexpectedErrorCopyWith(
-          _$UnexpectedError value, $Res Function(_$UnexpectedError) then) =
-      __$$UnexpectedErrorCopyWithImpl<$Res>;
+abstract class _$$UnexpectedErrorImplCopyWith<$Res> {
+  factory _$$UnexpectedErrorImplCopyWith(_$UnexpectedErrorImpl value,
+          $Res Function(_$UnexpectedErrorImpl) then) =
+      __$$UnexpectedErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$UnexpectedErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnexpectedError>
-    implements _$$UnexpectedErrorCopyWith<$Res> {
-  __$$UnexpectedErrorCopyWithImpl(
-      _$UnexpectedError _value, $Res Function(_$UnexpectedError) _then)
+class __$$UnexpectedErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$UnexpectedErrorImpl>
+    implements _$$UnexpectedErrorImplCopyWith<$Res> {
+  __$$UnexpectedErrorImplCopyWithImpl(
+      _$UnexpectedErrorImpl _value, $Res Function(_$UnexpectedErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$UnexpectedError implements UnexpectedError {
-  const _$UnexpectedError();
+class _$UnexpectedErrorImpl implements UnexpectedError {
+  const _$UnexpectedErrorImpl();
 
   @override
   String toString() {
@@ -3980,7 +3986,7 @@ class _$UnexpectedError implements UnexpectedError {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$UnexpectedError);
+        (other.runtimeType == runtimeType && other is _$UnexpectedErrorImpl);
   }
 
   @override
@@ -4164,29 +4170,29 @@ class _$UnexpectedError implements UnexpectedError {
 }
 
 abstract class UnexpectedError implements ApiExceptions {
-  const factory UnexpectedError() = _$UnexpectedError;
+  const factory UnexpectedError() = _$UnexpectedErrorImpl;
 }
 
 /// @nodoc
-abstract class _$$ServerErrorCopyWith<$Res> {
-  factory _$$ServerErrorCopyWith(
-          _$ServerError value, $Res Function(_$ServerError) then) =
-      __$$ServerErrorCopyWithImpl<$Res>;
+abstract class _$$ServerErrorImplCopyWith<$Res> {
+  factory _$$ServerErrorImplCopyWith(
+          _$ServerErrorImpl value, $Res Function(_$ServerErrorImpl) then) =
+      __$$ServerErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$ServerErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$ServerError>
-    implements _$$ServerErrorCopyWith<$Res> {
-  __$$ServerErrorCopyWithImpl(
-      _$ServerError _value, $Res Function(_$ServerError) _then)
+class __$$ServerErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$ServerErrorImpl>
+    implements _$$ServerErrorImplCopyWith<$Res> {
+  __$$ServerErrorImplCopyWithImpl(
+      _$ServerErrorImpl _value, $Res Function(_$ServerErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$ServerError implements ServerError {
-  const _$ServerError();
+class _$ServerErrorImpl implements ServerError {
+  const _$ServerErrorImpl();
 
   @override
   String toString() {
@@ -4196,7 +4202,7 @@ class _$ServerError implements ServerError {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$ServerError);
+        (other.runtimeType == runtimeType && other is _$ServerErrorImpl);
   }
 
   @override
@@ -4380,29 +4386,29 @@ class _$ServerError implements ServerError {
 }
 
 abstract class ServerError implements ApiExceptions {
-  const factory ServerError() = _$ServerError;
+  const factory ServerError() = _$ServerErrorImpl;
 }
 
 /// @nodoc
-abstract class _$$CacheErrorCopyWith<$Res> {
-  factory _$$CacheErrorCopyWith(
-          _$CacheError value, $Res Function(_$CacheError) then) =
-      __$$CacheErrorCopyWithImpl<$Res>;
+abstract class _$$CacheErrorImplCopyWith<$Res> {
+  factory _$$CacheErrorImplCopyWith(
+          _$CacheErrorImpl value, $Res Function(_$CacheErrorImpl) then) =
+      __$$CacheErrorImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$CacheErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$CacheError>
-    implements _$$CacheErrorCopyWith<$Res> {
-  __$$CacheErrorCopyWithImpl(
-      _$CacheError _value, $Res Function(_$CacheError) _then)
+class __$$CacheErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$CacheErrorImpl>
+    implements _$$CacheErrorImplCopyWith<$Res> {
+  __$$CacheErrorImplCopyWithImpl(
+      _$CacheErrorImpl _value, $Res Function(_$CacheErrorImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$CacheError implements CacheError {
-  const _$CacheError();
+class _$CacheErrorImpl implements CacheError {
+  const _$CacheErrorImpl();
 
   @override
   String toString() {
@@ -4412,7 +4418,7 @@ class _$CacheError implements CacheError {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$CacheError);
+        (other.runtimeType == runtimeType && other is _$CacheErrorImpl);
   }
 
   @override
@@ -4596,24 +4602,24 @@ class _$CacheError implements CacheError {
 }
 
 abstract class CacheError implements ApiExceptions {
-  const factory CacheError() = _$CacheError;
+  const factory CacheError() = _$CacheErrorImpl;
 }
 
 /// @nodoc
-abstract class _$$FireBaseAuthErrorCopyWith<$Res> {
-  factory _$$FireBaseAuthErrorCopyWith(
-          _$FireBaseAuthError value, $Res Function(_$FireBaseAuthError) then) =
-      __$$FireBaseAuthErrorCopyWithImpl<$Res>;
+abstract class _$$FireBaseAuthErrorImplCopyWith<$Res> {
+  factory _$$FireBaseAuthErrorImplCopyWith(_$FireBaseAuthErrorImpl value,
+          $Res Function(_$FireBaseAuthErrorImpl) then) =
+      __$$FireBaseAuthErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String error});
 }
 
 /// @nodoc
-class __$$FireBaseAuthErrorCopyWithImpl<$Res>
-    extends _$ApiExceptionsCopyWithImpl<$Res, _$FireBaseAuthError>
-    implements _$$FireBaseAuthErrorCopyWith<$Res> {
-  __$$FireBaseAuthErrorCopyWithImpl(
-      _$FireBaseAuthError _value, $Res Function(_$FireBaseAuthError) _then)
+class __$$FireBaseAuthErrorImplCopyWithImpl<$Res>
+    extends _$ApiExceptionsCopyWithImpl<$Res, _$FireBaseAuthErrorImpl>
+    implements _$$FireBaseAuthErrorImplCopyWith<$Res> {
+  __$$FireBaseAuthErrorImplCopyWithImpl(_$FireBaseAuthErrorImpl _value,
+      $Res Function(_$FireBaseAuthErrorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -4621,7 +4627,7 @@ class __$$FireBaseAuthErrorCopyWithImpl<$Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$FireBaseAuthError(
+    return _then(_$FireBaseAuthErrorImpl(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -4632,8 +4638,8 @@ class __$$FireBaseAuthErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$FireBaseAuthError implements FireBaseAuthError {
-  const _$FireBaseAuthError(this.error);
+class _$FireBaseAuthErrorImpl implements FireBaseAuthError {
+  const _$FireBaseAuthErrorImpl(this.error);
 
   @override
   final String error;
@@ -4647,7 +4653,7 @@ class _$FireBaseAuthError implements FireBaseAuthError {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$FireBaseAuthError &&
+            other is _$FireBaseAuthErrorImpl &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -4657,8 +4663,9 @@ class _$FireBaseAuthError implements FireBaseAuthError {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$FireBaseAuthErrorCopyWith<_$FireBaseAuthError> get copyWith =>
-      __$$FireBaseAuthErrorCopyWithImpl<_$FireBaseAuthError>(this, _$identity);
+  _$$FireBaseAuthErrorImplCopyWith<_$FireBaseAuthErrorImpl> get copyWith =>
+      __$$FireBaseAuthErrorImplCopyWithImpl<_$FireBaseAuthErrorImpl>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -4838,10 +4845,10 @@ class _$FireBaseAuthError implements FireBaseAuthError {
 }
 
 abstract class FireBaseAuthError implements ApiExceptions {
-  const factory FireBaseAuthError(final String error) = _$FireBaseAuthError;
+  const factory FireBaseAuthError(final String error) = _$FireBaseAuthErrorImpl;
 
   String get error;
   @JsonKey(ignore: true)
-  _$$FireBaseAuthErrorCopyWith<_$FireBaseAuthError> get copyWith =>
+  _$$FireBaseAuthErrorImplCopyWith<_$FireBaseAuthErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
