@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
@@ -12,6 +14,7 @@ import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 @RoutePage(name: 'doctorSignup')
@@ -124,10 +127,16 @@ class DoctorSignupScreen extends HookConsumerWidget {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     Loader.show(context);
+                    //get fcmToken
+                    String? fcmToken = '';
+                    if (Platform.isAndroid) {
+                      fcmToken = await FirebaseMessaging.instance.getToken();
+                    }
                     NewDoctor doctor = NewDoctor(
                         fullName: fullNameController.text,
                         emailAddress: emailController.text,
                         password: passwordController.text,
+                        fcmToken: fcmToken,
                         speciality: speciality.value!.title);
 
                     final result = await auth.doctorSignUp(doctor);
@@ -144,7 +153,7 @@ class DoctorSignupScreen extends HookConsumerWidget {
                             emailAddress: doctor.emailAddress,
                             speciality: doctor.speciality));
 
-                       //take user to doctor home
+                        //take user to doctor home
                         AppNavigator.of(context)
                             .replaceAll([const PatientHome()]);
                       }
@@ -152,35 +161,6 @@ class DoctorSignupScreen extends HookConsumerWidget {
                       Loader.hide(context);
                       showMessageAlertDialog(context, text: e.message);
                     });
-
-                    /*Loader.show(context);
-                    NewUser user = NewUser(
-                        fullName: fullNameController.text.trim(),
-                        emailAddress: emailController.text,
-                        password: passwordController.text);
-                    final result = await auth.signUpWithEmailAndPassword(user);
-
-                    result.when(success: (data) async {
-                      final firebaseDb = ref.read(firebaseApiProvider);
-                      bool stored = await firebaseDb.storePatientData(
-                          newUser: user, credential: data);
-
-                      Loader.hide(context);
-                      if (stored) {
-                        ref.read(storeProvider).savePatientInfo(Patient(
-                            fullName: user.fullName,
-                            emailAddress: user.emailAddress,
-                            userId: data.user!.uid));
-                        AppNavigator.of(context)
-                            .replaceAll([const PatientHome()]);
-                      } else {
-                        showMessageAlertDialog(context,
-                            text: 'Error creating patient account, try again');
-                      }
-                    }, apiFailure: (e, _) {
-                      Loader.hide(context);
-                      showMessageAlertDialog(context, text: e.message);
-                    });*/
                   }
                 },
                 child: const Text('Create Doctor Account'))

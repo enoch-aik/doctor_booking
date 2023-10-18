@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-
 class Toast {
   static const double _toastHeight = 70.0;
   static const Color _backgroundColor = Color.fromRGBO(247, 247, 247, 1);
@@ -127,7 +126,7 @@ class Toast {
 
     overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-       // key: toastKey,
+        // key: toastKey,
         top: MediaQuery.of(context).padding.top,
         left: 0,
         right: 0,
@@ -154,7 +153,7 @@ class Toast {
                       borderRadius: BorderRadius.circular(16.r),
                       boxShadow: [
                         BoxShadow(
-                          color: colorScheme.secondaryContainer,
+                          color: colorScheme.outline.withOpacity(0.6),
                           blurRadius: 10.0, // Soften the shaodw
                           spreadRadius: 1.0,
                           offset: const Offset(0.0, 0.0),

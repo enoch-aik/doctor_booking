@@ -3,7 +3,6 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.da
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
-import 'package:doctor_booking_flutter/app/patient/home/presentation/ui/screens/home.dart';
 import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/core/service_exceptions/service_exception.dart';
 import 'package:doctor_booking_flutter/core/validators/text_field_validators.dart';

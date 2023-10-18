@@ -256,22 +256,6 @@ class LoginScreen extends HookConsumerWidget {
                         apiFailure: (e, _) {
                           showMessageAlertDialog(context, text: e.message);
                         });
-
-                    /*   await auth.googleSignIn().then((value) {
-                      Navigator.pop(context);
-                      //if User is the result, then the login was successful
-                      if (value is UserCredential) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
-                                (route) => false);
-                      }
-                      else {
-                        //else show error message
-                        showMessageAlertDialog(context, text: value??'Failed to sign in with Google, try again');
-                      }
-                    });*/
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -287,10 +271,6 @@ class LoginScreen extends HookConsumerWidget {
             ),
             GestureDetector(
               onTap: () {},
-              /* => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const SignUpScreen())),*/
               child: Text.rich(
                 TextSpan(children: [
                   const TextSpan(text: 'Don\'t have an account?  '),
@@ -298,12 +278,7 @@ class LoginScreen extends HookConsumerWidget {
                       text: 'Signup',
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          /* //no longer necessary
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SignUpScreen()));
-                       */
+
                         },
                       style: AppStyle.textStyle
                           .copyWith(fontWeight: FontWeight.w500))

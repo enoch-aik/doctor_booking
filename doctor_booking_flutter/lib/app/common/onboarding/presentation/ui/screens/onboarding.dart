@@ -1,10 +1,9 @@
-import 'package:auto_route/annotations.dart';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/data/models/onboarding_model.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/presentation/ui/widgets/onboarding_item.dart';
 import 'package:doctor_booking_flutter/app/common/onboarding/presentation/ui/widgets/page_indicator.dart';
 import 'package:doctor_booking_flutter/lib.dart';
-import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 

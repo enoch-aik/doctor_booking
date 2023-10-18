@@ -17,7 +17,7 @@ class DoctorCategoryCard extends StatelessWidget {
       padding: EdgeInsets.only(right: 8.w, bottom: 8.h, top: 4),
       child: GestureDetector(
         onTap: onTap,
-        child: AnimatedContainer(duration: Duration(milliseconds: 600),
+        child: AnimatedContainer(duration: const Duration(milliseconds: 600),
           padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 2.h),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16.r),
@@ -27,7 +27,7 @@ class DoctorCategoryCard extends StatelessWidget {
                     color: Colors.grey.withOpacity(0.6),
                     blurRadius: 3,
                     spreadRadius: 0,
-                    offset: Offset(0, 2)),
+                    offset: const Offset(0, 2)),
               ]),
           child: Row(
             mainAxisSize: MainAxisSize.min,

@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
-import 'package:booking_calendar/booking_calendar.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
-import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor_speciality.dart';
 import 'package:doctor_booking_flutter/app/patient/calendar/presentation/ui/screens/calendar.dart';
@@ -11,11 +9,11 @@ import 'package:doctor_booking_flutter/app/patient/home/presentation/ui/widgets/
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/app/patient/profile/presentation/ui/screens/profile.dart';
 import 'package:doctor_booking_flutter/app/patient/search/presentation/ui/screens/search.dart';
-import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/app_constants.dart';
-import 'package:doctor_booking_flutter/src/extensions/context.dart';
+import 'package:doctor_booking_flutter/src/constants/assets.dart';
 import 'package:doctor_booking_flutter/src/res/assets/svg.dart';
+import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/category_header.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 
@@ -50,16 +48,12 @@ class PatientHomeScreen extends ConsumerWidget {
           showUnselectedLabels: false,
         ),
       ),
-      /*bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: ''),
-        BottomNavigationBarItem(icon: Icon(Icons.calendar_month), label: ''),
-      ]),*/
     );
   }
 }
 
-class _PatientHomeView extends ConsumerWidget {
-  const _PatientHomeView({super.key});
+class _PatientHomeView extends HookConsumerWidget {
+  const _PatientHomeView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -87,7 +81,7 @@ class _PatientHomeView extends ConsumerWidget {
           ),
         ],
       ),
-      body: RefreshIndicator(
+      body: RefreshIndicator.adaptive(
         //refresh both upcoming schedule and doctor list
         onRefresh: () async => await Future.wait([
           ref.refresh(patientAppointmentsStreamProvider(
@@ -100,37 +94,50 @@ class _PatientHomeView extends ConsumerWidget {
           children: [
             ColSpacing(16.h),
             appointments.when(
-                data: (patient) {
-                  if (patient.upcomingAppointments.isEmpty) {
-                    return SizedBox(
-                      /*height: 50.h,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-
-                          KText(
-                            'No upcoming appointment found',
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ],
-                      ),*/
-                    );
-                  }
-                  patient.upcomingAppointments.sort(
-                      (a, b) => a.bookingStart!.compareTo(b.bookingStart!));
-                  final firstAppointment = patient.upcomingAppointments.first;
-
+              data: (patient) {
+                if (patient.upcomingAppointments.isEmpty) {
                   return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      CategoryHeader(title: 'Upcoming Schedule', onPressed: () {}),
-                      UpcomingScheduleCard(
-                        appointment: firstAppointment,
+                      const KText(
+                        'No upcoming appointment found',
+                        fontWeight: FontWeight.w500,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16.h),
+                        child: SvgPicture.asset(
+                          AppAssets.emptySvg,
+                          height: 100.h,
+                        ),
                       ),
                     ],
                   );
-                },
-                error: (e, _) => const UpcomingScheduleCard(),
-                loading: () => const UpcomingScheduleCard()),
+                }
+
+                patient.upcomingAppointments
+                    .sort((a, b) => a.bookingStart!.compareTo(b.bookingStart!));
+                final firstAppointment = patient.upcomingAppointments.first;
+                return Column(
+                  children: [
+                    CategoryHeader(
+                      title: 'Upcoming Appointments',
+                      onPressed: () {
+                        //navigate to upcoming schedules
+                        AppNavigator.of(context).push(
+                          UpcomingSchedules(
+                              appointments: patient.upcomingAppointments),
+                        );
+                      },
+                    ),
+                    UpcomingScheduleCard(
+                      appointment: firstAppointment,
+                    ),
+                  ],
+                );
+              },
+              error: (e, _) => const UpcomingScheduleCard(),
+              loading: () => const UpcomingScheduleCard(),
+            ),
             ColSpacing(8.h),
             CategoryHeader(
               title: 'Let\'s find your doctor',

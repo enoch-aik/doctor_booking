@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:doctor_booking_flutter/core/api/fcm.dart';
 import 'package:doctor_booking_flutter/core/api/firebase.dart';
 import 'package:doctor_booking_flutter/core/services/storage/storage.dart';
+import 'package:doctor_booking_flutter/env.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -29,6 +31,11 @@ final collectionStreamProvider =
       .map((querySnapshot) {
     return querySnapshot.docs;
   });
+});
+
+//provider for firebase cloud messaging service
+final fcmServiceProvider = Provider<FCMService>((ref) {
+  return FCMService(serverKey: fcmServerKey);
 });
 
 //storage provider

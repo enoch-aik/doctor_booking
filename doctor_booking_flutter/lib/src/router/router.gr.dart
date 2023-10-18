@@ -15,6 +15,16 @@ abstract class _$AppRouter extends RootStackRouter {
 
   @override
   final Map<String, PageFactory> pagesMap = {
+    AppointmentDetails.name: (routeData) {
+      final args = routeData.argsAs<AppointmentDetailsArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: AppointmentDetailsScreen(
+          key: args.key,
+          appointment: args.appointment,
+        ),
+      );
+    },
     BookAppointment.name: (routeData) {
       final args = routeData.argsAs<BookAppointmentArgs>();
       return AutoRoutePage<dynamic>(
@@ -38,6 +48,7 @@ abstract class _$AppRouter extends RootStackRouter {
         child: DoctorDetailsScreen(
           key: args.key,
           doctor: args.doctor,
+          doctorImage: args.doctorImage,
         ),
       );
     },
@@ -113,13 +124,67 @@ abstract class _$AppRouter extends RootStackRouter {
         child: const PatientSignUpScreen(),
       );
     },
+    Settings.name: (routeData) {
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: const SettingsScreen(),
+      );
+    },
     Splash.name: (routeData) {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const SplashScreen(),
       );
     },
+    UpcomingSchedules.name: (routeData) {
+      final args = routeData.argsAs<UpcomingSchedulesArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: UpcomingSchedulesScreen(
+          key: args.key,
+          appointments: args.appointments,
+        ),
+      );
+    },
   };
+}
+
+/// generated route for
+/// [AppointmentDetailsScreen]
+class AppointmentDetails extends PageRouteInfo<AppointmentDetailsArgs> {
+  AppointmentDetails({
+    Key? key,
+    required Appointment appointment,
+    List<PageRouteInfo>? children,
+  }) : super(
+          AppointmentDetails.name,
+          args: AppointmentDetailsArgs(
+            key: key,
+            appointment: appointment,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'AppointmentDetails';
+
+  static const PageInfo<AppointmentDetailsArgs> page =
+      PageInfo<AppointmentDetailsArgs>(name);
+}
+
+class AppointmentDetailsArgs {
+  const AppointmentDetailsArgs({
+    this.key,
+    required this.appointment,
+  });
+
+  final Key? key;
+
+  final Appointment appointment;
+
+  @override
+  String toString() {
+    return 'AppointmentDetailsArgs{key: $key, appointment: $appointment}';
+  }
 }
 
 /// generated route for
@@ -180,12 +245,14 @@ class DoctorDetails extends PageRouteInfo<DoctorDetailsArgs> {
   DoctorDetails({
     Key? key,
     required Doctor doctor,
+    required String doctorImage,
     List<PageRouteInfo>? children,
   }) : super(
           DoctorDetails.name,
           args: DoctorDetailsArgs(
             key: key,
             doctor: doctor,
+            doctorImage: doctorImage,
           ),
           initialChildren: children,
         );
@@ -200,15 +267,18 @@ class DoctorDetailsArgs {
   const DoctorDetailsArgs({
     this.key,
     required this.doctor,
+    required this.doctorImage,
   });
 
   final Key? key;
 
   final Doctor doctor;
 
+  final String doctorImage;
+
   @override
   String toString() {
-    return 'DoctorDetailsArgs{key: $key, doctor: $doctor}';
+    return 'DoctorDetailsArgs{key: $key, doctor: $doctor, doctorImage: $doctorImage}';
   }
 }
 
@@ -381,6 +451,20 @@ class PatientSignUp extends PageRouteInfo<void> {
 }
 
 /// generated route for
+/// [SettingsScreen]
+class Settings extends PageRouteInfo<void> {
+  const Settings({List<PageRouteInfo>? children})
+      : super(
+          Settings.name,
+          initialChildren: children,
+        );
+
+  static const String name = 'Settings';
+
+  static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
 /// [SplashScreen]
 class Splash extends PageRouteInfo<void> {
   const Splash({List<PageRouteInfo>? children})
@@ -392,4 +476,42 @@ class Splash extends PageRouteInfo<void> {
   static const String name = 'Splash';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [UpcomingSchedulesScreen]
+class UpcomingSchedules extends PageRouteInfo<UpcomingSchedulesArgs> {
+  UpcomingSchedules({
+    Key? key,
+    required List<Appointment> appointments,
+    List<PageRouteInfo>? children,
+  }) : super(
+          UpcomingSchedules.name,
+          args: UpcomingSchedulesArgs(
+            key: key,
+            appointments: appointments,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'UpcomingSchedules';
+
+  static const PageInfo<UpcomingSchedulesArgs> page =
+      PageInfo<UpcomingSchedulesArgs>(name);
+}
+
+class UpcomingSchedulesArgs {
+  const UpcomingSchedulesArgs({
+    this.key,
+    required this.appointments,
+  });
+
+  final Key? key;
+
+  final List<Appointment> appointments;
+
+  @override
+  String toString() {
+    return 'UpcomingSchedulesArgs{key: $key, appointments: $appointments}';
+  }
 }

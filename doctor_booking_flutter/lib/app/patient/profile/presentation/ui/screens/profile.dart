@@ -44,63 +44,58 @@ class PatientProfileScreen extends ConsumerWidget {
               ),
             ),
             ColSpacing(24.h),
-
-            //change all the color of icons in the widget below to context.primary
-            ListTile(
-              leading: Icon(
-                Icons.calendar_month,
-                color: context.primary,
-              ),
-              title: Text('Upcoming schedules'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
-            ),
-            Divider(),
-            ListTile(
+            ListTile(onTap: (){
+              AppNavigator.of(context).push(const Settings());
+            },
               leading: Icon(
                 Icons.settings,
                 color: context.primary,
               ),
-              title: Text('Settings'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Settings'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
             ),
-            Divider(),
+            const Divider(),
             ListTile(
+              onTap: () {
+                showLicensePage(context: context);
+              },
               leading: Icon(
                 Icons.privacy_tip,
                 color: context.primary,
               ),
-              title: Text('Privacy policy'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Licenses and Privacy policy'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
             ),
-            Divider(),
+            const Divider(),
             ListTile(
               leading: Icon(
                 Icons.logout,
                 color: context.primary,
               ),
-              title: Text('Logout'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Logout'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
               onTap: () {
                 showAdaptiveDialog(
                     context: context,
                     builder: (context) => AlertDialog.adaptive(
-                          title: Text('Logout'),
-                          content: Text('Are you sure you want to logout?'),
+                          title: const Text('Logout'),
+                          content:
+                              const Text('Are you sure you want to logout?'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Cancel'),
+                              child: const Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () async {
                                 await ref.read(firebaseAuthProvider).signOut();
                                 ref.read(storeProvider).removeAll();
                                 AppNavigator.of(context)
-                                    .replaceAll([Onboarding()]);
+                                    .replaceAll([const Onboarding()]);
                               },
-                              child: Text('Logout'),
+                              child: const Text('Logout'),
                             ),
                           ],
                         ));

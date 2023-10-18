@@ -8,4 +8,8 @@ abstract class AppointmentDataSource {
       required Doctor doctor,
       required String patientEmail});
 
+  Future<bool> cancelDoctorAppointment(
+      {required Appointment appointment,bool isPatient = true});
+
+
 }

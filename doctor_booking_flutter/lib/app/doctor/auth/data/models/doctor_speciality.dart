@@ -16,4 +16,14 @@ class DoctorSpeciality {
     // DoctorSpeciality(title: 'Psychologist', icon: ''),
     DoctorSpeciality(title: 'Therapist', icon: '🧘‍♂️'),
   ];
+
+  static DoctorSpeciality getFromSpeciality(String speciality) {
+    return specialities.firstWhere((element) => element.title == speciality);
+  }
+
+  static String getIconFromSpeciality(String speciality) {
+    return specialities
+        .firstWhere((element) => element.title == speciality)
+        .icon;
+  }
 }

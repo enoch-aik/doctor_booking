@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:doctor_booking_flutter/app/common/auth/data/models/user.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
 import 'package:flutter/material.dart';

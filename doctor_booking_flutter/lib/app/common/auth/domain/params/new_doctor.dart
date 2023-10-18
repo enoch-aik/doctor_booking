@@ -13,12 +13,13 @@ class NewDoctor {
   final String speciality;
   final bool isApproved;
   final List<Appointment> appointments;
+  final String? fcmToken;
 
   NewDoctor(
       {required this.fullName,
         required this.emailAddress,
         required this.password,
-        this.appointments = const [],this.isApproved = false,required this.speciality,
+        this.appointments = const [],this.isApproved = false,required this.speciality,this.fcmToken,
         this.userId});
 
   factory NewDoctor.fromJson(Map<String, dynamic> json) =>
@@ -29,6 +30,6 @@ class NewDoctor {
   Doctor toDoctor() => Doctor(
       fullName: fullName,
       emailAddress: emailAddress,
-      userId: userId,
+      userId: userId,fcmToken: fcmToken,
       appointments: [], speciality: speciality);
 }

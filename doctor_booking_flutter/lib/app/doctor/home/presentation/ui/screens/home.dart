@@ -1,11 +1,19 @@
-import 'dart:math';
 
-import 'package:auto_route/annotations.dart';
-import 'package:doctor_booking_flutter/app/doctor/calendar/presentation/ui/screens/calendar.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
+import 'package:doctor_booking_flutter/app/doctor/home/data/models/custom_appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/profile/presentation/ui/screens/profile.dart';
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/constants/app_constants.dart';
+import 'package:doctor_booking_flutter/src/extensions/appointment_list.dart';
+import 'package:doctor_booking_flutter/src/extensions/context.dart';
+import 'package:doctor_booking_flutter/src/extensions/date_range.dart';
+import 'package:doctor_booking_flutter/src/res/assets/svg.dart';
+import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
+import 'package:doctor_booking_flutter/src/widgets/margin.dart';
+import 'package:doctor_booking_flutter/src/widgets/toast/toast.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 @RoutePage(name: 'doctorHome')
@@ -14,14 +22,14 @@ class DoctorHomeScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const List<Widget> _body = [
+    const List<Widget> body = [
       _DoctorHomeView(),
-      DoctorCalendarScreen(),
+     // DoctorCalendarScreen(),
       DoctorProfileScreen(),
     ];
 
     return Scaffold(
-        body: _body[ref.watch(doctorSelectedHomeIndex)],
+        body: body[ref.watch(doctorSelectedHomeIndex)],
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(
               splashFactory: NoSplash.splashFactory,
@@ -47,87 +55,216 @@ class DoctorHomeScreen extends ConsumerWidget {
   }
 }
 
-class _DoctorHomeView extends StatelessWidget {
-  const _DoctorHomeView({super.key});
-
-  /// Method that creates the collection the data source for calendar, with
-  /// required information.
-  List<Appointment> _getAppointments() {
-    final List<String> subjectCollection = <String>[];
-    subjectCollection.add('General Meeting');
-    subjectCollection.add('Plan Execution');
-    subjectCollection.add('Project Plan');
-    subjectCollection.add('Consulting');
-    subjectCollection.add('Support');
-    subjectCollection.add('Development Meeting');
-    subjectCollection.add('Project Completion');
-    subjectCollection.add('Release updates');
-    subjectCollection.add('Performance Check');
-
-    final List<Color> colorCollection = <Color>[];
-    colorCollection.add(const Color(0xFF0F8644));
-    colorCollection.add(const Color(0xFF8B1FA9));
-    colorCollection.add(const Color(0xFFD20100));
-    colorCollection.add(const Color(0xFFFC571D));
-    colorCollection.add(const Color(0xFF36B37B));
-    colorCollection.add(const Color(0xFF01A1EF));
-    colorCollection.add(const Color(0xFF3D4FB5));
-    colorCollection.add(const Color(0xFFE47C73));
-    colorCollection.add(const Color(0xFF636363));
-    colorCollection.add(const Color(0xFF0A8043));
-
-    final Random random = Random();
-    final DateTime rangeStartDate =
-        DateTime.now().add(const Duration(days: -(365 ~/ 2)));
-    final DateTime rangeEndDate = DateTime.now().add(const Duration(days: 365));
-    final List<Appointment> appointments = <Appointment>[];
-    for (DateTime i = rangeStartDate;
-        i.isBefore(rangeEndDate);
-        i = i.add(Duration(days: random.nextInt(10)))) {
-      final DateTime date = i;
-      final int count = 1 + random.nextInt(3);
-      for (int j = 0; j < count; j++) {
-        final DateTime startDate =
-            DateTime(date.year, date.month, date.day, 8 + random.nextInt(8));
-        appointments.add(Appointment(
-          subject: subjectCollection[random.nextInt(7)],
-          startTime: startDate,
-          endTime: startDate.add(Duration(hours: random.nextInt(3))),
-          color: colorCollection[random.nextInt(9)],
-        ));
-      }
-    }
-
-    DateTime date = DateTime.now();
-    date = DateTime(date.year, date.month, date.day, 11);
-    // added recurrence appointment
-    appointments.add(Appointment(
-        subject: 'Scrum',
-        startTime: date,
-        endTime: date.add(const Duration(hours: 1)),
-        color: colorCollection[random.nextInt(9)],
-        recurrenceRule: 'FREQ=DAILY;INTERVAL=10'));
-    return appointments;
-  }
+class _DoctorHomeView extends ConsumerWidget {
+  const _DoctorHomeView();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final User currentUser = ref.watch(currentUserProvider)!;
     return Scaffold(
       //appBar: AppBar(),
       body: Padding(
-        padding: EdgeInsets.only(top: 80.h),
-        child:
-            getScheduleViewCalendar(scheduleViewBuilder: scheduleViewBuilder),
-      ),
+          padding: EdgeInsets.only(top: 80.h),
+          child:
+              ref.watch(doctorScheduleStreamProvider(currentUser.email!)).when(
+                  data: (data) {
+                    return getScheduleViewCalendar(
+                        scheduleViewBuilder: scheduleViewBuilder,
+                        context: context,
+                        sources: /*_getAppointments()*/
+                            data.appointments.toSyncfusionAppointment());
+                  },
+                  error: (e, _) {
+                    return getScheduleViewCalendar(
+                        context: context,
+                        scheduleViewBuilder: scheduleViewBuilder,
+                        sources: []);
+                  },
+                  loading: () => const Center(
+                        child: CircularProgressIndicator(),
+                      ))),
     );
   }
 
-  SfCalendar getScheduleViewCalendar({dynamic scheduleViewBuilder}) {
+  SfCalendar getScheduleViewCalendar(
+      {dynamic scheduleViewBuilder,
+      required List<CustomAppointment> sources,
+      required BuildContext context}) {
+    void onAppointmentTap(CalendarTapDetails details) {
+      // if (details.appointments!.first.endTime.isAfter(DateTime.now())) {
+      CustomAppointment appointment = details.appointments!.first;
+      DateTimeRange dateTimeRange =
+          DateTimeRange(start: appointment.startTime, end: appointment.endTime);
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => Consumer(builder: (context, ref, child) {
+          onCancel(CustomAppointment appointment) async {
+            Loader.show(context);
+            final appointmentRepo = ref.read(appointmentRepoProvider);
+            final result = await appointmentRepo.cancelDoctorAppointment(
+                appointment: appointment.appointment, isPatient: false);
+            Loader.hide(context);
+            result.when(success: (data) {
+              context.router.popUntilRoot();
+              Toast.success(
+                'Appointment cancelled successfully',
+                context,
+              );
+            }, apiFailure: (e, _) {
+              Navigator.pop(context);
+              Toast.error('Unexpected error encountered', context,
+                  title: 'Unable to cancel appointment');
+            });
+          }
+
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              child: SizedBox(
+                height: 400.h,
+                width: double.maxFinite,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.h),
+                      child: KText(
+                        'Appointment Details',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 20.sp,
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: KText(
+                        'Date',
+                        fontSize: 15.sp,
+                      ),
+                    ),
+                    ColSpacing(8.h),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          icCalendar,
+                          width: 38.w,
+                        ),
+                        RowSpacing(16.w),
+                        KText(
+                          dateTimeRange.formatBookingDateTime(),
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500,
+                          //color: context.primary,
+                        )
+                      ],
+                    ),
+                    ColSpacing(16.h),
+                    if (appointment.notes != null &&
+                        appointment.notes!.isNotEmpty)
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          KText(
+                            'Patient Note',
+                            fontSize: 15.sp,
+                          ),
+                          ColSpacing(8.h),
+                          Row(
+                            children: [
+                              SvgPicture.asset(
+                                icNote,
+                                width: 38.w,
+                              ),
+                              RowSpacing(16.w),
+                              SizedBox(
+                                width: 280.w,
+                                child: KText(
+                                  appointment.notes ?? 'No note added',
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ColSpacing(16.h),
+                    Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                              text: 'INFO: ',
+                              style: AppStyle.textStyle.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  color: context.primary)),
+                          TextSpan(
+                              text:
+                                  'You ${dateTimeRange.isPast ? 'had' : 'have'} an ${dateTimeRange.isPast ? '' : dateTimeRange.isOngoing ? 'ongoing' : 'upcoming'} ${appointment.subject} ${dateTimeRange.formatToInfoDateTime()}'),
+                        ],
+                      ),
+                      style: AppStyle.textStyle.copyWith(
+                        fontSize: 15.sp,
+                        //    color: context.primaryContainer,
+                      ),
+                      //textAlign: TextAlign.center,
+                    ),
+                    ColSpacing(24.h),
+                    if (!dateTimeRange.isPast)
+                      SizedBox(
+                        width: double.maxFinite,
+                        child: FilledButton(
+                            onPressed: () {
+                              /*if (dateTimeRange.isLessThan24HrsToAppointment) {
+                                Toast.error(
+                                    'You can only cancel 24 hours before the appointment',
+                                    title: 'Unable to cancel appointment',
+                                    context);
+                              } else {*/
+                                showAdaptiveDialog(
+                                  context: context,
+                                  builder: (context) => AlertDialog.adaptive(
+                                    title: const Text('Delete Appointment'),
+                                    content: const Text(
+                                        'Are you sure you want to delete this appointment?'),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text('No'),
+                                      ),
+                                      TextButton(
+                                        style: TextButton.styleFrom(
+                                            foregroundColor: context.error),
+                                        onPressed: () async =>
+                                            await onCancel(appointment),
+                                        child: const Text('Yes'),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                           //   }
+                            },
+                            child: const Text('Cancel Appointment')),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        }),
+      );
+      //  }
+    }
+
     return SfCalendar(
       showDatePickerButton: true,
       scheduleViewMonthHeaderBuilder: scheduleViewBuilder,
       view: CalendarView.schedule,
-      dataSource: _DataSource([]),
+      onTap: onAppointmentTap,
+      firstDayOfWeek: 1,
+      dataSource: _DataSource(sources),
     );
   }
 }

@@ -16,4 +16,9 @@ abstract class AuthRepo {
   Future<ApiResult<UserCredential>> doctorLogin(UserCred user);
 
   Future<ApiResult<void>> forgotPassword(String email);
+
+  Future<ApiResult<bool>> updateFcmToken(
+      {required String fcmToken,
+      required String email,
+      required String userType});
 }

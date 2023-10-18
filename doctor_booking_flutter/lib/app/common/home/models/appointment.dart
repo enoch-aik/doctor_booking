@@ -1,29 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'appointment.g.dart';
 
 @JsonSerializable(explicitToJson: true)
-class Appointment {
+class Appointment extends Equatable {
   /// The generated code assumes these values exist in JSON.
   final String? patientId;
+  final String? patientName;
   final String? doctorId;
   final String? userEmail;
   final String? patientNote;
   final bool? valid;
   final String? doctorName;
   final String? doctorSpeciality;
+  @JsonKey(includeIfNull: false)
+  final String? doctorEmail;
+  @JsonKey(includeIfNull: false)
+  final String? patientEmail;
 
   bool get isActive => bookingEnd?.isBefore(DateTime.now()) ?? false;
 
-  //Because we are storing timestamp in Firestore, we need a converter for DateTime
   static DateTime timeStampToDateTime(Timestamp timestamp) {
     return DateTime.parse(timestamp.toDate().toString());
   }
 
   static Timestamp dateTimeToTimeStamp(DateTime? dateTime) {
-    return Timestamp.fromDate(dateTime ?? DateTime.now()); //To TimeStamp
+    return Timestamp.fromDate(dateTime ?? DateTime.now());
   }
 
   @JsonKey(fromJson: timeStampToDateTime, toJson: dateTimeToTimeStamp)
@@ -31,14 +36,15 @@ class Appointment {
   @JsonKey(fromJson: timeStampToDateTime, toJson: dateTimeToTimeStamp)
   final DateTime? bookingEnd;
 
-  Appointment(
+  const Appointment(
       {this.bookingStart,
       this.bookingEnd,
-      this.patientId,
+      this.patientId,this.patientName,this.doctorEmail,this.patientEmail,
       this.doctorId,
       this.userEmail,
       this.patientNote,
-      this.doctorName,this.doctorSpeciality,
+      this.doctorName,
+      this.doctorSpeciality,
       this.valid = true});
 
   /// Connect the generated [_$SportBookingFromJson] function to the `fromJson`
@@ -52,4 +58,20 @@ class Appointment {
   //convert appointment to DateTimerRange
   DateTimeRange get toDateTimeRange =>
       DateTimeRange(start: bookingStart!, end: bookingEnd!);
+
+
+
+  @override
+  // TODO: implement props
+  List<Object?> get props => [
+        bookingStart,
+        bookingEnd,
+        patientId,patientName,
+        doctorId,
+        userEmail,
+        patientNote,
+        doctorName,
+        doctorSpeciality,
+        valid
+      ];
 }

@@ -4,9 +4,11 @@ import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-final authDataSourceProvider =
-    Provider((ref) => AuthDataSourceImpl(ref.watch(firebaseAuthProvider)));
+///This is the provider for the auth datasource
+final authDataSourceProvider = Provider((ref) => AuthDataSourceImpl(ref));
 
+
+///This is the provider for the auth repo
 final authRepoProvider =
     Provider((ref) => AuthRepoImpl(ref.watch(authDataSourceProvider)));
 //This boolean is used to get there is a current user, this is true if there is a current user and false if there is no current user
@@ -18,3 +20,4 @@ final isLoggedIn = StateProvider<bool>((ref) {
 final currentUserProvider = StateProvider<User?>((ref) {
   return ref.watch(firebaseAuthProvider).currentUser;
 });
+

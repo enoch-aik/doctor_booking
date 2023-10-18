@@ -3,8 +3,6 @@ import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/observers.dart';
 import 'package:doctor_booking_flutter/src/providers.dart';
 import 'package:doctor_booking_flutter/src/res/theme/theme.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class DoctorBookingApp extends ConsumerWidget {
   const DoctorBookingApp({super.key});
@@ -27,8 +25,8 @@ class DoctorBookingApp extends ConsumerWidget {
                 title: 'Doctor booking',
                 theme: AppTheme.light,
                 darkTheme: AppTheme.dark,
-                themeMode: ThemeMode.light,
-
+                themeMode: ref.watch(themeModeProvider),
+                debugShowCheckedModeBanner: false,
                 routeInformationParser: router.defaultRouteParser(),
                 routeInformationProvider: router.routeInfoProvider(),
                 routerDelegate: AutoRouterDelegate(

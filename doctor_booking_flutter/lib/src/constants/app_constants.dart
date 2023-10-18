@@ -25,10 +25,10 @@ const List<BottomNavigationBarItem> doctorAppNavItems = [
     icon: Icon(BottomNavIcons.home),
     label: 'Home',
   ),
-  BottomNavigationBarItem(
+  /*BottomNavigationBarItem(
     icon: Icon(BottomNavIcons.calendar),
     label: 'Calendar',
-  ),
+  ),*/
   BottomNavigationBarItem(
     icon: Icon(BottomNavIcons.profile),
     label: 'Profile',

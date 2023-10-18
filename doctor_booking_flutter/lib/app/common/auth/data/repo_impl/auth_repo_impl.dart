@@ -35,4 +35,12 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<ApiResult<UserCredential>> doctorLogin(UserCred user) =>
       apiInterceptor(() => _dataSource.doctorLogin(user));
+
+  @override
+  Future<ApiResult<bool>> updateFcmToken(
+          {required String fcmToken,
+          required String email,
+          required String userType}) =>
+      apiInterceptor(() => _dataSource.updateFcmToken(
+          fcmToken: fcmToken, email: email, userType: userType));
 }
