@@ -53,7 +53,7 @@ class PatientHomeScreen extends ConsumerWidget {
 }
 
 class _PatientHomeView extends HookConsumerWidget {
-  const _PatientHomeView({super.key});
+  const _PatientHomeView();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

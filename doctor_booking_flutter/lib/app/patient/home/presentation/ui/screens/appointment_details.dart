@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor_speciality.dart';
 import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
@@ -194,46 +193,55 @@ class AppointmentDetailsScreen extends ConsumerWidget {
                             title: 'Unable to cancel appointment',
                             context);
                       } else {
-
                         showAdaptiveDialog(
                             context: context,
                             builder: (context) => AlertDialog.adaptive(
-                              title: const Text('Cancel appointment'),
-                              content: const Text('Are you sure you want to cancel this appointment?'),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child:  Text('No',style: AppStyle.textStyle.copyWith(color: context.outline),),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    Loader.show(context);
-                                    final appointmentRepo =
-                                    ref.read(appointmentRepoProvider);
-                                    final result =
-                                    await appointmentRepo.cancelDoctorAppointment(
-                                        appointment: appointment,
-                                        patientEmail:
-                                        ref.watch(currentUserProvider)!.email!);
-                                    Loader.hide(context);
-                                    result.when(success: (data) {
-                                      context.router.popUntilRoot();
-                                      Toast.success(
-                                        'Appointment cancelled successfully',
-                                        context,
-                                      );
-                                    }, apiFailure: (e, _) {
-                                      Navigator.pop(context);
-                                      Toast.error('Unexpected error encountered', context,
-                                          title: 'Unable to cancel appointment');
-                                    });
-                                  },
-                                  child:  Text('Yes, Cancel',style: AppStyle.textStyle.copyWith(color: context.error),),
-                                ),
-                              ],
-                            ));
+                                  title: const Text('Cancel appointment'),
+                                  content: const Text(
+                                      'Are you sure you want to cancel this appointment?'),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: Text(
+                                        'No',
+                                        style: AppStyle.textStyle
+                                            .copyWith(color: context.outline),
+                                      ),
+                                    ),
+                                    TextButton(
+                                      onPressed: () async {
+                                        Loader.show(context);
+                                        final appointmentRepo =
+                                            ref.read(appointmentRepoProvider);
+                                        final result = await appointmentRepo
+                                            .cancelDoctorAppointment(
+                                                appointment: appointment);
+                                        Loader.hide(context);
+                                        result.when(success: (data) {
+                                          context.router.popUntilRoot();
+                                          Toast.success(
+                                            'Appointment cancelled successfully',
+                                            context,
+                                          );
+                                        }, apiFailure: (e, _) {
+                                          Navigator.pop(context);
+                                          Toast.error(
+                                              'Unexpected error encountered',
+                                              context,
+                                              title:
+                                                  'Unable to cancel appointment');
+                                        });
+                                      },
+                                      child: Text(
+                                        'Yes, Cancel',
+                                        style: AppStyle.textStyle
+                                            .copyWith(color: context.error),
+                                      ),
+                                    ),
+                                  ],
+                                ));
 
                         // get the doctor's fcm token and send a notification
 

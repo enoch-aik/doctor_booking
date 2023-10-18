@@ -8,7 +8,6 @@ import 'package:doctor_booking_flutter/core/service_exceptions/service_exception
 import 'package:doctor_booking_flutter/core/services/add_event_to_calendar.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
-import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
 import 'package:doctor_booking_flutter/src/widgets/toast/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';

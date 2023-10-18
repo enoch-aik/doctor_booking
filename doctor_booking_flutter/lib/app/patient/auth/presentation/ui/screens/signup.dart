@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
@@ -11,6 +13,7 @@ import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/alert_dialog.dart';
 import 'package:doctor_booking_flutter/src/widgets/loader/loader.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
 ///Form for patient signUp
@@ -103,9 +106,15 @@ class PatientSignUpScreen extends HookConsumerWidget {
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
                     Loader.show(context);
+                    //get fcmToken
+                    String? fcmToken = '';
+                    if (Platform.isAndroid) {
+                      fcmToken = await FirebaseMessaging.instance.getToken();
+                    }
                     NewUser user = NewUser(
                         fullName: fullNameController.text.trim(),
                         emailAddress: emailController.text,
+                        fcmToken: fcmToken,
                         password: passwordController.text);
                     final result = await auth.signUpWithEmailAndPassword(user);
 
@@ -117,7 +126,7 @@ class PatientSignUpScreen extends HookConsumerWidget {
                       Loader.hide(context);
                       if (stored) {
                         ref.read(storeProvider).savePatientInfo(Patient(
-                            fullName: user.fullName,
+                            fullName: user.fullName,fcmToken: fcmToken,
                             emailAddress: user.emailAddress,
                             userId: data.user!.uid));
                         AppNavigator.of(context)

@@ -1,5 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
+import 'package:doctor_booking_flutter/app/patient/home/providers.dart';
 import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:doctor_booking_flutter/lib.dart';
 import 'package:doctor_booking_flutter/src/extensions/context.dart';
@@ -14,6 +16,8 @@ class DoctorProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider);
+    final Doctor? doctor =
+        ref.watch(doctorScheduleStreamProvider(currentUser!.email!)).value;
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -25,20 +29,13 @@ class DoctorProfileScreen extends ConsumerWidget {
               child: Row(
                 children: [
                   Initicon(
-                    text: currentUser?.displayName ?? currentUser?.email ?? 'A',
+                    text: doctor?.fullName ?? '',
                     backgroundColor: context.primary,
                   ),
                   RowSpacing(24.w),
-                  Column(
-                    children: [
-                      KText(
-                        currentUser?.displayName ?? '',
-                        fontWeight: FontWeight.w500,
-                      ),
-                      /*KText(
-                        currentUser?.email ?? '',
-                      ),*/
-                    ],
+                  KText(
+                    doctor?.fullName ?? '',
+                    fontWeight: FontWeight.w500,
                   )
                 ],
               ),
@@ -46,64 +43,71 @@ class DoctorProfileScreen extends ConsumerWidget {
             ColSpacing(24.h),
 
             //change all the color of icons in the widget below to context.primary
-            ListTile(
+            /*ListTile(
               leading: Icon(
                 Icons.calendar_month,
                 color: context.primary,
               ),
               title: Text('Upcoming schedules'),
               trailing: Icon(Icons.keyboard_arrow_right_sharp),
-            ),
-            Divider(),
+            ),*/
+            //Divider(),
             ListTile(
               leading: Icon(
                 Icons.settings,
                 color: context.primary,
               ),
-              title: Text('Settings'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Settings'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
+
+              onTap: (){
+                AppNavigator.of(context).push(const Settings());
+              },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
+              onTap: () {
+                showLicensePage(context: context);
+              },
               leading: Icon(
                 Icons.privacy_tip,
                 color: context.primary,
               ),
-              title: Text('Privacy policy'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Licenses & Privacy Policy'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
             ),
-            Divider(),
+            const Divider(),
             ListTile(
               leading: Icon(
                 Icons.logout,
                 color: context.primary,
               ),
-              title: Text('Logout'),
-              trailing: Icon(Icons.keyboard_arrow_right_sharp),
+              title: const Text('Logout'),
+              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
               onTap: () {
                 showAdaptiveDialog(
                     context: context,
                     builder: (context) => AlertDialog.adaptive(
-                      title: Text('Logout'),
-                      content: Text('Are you sure you want to logout?'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            await ref.read(firebaseAuthProvider).signOut();
-                            ref.read(storeProvider).removeAll();
-                            AppNavigator.of(context)
-                                .replaceAll([Onboarding()]);
-                          },
-                          child: Text('Logout'),
-                        ),
-                      ],
-                    ));
+                          title: const Text('Logout'),
+                          content: const Text('Are you sure you want to logout?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await ref.read(firebaseAuthProvider).signOut();
+                                ref.read(storeProvider).removeAll();
+                                AppNavigator.of(context)
+                                    .replaceAll([const Onboarding()]);
+                              },
+                              child: const Text('Logout'),
+                            ),
+                          ],
+                        ));
               },
             ),
             // Divider(),

@@ -8,6 +8,7 @@ import 'package:doctor_booking_flutter/app/doctor/auth/presentation/ui/screens/s
 import 'package:doctor_booking_flutter/app/doctor/calendar/presentation/ui/screens/calendar.dart';
 import 'package:doctor_booking_flutter/app/doctor/home/presentation/ui/screens/home.dart';
 import 'package:doctor_booking_flutter/app/doctor/profile/presentation/ui/screens/profile.dart';
+import 'package:doctor_booking_flutter/app/doctor/profile/presentation/ui/screens/settings.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/presentation/ui/screens/login.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/presentation/ui/screens/signup.dart';
 import 'package:doctor_booking_flutter/app/patient/calendar/presentation/ui/screens/calendar.dart';
@@ -38,6 +39,7 @@ class AppRouter extends _$AppRouter {
         // HOME
         AutoRoute(page: PatientHome.page),
         AutoRoute(page: DoctorHome.page),
+        AutoRoute(page: Settings.page),
         AutoRoute(page: PatientCalendar.page),
         AutoRoute(page: PatientSearch.page),
         AutoRoute(page: PatientProfile.page),

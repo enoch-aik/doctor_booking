@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart';

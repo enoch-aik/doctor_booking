@@ -3,7 +3,6 @@ import 'package:doctor_booking_flutter/app/common/auth/data/data_source/auth_dat
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/user_credentials.dart';
-import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:doctor_booking_flutter/core/api/firebase.dart';
 import 'package:doctor_booking_flutter/core/di/di_providers.dart';
 import 'package:firebase_auth/firebase_auth.dart';

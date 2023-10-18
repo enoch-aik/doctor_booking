@@ -1,4 +1,3 @@
-import 'package:doctor_booking_flutter/app/common/auth/data/models/user.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:json_annotation/json_annotation.dart';
 

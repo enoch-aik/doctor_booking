@@ -25,8 +25,8 @@ class DoctorBookingApp extends ConsumerWidget {
                 title: 'Doctor booking',
                 theme: AppTheme.light,
                 darkTheme: AppTheme.dark,
-                themeMode: ThemeMode.light,
-
+                themeMode: ref.watch(themeModeProvider),
+                debugShowCheckedModeBanner: false,
                 routeInformationParser: router.defaultRouteParser(),
                 routeInformationProvider: router.routeInfoProvider(),
                 routerDelegate: AutoRouterDelegate(

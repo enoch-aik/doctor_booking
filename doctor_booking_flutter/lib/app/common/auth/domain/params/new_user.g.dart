@@ -10,6 +10,7 @@ NewUser _$NewUserFromJson(Map<String, dynamic> json) => NewUser(
       fullName: json['fullName'] as String,
       emailAddress: json['emailAddress'] as String,
       password: json['password'] as String,
+      fcmToken: json['fcmToken'] as String?,
       appointments: (json['appointments'] as List<dynamic>?)
               ?.map((e) => Appointment.fromJson(e as Map<String, dynamic>))
               .toList() ??
@@ -23,4 +24,5 @@ Map<String, dynamic> _$NewUserToJson(NewUser instance) => <String, dynamic>{
       'password': instance.password,
       'userId': instance.userId,
       'appointments': instance.appointments,
+      'fcmToken': instance.fcmToken,
     };

@@ -11,11 +11,12 @@ class NewUser {
   final String password;
   String? userId;
   final List<Appointment> appointments;
+  final String? fcmToken;
 
   NewUser(
       {required this.fullName,
       required this.emailAddress,
-      required this.password,
+      required this.password,this.fcmToken,
       this.appointments = const [],
       this.userId});
 
@@ -27,6 +28,6 @@ class NewUser {
   Patient toPatient() => Patient(
       fullName: fullName,
       emailAddress: emailAddress,
-      userId: userId,
+      userId: userId,fcmToken: fcmToken,
       appointments: appointments);
 }

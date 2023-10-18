@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
+import 'package:doctor_booking_flutter/app/doctor/home/data/models/custom_appointment.dart';
 import 'package:flutter/animation.dart';
-import 'package:syncfusion_flutter_calendar/src/calendar/appointment_engine/appointment.dart'
-    as apt;
 
 extension AppointmentList on List<Appointment> {
   List<Color> get colorCollection => const <Color>[
@@ -15,16 +14,19 @@ extension AppointmentList on List<Appointment> {
         Color(0xFF01A1EF),
         Color(0xFF3D4FB5),
         Color(0xFFE47C73),
-       // Color(0xFF636363),
+        // Color(0xFF636363),
         Color(0xFF0A8043)
       ];
 
-  List<apt.Appointment> toSyncfusionAppointment() {
+  List<CustomAppointment> toSyncfusionAppointment({bool isDoctor = true}) {
     final Random random = Random();
-    return map((e) => apt.Appointment(
-          subject: 'Appointment with ${e.patientName ?? 'a Patient'}',
+    return map((e) => CustomAppointment(
+          appointment: e,
+          subject:
+              'Appointment with ${isDoctor ? e.patientName ?? 'a Patient' : 'Dr. ${e.doctorName!}'}',
           startTime: e.bookingStart!,
-          endTime: e.bookingEnd!,notes: e.patientNote,
+          endTime: e.bookingEnd!,
+          notes: e.patientNote,
           color: e.bookingEnd!.isBefore(DateTime.now())
               ? const Color(0xFF636363)
               : colorCollection[random.nextInt(8)],

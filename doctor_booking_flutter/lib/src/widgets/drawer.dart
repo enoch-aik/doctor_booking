@@ -5,9 +5,6 @@ import 'package:doctor_booking_flutter/src/res/assets/svg.dart';
 import 'package:doctor_booking_flutter/src/router/navigator.dart';
 import 'package:doctor_booking_flutter/src/widgets/init_icon.dart';
 import 'package:doctor_booking_flutter/src/widgets/margin.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class ValorDrawer extends ConsumerWidget {
   const ValorDrawer({
@@ -44,15 +41,15 @@ class ValorDrawer extends ConsumerWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                         Initicon(text: 'Enoch Aik'),
+                         const Initicon(text: 'Enoch Aik'),
                        ColSpacing(12.h),
-                        KText('Enoch Aik'),
+                        const KText('Enoch Aik'),
                        ColSpacing(8.h),
-TextButton(onPressed: (){}, child: Text('My profile')),
+TextButton(onPressed: (){}, child: const Text('My profile')),
 
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       //color: valorColors.orange,
                     ),
                     ..._DrawerItem.drawerItems

@@ -44,18 +44,9 @@ class PatientProfileScreen extends ConsumerWidget {
               ),
             ),
             ColSpacing(24.h),
-
-            //change all the color of icons in the widget below to context.primary
-            ListTile(
-              leading: Icon(
-                Icons.calendar_month,
-                color: context.primary,
-              ),
-              title: const Text('Upcoming schedules'),
-              trailing: const Icon(Icons.keyboard_arrow_right_sharp),
-            ),
-            const Divider(),
-            ListTile(
+            ListTile(onTap: (){
+              AppNavigator.of(context).push(const Settings());
+            },
               leading: Icon(
                 Icons.settings,
                 color: context.primary,
@@ -65,11 +56,14 @@ class PatientProfileScreen extends ConsumerWidget {
             ),
             const Divider(),
             ListTile(
+              onTap: () {
+                showLicensePage(context: context);
+              },
               leading: Icon(
                 Icons.privacy_tip,
                 color: context.primary,
               ),
-              title: const Text('Privacy policy'),
+              title: const Text('Licenses and Privacy policy'),
               trailing: const Icon(Icons.keyboard_arrow_right_sharp),
             ),
             const Divider(),
@@ -85,7 +79,8 @@ class PatientProfileScreen extends ConsumerWidget {
                     context: context,
                     builder: (context) => AlertDialog.adaptive(
                           title: const Text('Logout'),
-                          content: const Text('Are you sure you want to logout?'),
+                          content:
+                              const Text('Are you sure you want to logout?'),
                           actions: [
                             TextButton(
                               onPressed: () {

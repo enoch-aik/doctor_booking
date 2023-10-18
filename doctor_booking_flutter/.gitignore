@@ -50,3 +50,7 @@ app.*.map.json
 assets/images/avatars/
 /assets/images/avatars/
 assets/images/avatars/*.png
+
+
+# env file
+lib/env.dart

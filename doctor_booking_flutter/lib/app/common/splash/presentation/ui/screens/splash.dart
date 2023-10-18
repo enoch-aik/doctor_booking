@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_route/annotations.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:doctor_booking_flutter/app/common/auth/providers.dart'
@@ -28,7 +30,10 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
       if (hasCurrentUser && hasUserData) {
         //Check if the current user is a doctor or patient
         String userType = ref.read(storeProvider).fetchUserType()!;
-        String? fcmToken = await FirebaseMessaging.instance.getToken();
+        String? fcmToken = '';
+        if(Platform.isAndroid){
+           fcmToken = await FirebaseMessaging.instance.getToken();
+        }
         await authRepo.updateFcmToken(
             fcmToken: fcmToken!,
             email: ref.read(currentUserProvider.notifier).state!.email!,

@@ -16,6 +16,7 @@ NewDoctor _$NewDoctorFromJson(Map<String, dynamic> json) => NewDoctor(
           const [],
       isApproved: json['isApproved'] as bool? ?? false,
       speciality: json['speciality'] as String,
+      fcmToken: json['fcmToken'] as String?,
       userId: json['userId'] as String?,
     );
 
@@ -27,4 +28,5 @@ Map<String, dynamic> _$NewDoctorToJson(NewDoctor instance) => <String, dynamic>{
       'speciality': instance.speciality,
       'isApproved': instance.isApproved,
       'appointments': instance.appointments,
+      'fcmToken': instance.fcmToken,
     };

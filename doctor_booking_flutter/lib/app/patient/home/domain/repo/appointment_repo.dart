@@ -8,6 +8,5 @@ abstract class AppointmentRepo {
       required Doctor doctor,
       required String patientEmail});
   Future<ApiResult<bool>> cancelDoctorAppointment(
-      {required Appointment appointment,
-      required String patientEmail});
+      {required Appointment appointment,bool isPatient = true});
 }

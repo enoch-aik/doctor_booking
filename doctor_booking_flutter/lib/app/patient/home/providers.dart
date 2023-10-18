@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
@@ -15,8 +14,8 @@ final patientSelectedHomeIndex = StateProvider<int>((ref) => 0);
 final doctorSelectedHomeIndex = StateProvider<int>((ref) => 0);
 
 final appointmentDataSourceProvider = Provider<AppointmentDataSource>((ref) {
-  return AppointmentDataSourceImpl(
-      ref.read(firestoreProvider), ref.read(firebaseApiProvider));
+  return AppointmentDataSourceImpl(ref.read(firestoreProvider),
+      ref.read(firebaseApiProvider), ref.read(fcmServiceProvider));
 });
 final appointmentRepoProvider = Provider<AppointmentRepo>(
     (ref) => AppointmentRepoImpl(ref.read(appointmentDataSourceProvider)));
