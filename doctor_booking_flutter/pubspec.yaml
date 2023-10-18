@@ -66,6 +66,9 @@ dev_dependencies:
   json_serializable: ^6.6.2
   flutter_test:
     sdk: flutter
+  test:
+  fake_cloud_firestore:
+  firebase_auth_mocks:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
