@@ -3,13 +3,17 @@ import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_doctor.
 import 'package:doctor_booking_flutter/app/common/auth/domain/params/new_user.dart';
 import 'package:doctor_booking_flutter/app/common/home/models/appointment.dart';
 import 'package:doctor_booking_flutter/app/patient/auth/data/models/patient.dart';
+import 'package:doctor_booking_flutter/app/doctor/auth/data/models/doctor.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class FirebaseApi {
   final FirebaseFirestore firestore;
+  late CollectionReference bookings;
 
-  FirebaseApi(this.firestore);
+   FirebaseApi(this.firestore) {
+    bookings = firestore.collection('bookings');
+  }
 
   ///add new patient details to patients collection
   Future<bool> storePatientData(
@@ -38,9 +42,9 @@ class FirebaseApi {
 
   //check if user exist
   Future<bool> getPatient(String email) async {
-    bool exists = false;
-    await firestore.collection('patients').doc(email).get();
-    return exists;
+    // bool exists = false;
+    var doc = await firestore.collection('patients').doc(email).get();
+    return doc.exists;
   }
 
   Future<Patient> getPatientData(String email) async {
@@ -53,14 +57,22 @@ class FirebaseApi {
   //check if doctor exists
   Future<bool> getDoctor(String email) async {
     bool exists = false;
-    await firestore.collection('doctors').doc(email).get();
+    var doc = await firestore.collection('doctors').doc(email).get();
+    exists = doc.exists;
     return exists;
+  }
+
+  // Debugging function to get reliable access to DoctorId
+  Future<Doctor> getDoctorData(String email) async {
+    DocumentReference docRef = firestore.collection('doctors').doc(email);
+    return Doctor.fromJson(await docRef
+        .get()
+        .then((value) => value.data()! as Map<String, dynamic>));
   }
 
   ///add new doctor details to doctors db
 
-  CollectionReference bookings =
-      FirebaseFirestore.instance.collection('bookings');
+
 
   ///This is how can you get the reference to your data from the collection, and serialize the data with the help of the Firestore [withConverter]. This function would be in your repository.
   CollectionReference<Appointment> getBookingStream({required String docId}) {
