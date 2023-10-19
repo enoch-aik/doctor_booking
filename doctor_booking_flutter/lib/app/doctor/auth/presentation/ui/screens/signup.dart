@@ -155,7 +155,7 @@ class DoctorSignupScreen extends HookConsumerWidget {
 
                         //take user to doctor home
                         AppNavigator.of(context)
-                            .replaceAll([const PatientHome()]);
+                            .replaceAll([const DoctorHome()]);
                       }
                     }, apiFailure: (e, _) {
                       Loader.hide(context);
