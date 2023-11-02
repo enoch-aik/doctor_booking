@@ -47,34 +47,34 @@ We are a team of six
 
 ### Light
 
-| 1                                                                             | 2 | 3                                                                             |
-|-------------------------------------------------------------------------------|---|-------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/light/1.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/2.png" width="400">  | <img src="doctor_booking_flutter/assets/screenshots/light/3.png" width="400"> |
+| 1                                                                             | 2                                                                             | 3                                                                             |
+|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| <img src="doctor_booking_flutter/assets/screenshots/light/1.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/2.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/3.PNG" width="400"> |
 
 | 4                                                                             | 5                                                                             | 6                                                                              |
 |-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/light/4.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/5.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/10.png" width="400"> |
+| <img src="doctor_booking_flutter/assets/screenshots/light/4.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/5.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/10.PNG" width="400"> |
 
 
 | 7                                                                             | 8                                                                             | 9                                                                             |
 |-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/light/8.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/9.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/6.png" width="400"> |
+| <img src="doctor_booking_flutter/assets/screenshots/light/8.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/9.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/6.PNG" width="400"> |
 
 
 | 10                                                                            | 11                                                                             | 12                                                                             |
 |-------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/light/7.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/11.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/12.png" width="400"> |
+| <img src="doctor_booking_flutter/assets/screenshots/light/7.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/11.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/light/12.PNG" width="400"> |
 
 
 ### Dark
 
 | 1                                                                            | 2                                                                            | 3                                                                            |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/dark/1.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/2.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/3.png" width="400"> |
+| <img src="doctor_booking_flutter/assets/screenshots/dark/1.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/2.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/3.PNG" width="400"> |
 
 | 4                                                                            | 5                                                                            | 6                                                                            |
 |------------------------------------------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------|
-| <img src="doctor_booking_flutter/assets/screenshots/dark/4.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/5.png" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/6.png" width="400"> |
+| <img src="doctor_booking_flutter/assets/screenshots/dark/4.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/5.PNG" width="400"> | <img src="doctor_booking_flutter/assets/screenshots/dark/6.PNG" width="400"> |
 
 ## Packages & Libraries Used
 
