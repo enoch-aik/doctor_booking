@@ -5,20 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39e48bbe-d1c3-485d-be93-3bf363f50caf" name="Changes" comment="added project with serverpod">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/test/firebase_test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/doctor_booking.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/doctor_booking.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/lib/core/api/firebase.dart" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/lib/core/api/firebase.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/linux/flutter/generated_plugins.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/windows/flutter/generated_plugins.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/1.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/2.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/3.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/4.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/5.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/dark/6.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/1.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/10.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/11.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/12.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/2.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/3.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/4.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/5.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/6.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/7.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/8.PNG" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/doctor_booking_flutter/assets/screenshots/light/9.PNG" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/lib/app/patient/auth/presentation/ui/screens/login.dart" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/lib/app/patient/auth/presentation/ui/screens/login.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/lib/app/patient/home/data/data_source/appointment_datasource_impl.dart" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/lib/app/patient/home/data/data_source/appointment_datasource_impl.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doctor_booking_flutter/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/doctor_booking_flutter/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="dev" />
+        <entry key="$PROJECT_DIR$" value="seminar-series" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -61,20 +69,27 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;E:/dev/doctor_booking/doctor_booking_flutter/test&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "docs",
+    "io.flutter.reload.alreadyRun": "true",
+    "last_opened_file_path": "/Users/enochaikpokpodion/IdeaProjects/doctor_booking",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "yarn",
+    "settings.editor.selected.configurable": "flutter.settings",
+    "show.migrate.to.gradle.popup": "false",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\dev\doctor_booking\doctor_booking_flutter\test" />
@@ -110,6 +125,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1693490489781</updated>
+      <workItem from="1698906218636" duration="4014000" />
     </task>
     <task id="LOCAL-00001" summary="first commit">
       <option name="closed" value="true" />
@@ -129,6 +145,9 @@
     </task>
     <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
