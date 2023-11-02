@@ -7,7 +7,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'core/services/notification.dart';
@@ -21,8 +21,8 @@ Future<void> _backgroundHandler(RemoteMessage message) async {
       FlutterLocalNotificationsPlugin();
   await notificationsPlugin.show(
       1,
-      'noti',
-      'noti',
+      message.notification!.title,
+      message.notification!.body,
       const NotificationDetails(
           android: AndroidNotificationDetails('noti', 'noti',
               priority: Priority.max,

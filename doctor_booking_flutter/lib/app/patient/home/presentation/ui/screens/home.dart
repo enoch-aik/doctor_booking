@@ -25,7 +25,7 @@ class PatientHomeScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const List<Widget> body = [
       _PatientHomeView(),
-      PatientSearchScreen(),
+     // PatientSearchScreen(),
       PatientCalendarScreen(),
       PatientProfileScreen()
     ];

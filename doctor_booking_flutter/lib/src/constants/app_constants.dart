@@ -6,10 +6,10 @@ const List<BottomNavigationBarItem> patientAppNavItems = [
     icon: Icon(BottomNavIcons.home),
     label: 'Home',
   ),
-  BottomNavigationBarItem(
+  /*BottomNavigationBarItem(
     icon: Icon(BottomNavIcons.search),
     label: 'Search',
-  ),
+  ),*/
   BottomNavigationBarItem(
     icon: Icon(BottomNavIcons.calendar),
     label: 'Calendar',

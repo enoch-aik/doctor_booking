@@ -54,13 +54,13 @@ class FirebaseApi {
         .get()
         .then((value) => value.data()! as Map<String, dynamic>));
   }
-  Future<Doctor> getDoctorData(String email) async {
+  /*Future<Doctor> getDoctorData(String email) async {
     DocumentReference docRef = firestore.collection('doctors').doc(email);
     return Doctor.fromJson(await docRef
         .get()
         .then((value) => value.data()! as Map<String, dynamic>));
   }
-
+*/
   //check if doctor exists
   Future<bool> getDoctor(String email) async {
     bool exists = false;
