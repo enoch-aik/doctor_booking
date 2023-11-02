@@ -21,8 +21,8 @@ Future<void> _backgroundHandler(RemoteMessage message) async {
       FlutterLocalNotificationsPlugin();
   await notificationsPlugin.show(
       1,
-      'noti',
-      'noti',
+      message.notification!.title,
+      message.notification!.body,
       const NotificationDetails(
           android: AndroidNotificationDetails('noti', 'noti',
               priority: Priority.max,

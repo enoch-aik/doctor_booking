@@ -179,19 +179,6 @@ class PatientLoginScreen extends HookConsumerWidget {
                                               showMessageAlertDialog(context,
                                                   text: e.message);
                                             });
-
-                                            /*await auth
-                                                .forgotPassword(email)
-                                                .then(
-                                              (value) {
-                                                  AutoRouter.of(context).popUntilRoot();
-                                                */ /*Navigator.pop(context);
-                                                Navigator.pop(context);*/ /*
-                                                showMessageAlertDialog(context,
-                                                    text:
-                                                        'Password reset link has been successfully 1sent to your email address');
-                                              },
-                                            );*/
                                           } else {
                                             //if email is no valid, prompt user to input valid mail
                                             showMessageAlertDialog(context,
@@ -278,9 +265,7 @@ class PatientLoginScreen extends HookConsumerWidget {
                         await firebaseApi.storePatientData(
                             newUser: user, credential: data);
                       }
-
                       //save user details here and navigator to the next screen
-
                       ref.read(storeProvider).savePatientInfo(Patient(
                           fullName: data.user?.displayName ?? '',
                           emailAddress: emailController.text,
@@ -290,22 +275,6 @@ class PatientLoginScreen extends HookConsumerWidget {
                     }, apiFailure: (e, _) {
                       showMessageAlertDialog(context, text: e.message);
                     });
-
-                    /*   await auth.googleSignIn().then((value) {
-                      Navigator.pop(context);
-                      //if User is the result, then the login was successful
-                      if (value is UserCredential) {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const HomeScreen()),
-                                (route) => false);
-                      }
-                      else {
-                        //else show error message
-                        showMessageAlertDialog(context, text: value??'Failed to sign in with Google, try again');
-                      }
-                    });*/
                   },
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,

@@ -86,7 +86,7 @@ class AppointmentDataSourceImpl extends AppointmentDataSource {
       await fcmService.sendNotification(
           recipientFCMToken: isPatient ? doctor.fcmToken! : patient.fcmToken!,
           body:
-              'You appointment with ${appointment.patientName!} ${appointment.toDateTimeRange.formatToInfoDateTime()} has been cancelled',
+              'Your appointment with ${isPatient ? appointment.patientName! : 'Dr. ${appointment.doctorName!}'} ${appointment.toDateTimeRange.formatToInfoDateTime()} has been cancelled',
           title: 'Appointment cancelled');
     } catch (_) {}
 
